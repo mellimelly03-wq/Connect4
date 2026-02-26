@@ -1,0 +1,24 @@
+body{
+text-align:center;
+font-family:Arial;
+}
+
+#board{
+display:grid;
+gap:4px;
+justify-content:center;
+}
+
+.cell{
+width:40px;
+height:40px;
+border-radius:50%;
+background:lightgray;
+}
+
+@media (max-width:600px){
+.cell{
+width:30px;
+height:30px;
+}
+}

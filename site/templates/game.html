@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connect4 Web</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h2>Connect4 Web</h2>
+
+<div id="controls">
+    <select id="mode">
+        <option value="">Choisir un mode</option>
+        <option value="2players">2 Joueurs</option>
+        <option value="human_vs_ai">Humain vs IA</option>
+        <option value="ai_vs_ai">IA vs IA</option>
+    </select>
+
+    <select id="ai_type">
+        <option value="random">IA Random</option>
+        <option value="minimax">IA Minimax</option>
+    </select>
+
+    <select id="starting">
+        <option value="1">Rouge commence</option>
+        <option value="2">Jaune commence</option>
+    </select>
+
+    <input type="number" id="depth" value="3" min="1" max="6">
+    
+    <button onclick="startGame()">Start</button>
+    <button onclick="aiSuggestion()">IA jouerait</button>
+    <button onclick="undo()">Undo</button>
+    <button onclick="restart()">Restart</button>
+    <button onclick="saveGame()">Save</button>
+    <button onclick="pauseGame()">Pause</button>
+    <button onclick="resumeGame()">Resume</button>
+</div>
+
+<p id="info">⚠ Choisis un mode pour commencer</p>
+
+<div id="board"></div>
+
+<script>
+    const ROWS = {{ rows }};
+    const COLS = {{ cols }};
+    const INITIAL_GRID = {{ grid | tojson }};
+</script>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>

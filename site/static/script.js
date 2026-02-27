@@ -1,61 +1,72 @@
 const boardDiv = document.getElementById("board");
+const scoresRowDiv = document.getElementById("scoresRow");
 const info = document.getElementById("info");
 
-boardDiv.style.gridTemplateColumns = `repeat(${COLS}, 60px)`;
-
 let gameStarted = false;
-let lastMove = null;
+let lastScores = [];
+let currentMode = null;
+let isAITurn = false;
+let aiInterval = null;
 
-function drawBoard(grid, scores = []) {
+function drawBoard(grid, scores = null, winning_cells = []) {
+    if (scores !== null) lastScores = scores;
+    const displayScores = lastScores;
 
-    // Nettoyer plateau
+    // Taille cellule selon viewport
+    const cellSize = window.innerWidth <= 600 ? 38 : 52;
+    const gap = 6;
+    const gridWidth = COLS * cellSize + (COLS - 1) * gap;
+
+    boardDiv.style.gridTemplateColumns = `repeat(${COLS}, ${cellSize}px)`;
     boardDiv.innerHTML = "";
 
-    // Nettoyer anciens scores
-    const oldScores = document.getElementById("scoresRow");
-    if (oldScores) oldScores.remove();
+    // Winning cells set
+    const winSet = new Set((winning_cells || []).map(([r,c]) => r * COLS + c));
 
-    // --- DESSIN DU PLATEAU ---
     for (let r = 0; r < ROWS; r++) {
         for (let c = 0; c < COLS; c++) {
-
             const cell = document.createElement("div");
             cell.classList.add("cell");
 
-            if (grid[r][c] === 1)
-                cell.style.backgroundColor = "red";
-            else if (grid[r][c] === 2)
-                cell.style.backgroundColor = "yellow";
+            const idx = r * COLS + c;
+
+            if (grid[r][c] === 1) {
+                cell.classList.add("red");
+                if (winSet.has(idx)) cell.classList.add("winning");
+            } else if (grid[r][c] === 2) {
+                cell.classList.add("yellow");
+                if (winSet.has(idx)) cell.classList.add("winning");
+            }
 
             cell.onclick = () => playMove(c);
             boardDiv.appendChild(cell);
         }
     }
 
-    // --- AFFICHAGE SCORES MINIMAX SOUS LE PLATEAU ---
-    if (scores && scores.length > 0) {
-
-        const scoreRow = document.createElement("div");
-        scoreRow.id = "scoresRow";
-        scoreRow.style.display = "grid";
-        scoreRow.style.gridTemplateColumns = `repeat(${COLS}, 60px)`;
-        scoreRow.style.marginTop = "10px";
+    // Scores minimax
+    scoresRowDiv.innerHTML = "";
+    if (displayScores && displayScores.length > 0) {
+        scoresRowDiv.style.gridTemplateColumns = `repeat(${COLS}, ${cellSize}px)`;
 
         for (let c = 0; c < COLS; c++) {
-
             const scoreCell = document.createElement("div");
-            scoreCell.style.textAlign = "center";
-            scoreCell.style.color = "white";
-            scoreCell.style.fontSize = "14px";
+            scoreCell.classList.add("score-cell");
 
-            const found = scores.find(s => s[0] === c);
-            scoreCell.innerText = found ? found[1] : "";
-
-            scoreRow.appendChild(scoreCell);
+            const found = displayScores.find(s => s[0] === c);
+            if (found) {
+                scoreCell.innerText = found[1];
+                if (found[1] > 0) scoreCell.classList.add("score-pos");
+                else if (found[1] < 0) scoreCell.classList.add("score-neg");
+                else scoreCell.classList.add("score-zero");
+            }
+            scoresRowDiv.appendChild(scoreCell);
         }
-
-        boardDiv.parentNode.appendChild(scoreRow);
     }
+}
+
+function setInfo(msg, color = null) {
+    info.innerText = msg;
+    info.style.color = color || "var(--text)";
 }
 
 function startGame() {
@@ -64,10 +75,10 @@ function startGame() {
     const depth = document.getElementById("depth").value;
     const starting = document.getElementById("starting").value;
 
-    if (mode === "") {
-        alert("Choisis un mode !");
-        return;
-    }
+    if (mode === "") { alert("Choisis un mode !"); return; }
+
+    currentMode = mode;
+    stopAIVsAI();
 
     fetch("/start", {
         method: "POST",
@@ -77,16 +88,17 @@ function startGame() {
     .then(res => res.json())
     .then(data => {
         gameStarted = true;
+        lastScores = [];
         drawBoard(data.grid);
-        info.innerText = "Partie commencée";
+        setInfo("SYSTÈME ACTIF — BONNE CHANCE", "var(--neon-green)");
+
+        if (currentMode === "ai_vs_ai") launchAIVsAI();
     });
 }
 
 function playMove(col) {
-    if (!gameStarted) {
-        alert("Choisis un mode !");
-        return;
-    }
+    if (!gameStarted || isAITurn) return;
+    if (currentMode === "ai_vs_ai") return;
 
     fetch("/move", {
         method: "POST",
@@ -95,73 +107,120 @@ function playMove(col) {
     })
     .then(res => res.json())
     .then(data => {
+        if (data.error === "full") { setInfo("COLONNE PLEINE !", "var(--neon-pink)"); return; }
+        if (data.error) return;
 
-        if (data.error === "full") {
-            alert("Colonne pleine !");
-            drawBoard(data.grid);
-            return;
-        }
-
-        drawBoard(data.grid, data.scores);
+        drawBoard(data.grid, data.scores, data.winning_cells || []);
 
         if (data.winner) {
-            highlightWinning(data.winning_cells);
-            alert("Victoire joueur " + data.winner);
-        }
-
-        if (data.draw && !data.winner) {
-            alert("Match nul !");
+            const who = data.winner === 1 ? "ROUGE" : "JAUNE";
+            const col = data.winner === 1 ? "var(--player-red)" : "var(--player-yellow)";
+            setInfo(`⬤ VICTOIRE — JOUEUR ${who} !`, col);
+            setTimeout(() => alert(`Victoire joueur ${who} !`), 100);
+        } else if (data.draw) {
+            setInfo("MATCH NUL — ÉGALITÉ PARFAITE", "var(--neon-blue)");
+            setTimeout(() => alert("Match nul !"), 100);
+        } else {
+            const next = data.grid ? "TOUR SUIVANT" : "";
+            setInfo("EN ATTENTE DU PROCHAIN COUP...");
         }
     });
 }
 
-function aiSuggestion() {
-    fetch("/ai_suggest", {method: "POST"})
+function aiMove() {
+    if (!gameStarted) return;
+    isAITurn = true;
+    setInfo("IA EN CALCUL...", "var(--neon-blue)");
+
+    fetch("/ai_move", { method: "POST" })
     .then(res => res.json())
     .then(data => {
+        isAITurn = false;
+
+        if (data.error) { stopAIVsAI(); return; }
+
+        drawBoard(data.grid, data.scores || [], data.winning_cells || []);
+
+        if (data.winner) {
+            stopAIVsAI();
+            const who = data.winner === 1 ? "ROUGE" : "JAUNE";
+            const col = data.winner === 1 ? "var(--player-red)" : "var(--player-yellow)";
+            setInfo(`⬤ VICTOIRE — JOUEUR ${who} !`, col);
+            setTimeout(() => alert(`Victoire joueur ${who} !`), 100);
+        } else if (data.draw) {
+            stopAIVsAI();
+            setInfo("MATCH NUL — ÉGALITÉ PARFAITE", "var(--neon-blue)");
+            setTimeout(() => alert("Match nul !"), 100);
+        } else {
+            setInfo("SYSTÈME ACTIF — EN COURS...", "var(--neon-green)");
+        }
+    });
+}
+
+function launchAIVsAI() {
+    stopAIVsAI();
+    aiInterval = setInterval(() => { if (!isAITurn) aiMove(); }, 900);
+}
+
+function stopAIVsAI() {
+    if (aiInterval) clearInterval(aiInterval);
+    aiInterval = null;
+    isAITurn = false;
+}
+
+function aiSuggestion() {
+    setInfo("ANALYSE EN COURS...", "var(--neon-blue)");
+    fetch("/ai_suggest", { method: "POST" })
+    .then(res => res.json())
+    .then(data => {
+        setInfo(`IA SUGGÈRE COLONNE : ${data.col}`, "var(--neon-yellow)");
         alert("IA suggère colonne : " + data.col);
     });
 }
 
 function undo() {
-    fetch("/undo", {method: "POST"})
-    .then(res => res.json())
-    .then(data => drawBoard(data.grid));
-}
-
-function restart() {
-    fetch("/restart", {method: "POST"})
+    fetch("/undo", { method: "POST" })
     .then(res => res.json())
     .then(data => {
+        lastScores = [];
         drawBoard(data.grid);
-        info.innerText = "Partie réinitialisée";
+        setInfo("COUP ANNULÉ");
     });
 }
 
-drawBoard(INITIAL_GRID);
+function restart() {
+    stopAIVsAI();
+    fetch("/restart", { method: "POST" })
+    .then(res => res.json())
+    .then(data => {
+        lastScores = [];
+        drawBoard(data.grid);
+        setInfo("SYSTÈME RÉINITIALISÉ", "var(--neon-green)");
+        if (currentMode === "ai_vs_ai") launchAIVsAI();
+    });
+}
+
 function saveGame() {
-    fetch("/save", {method:"POST"})
-    .then(res=>res.json())
-    .then(data=>{
+    fetch("/save", { method: "POST" })
+    .then(res => res.json())
+    .then(() => {
+        setInfo("PARTIE SAUVEGARDÉE ✓", "var(--neon-green)");
         alert("Sauvegarde OK");
     });
 }
 
 function pauseGame() {
-    fetch("/pause", {method:"POST"})
-    .then(()=> alert("Pause activée"));
+    stopAIVsAI();
+    fetch("/pause", { method: "POST" })
+    .then(() => setInfo("SYSTÈME EN PAUSE", "var(--neon-yellow)"));
 }
 
 function resumeGame() {
-    fetch("/resume", {method:"POST"})
-    .then(()=> alert("Reprise"));
-}
-
-function highlightWinning(cells) {
-    const allCells = document.querySelectorAll(".cell");
-
-    cells.forEach(([r, c]) => {
-        const index = r * COLS + c;
-        allCells[index].style.border = "4px solid lime";
+    fetch("/resume", { method: "POST" })
+    .then(() => {
+        setInfo("SYSTÈME ACTIF", "var(--neon-green)");
+        if (currentMode === "ai_vs_ai") launchAIVsAI();
     });
 }
+
+drawBoard(INITIAL_GRID);

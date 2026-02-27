@@ -1,53 +1,172 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="fr">
+
 <head>
-    <title>Connect4 Web</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Connect4 — Cyberpunk</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="/static/style.css">
+
 </head>
+
 <body>
 
-<h2>Connect4 Web</h2>
 
-<div id="controls">
-    <select id="mode">
-        <option value="">Choisir un mode</option>
-        <option value="2players">2 Joueurs</option>
-        <option value="human_vs_ai">Humain vs IA</option>
-        <option value="ai_vs_ai">IA vs IA</option>
-    </select>
+<div class="bg-grid"></div>
 
-    <select id="ai_type">
-        <option value="random">IA Random</option>
-        <option value="minimax">IA Minimax</option>
-    </select>
+<div class="scanlines"></div>
 
-    <select id="starting">
-        <option value="1">Rouge commence</option>
-        <option value="2">Jaune commence</option>
-    </select>
 
-    <input type="number" id="depth" value="3" min="1" max="6">
-    
-    <button onclick="startGame()">Start</button>
-    <button onclick="aiSuggestion()">IA jouerait</button>
-    <button onclick="undo()">Undo</button>
-    <button onclick="restart()">Restart</button>
-    <button onclick="saveGame()">Save</button>
-    <button onclick="pauseGame()">Pause</button>
-    <button onclick="resumeGame()">Resume</button>
+<div class="container">
+
+
+    <header>
+
+        <div class="title-glow">
+
+            <h1>CONNECT<span class="accent">4</span></h1>
+
+            <div class="subtitle">NEURAL GAME SYSTEM</div>
+
+        </div>
+
+    </header>
+
+
+    <div class="panel controls-panel">
+
+        <div class="controls-grid">
+
+
+            <div class="control-group">
+
+                <label class="ctrl-label">MODE</label>
+
+                <select id="mode" class="cyber-select">
+
+                    <option value="">— SELECT —</option>
+
+                    <option value="2players">2 JOUEURS</option>
+
+                    <option value="human_vs_ai">HUMAIN vs IA</option>
+
+                    <option value="ai_vs_ai">IA vs IA</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="control-group">
+
+                <label class="ctrl-label">IA TYPE</label>
+
+                <select id="ai_type" class="cyber-select">
+
+                    <option value="random">RANDOM</option>
+
+                    <option value="minimax">MINIMAX</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="control-group">
+
+                <label class="ctrl-label">PREMIER</label>
+
+                <select id="starting" class="cyber-select">
+
+                    <option value="1">⬤ ROUGE</option>
+
+                    <option value="2">⬤ JAUNE</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="control-group">
+
+                <label class="ctrl-label">PROFONDEUR</label>
+
+                <input type="number" id="depth" value="3" min="1" max="6" class="cyber-input">
+
+            </div>
+
+
+        </div>
+
+
+        <div class="buttons-row">
+
+            <button onclick="startGame()" class="btn btn-primary">▶ START</button>
+
+            <button onclick="undo()" class="btn btn-secondary">↩ UNDO</button>
+
+            <button onclick="restart()" class="btn btn-secondary">↺ RESTART</button>
+
+            <button onclick="aiSuggestion()" class="btn btn-accent">⚡ IA HINT</button>
+
+            <button onclick="saveGame()" class="btn btn-secondary">💾 SAVE</button>
+
+            <button onclick="pauseGame()" class="btn btn-secondary">⏸ PAUSE</button>
+
+            <button onclick="resumeGame()" class="btn btn-secondary">▶ RESUME</button>
+
+        </div>
+
+    </div>
+
+
+    <div class="status-bar">
+
+        <div class="status-dot"></div>
+
+        <p id="info">INITIALISATION DU SYSTÈME...</p>
+
+    </div>
+
+
+    <div class="game-area">
+
+        <div class="board-wrapper">
+
+            <div id="board"></div>
+
+            <div id="scoresRow"></div>
+
+        </div>
+
+    </div>
+
+
 </div>
 
-<p id="info">⚠ Choisis un mode pour commencer</p>
-
-<div id="board"></div>
 
 <script>
+
     const ROWS = {{ rows }};
+
     const COLS = {{ cols }};
+
     const INITIAL_GRID = {{ grid | tojson }};
+
 </script>
 
 <script src="/static/script.js"></script>
 
+
 </body>
+
 </html>

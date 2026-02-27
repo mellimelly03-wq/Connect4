@@ -2,17 +2,19 @@ from flask import Flask, render_template, request, jsonify
 import sys
 import os
 import json
-import time
 
-sys.path.append(os.path.abspath(".."))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+SITE_DIR = os.path.abspath(os.path.dirname(__file__))
+sys.path = [p for p in sys.path if os.path.abspath(p) != SITE_DIR and p != '']
+sys.path.insert(0, BASE_DIR)
 
-from board import Board, RED, YELLOW
+from board import Board
 from game import Game
 from game_repository import save_game_from_board
 
 app = Flask(__name__)
 
-with open("../config.json", "r") as f:
+with open(os.path.join(BASE_DIR, "config.json"), "r") as f:
     cfg = json.load(f)["config"]
 
 ROWS = cfg["rows"]
@@ -30,56 +32,54 @@ def index():
 @app.route("/start", methods=["POST"])
 def start():
     global game, board
-
     data = request.json
     mode = data["mode"]
     ai_type = data["ai_type"]
     depth = int(data["depth"])
     starting = int(data["starting"])
-
     board.reset()
     game = Game(board, starting, mode)
     game.ai_type = ai_type
-
     if ai_type == "minimax":
         game.ai.depth = depth
-
     return jsonify({"grid": board.grid})
 
 
 @app.route("/move", methods=["POST"])
 def move():
     global game
-
     if not game or game.game_over or game.paused:
         return jsonify({"error": "invalid"})
-
     col = int(request.json["col"])
-
-    # 🔴 Colonne pleine
     if game.board.is_column_full(col):
-        return jsonify({
-            "error": "full",
-            "grid": game.board.grid
-        })
-
+        return jsonify({"error": "full", "grid": game.board.grid})
     winner = game.play_turn(col)
-
-    # 🔥 HUMAN VS AI
+    scores = []
     if game.mode == "human_vs_ai" and not game.game_over:
-        ai_col = game.ai_move()
-        winner = game.play_turn(ai_col)
-
-    # 🔥 AI VS AI → boucle automatique
-    if game.mode == "ai_vs_ai":
-        ai_col = game.ai_move()
-        winner = game.play_turn(ai_col)
-        time.sleep(0.5)   # 0.5 seconde entre coups
-
+        ai_col, scores = get_ai_move()
+        ai_winner = game.play_turn(ai_col)
+        if ai_winner:
+            winner = ai_winner
     return jsonify({
         "grid": game.board.grid,
         "winner": winner,
-        "scores": game.ai.scores if game.ai_type == "minimax" else [],
+        "scores": scores,
+        "winning_cells": game.board.winning_cells,
+        "draw": game.board.is_full()
+    })
+
+
+@app.route("/ai_move", methods=["POST"])
+def ai_move():
+    global game
+    if not game or game.game_over or game.paused:
+        return jsonify({"error": "invalid"})
+    col, scores = get_ai_move()
+    winner = game.play_turn(col)
+    return jsonify({
+        "grid": game.board.grid,
+        "winner": winner,
+        "scores": scores if game.ai_type == "minimax" else [],
         "winning_cells": game.board.winning_cells,
         "draw": game.board.is_full()
     })
@@ -116,8 +116,7 @@ def resume():
 @app.route("/save", methods=["POST"])
 def save():
     if game:
-        result = save_game_from_board(game)
-        return jsonify(result)
+        return jsonify(save_game_from_board(game))
     return jsonify({"error": "no_game"})
 
 
@@ -125,21 +124,19 @@ def save():
 def ai_suggest():
     if not game:
         return jsonify({"col": None})
-
-    if game.ai_type == "random":
-        col = game.random_move()
-    else:
-        col = game.ai.choose_move(board)
-
+    col, _ = get_ai_move()
     return jsonify({"col": col})
+
+
 def get_ai_move():
     if game.ai_type == "random":
         col = game.random_move()
         return col, []
     else:
-        col, scores = game.ai.choose_move_with_scores(board)
+        col = game.ai.choose_move(game.board)
+        scores = game.ai.scores
         return col, scores
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    app.run(host="0.0.0.0", port=10000, debug=True)

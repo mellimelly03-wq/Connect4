@@ -224,3 +224,9 @@ function resumeGame() {
 }
 
 drawBoard(INITIAL_GRID);
+if (RESUMED) {
+    gameStarted = true;
+    currentMode = RESUMED_MODE;
+    setInfo("PARTIE REPRISE — À TON TOUR !", "var(--neon-green)");
+    if (currentMode === "ai_vs_ai") launchAIVsAI();
+}

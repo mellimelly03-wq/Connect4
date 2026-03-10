@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique — Connect4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .historique-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+        }
+        th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            color: var(--neon-blue);
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+            text-align: left;
+        }
+        td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(0,245,255,0.05);
+            color: var(--text);
+        }
+        tr:hover td { background: rgba(0,245,255,0.03); }
+
+        .statut-badge {
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+        }
+        .TERMINE_ROUGE { color: var(--player-red); border: 1px solid var(--player-red); }
+        .TERMINE_JAUNE { color: var(--player-yellow); border: 1px solid var(--player-yellow); }
+        .TERMINE_NUL   { color: var(--neon-blue); border: 1px solid var(--neon-blue); }
+        .EN_COURS      { color: var(--neon-green); border: 1px solid var(--neon-green); }
+
+        /* Modal replay */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .modal.active { display: flex; }
+        .modal-board {
+            display: grid;
+            gap: 5px;
+            padding: 16px;
+            background: rgba(0,10,25,0.95);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+        .modal-cell {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(0,245,255,0.07);
+            border: 1px solid rgba(0,245,255,0.18);
+        }
+        .modal-cell.red {
+            background: radial-gradient(circle at 35% 35%, #ff4d6d, #ff1744);
+            box-shadow: 0 0 12px rgba(255,23,68,0.5);
+        }
+        .modal-cell.yellow {
+            background: radial-gradient(circle at 35% 35%, #fff176, #ffe600);
+            box-shadow: 0 0 12px rgba(255,230,0,0.5);
+        }
+        .modal-info {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--neon-blue);
+            letter-spacing: 0.2em;
+        }
+        .modal-controls { display: flex; gap: 10px; }
+    </style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="scanlines"></div>
+
+<div class="historique-container">
+    <a href="/" class="btn btn-secondary back-btn">← RETOUR AU JEU</a>
+
+    <div class="panel">
+        <h2 style="font-family:'Orbitron',sans-serif; color:var(--neon-blue); font-size:1rem; letter-spacing:0.2em; margin-bottom:20px;">
+            HISTORIQUE DES PARTIES
+        </h2>
+
+        {% if parties %}
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>MODE</th>
+                    <th>IA</th>
+                    <th>PREMIER</th>
+                    <th>STATUT</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in parties %}
+                <tr>
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.mode }}</td>
+                    <td>{{ p.ai_type }}</td>
+                    <td>{{ p.starting_color }}</td>
+                    <td>
+                        <span class="statut-badge {{ p.statut }}">{{ p.statut }}</span>
+                    </td>
+                    <td>
+                        <button onclick="replayPartie({{ p.id }}, {{ p.nb_cols }}, {{ p.nb_rows }})"
+                                class="btn btn-primary" style="font-size:0.55rem; padding:6px 10px;">
+                            ▶ REPLAY
+                        </button>
+                        {% if p.statut == 'EN_COURS' %}
+                        <button onclick="reprendrePartie({{ p.id }})"
+                                class="btn btn-accent" style="font-size:0.55rem; padding:6px 10px;">
+                            ↩ REPRENDRE
+                        </button>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p style="color:var(--text-dim); text-align:center; padding:40px;">
+            AUCUNE PARTIE SAUVEGARDÉE
+        </p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- MODAL REPLAY -->
+<div class="modal" id="replayModal">
+    <div class="modal-info" id="replayInfo">COUP 0 / 0</div>
+    <div class="modal-board" id="replayBoard"></div>
+    <div class="modal-controls">
+        <button onclick="prevCoup()" class="btn btn-secondary">◀ PRÉC</button>
+        <button onclick="toggleAutoPlay()" class="btn btn-primary" id="autoBtn">▶ AUTO</button>
+        <button onclick="nextCoup()" class="btn btn-secondary">SUIV ▶</button>
+        <button onclick="closeModal()" class="btn btn-accent">✕ FERMER</button>
+    </div>
+</div>
+
+<script>
+let situations = [];
+let currentCoup = 0;
+let replayCols = 7;
+let replayRows = 6;
+let autoInterval = null;
+
+function replayPartie(partieId, cols, rows) {
+    replayCols = cols;
+    replayRows = rows;
+    currentCoup = 0;
+    stopAuto();
+
+    fetch(`/replay/${partieId}`)
+    .then(r => r.json())
+    .then(data => {
+        situations = data;
+        document.getElementById('replayModal').classList.add('active');
+        drawReplay(0);
+    });
+}
+
+function drawReplay(idx) {
+    const board = document.getElementById('replayBoard');
+    const info = document.getElementById('replayInfo');
+
+    board.style.gridTemplateColumns = `repeat(${replayCols}, 52px)`;
+    board.innerHTML = '';
+
+    const grid = situations[idx];
+    if (!grid) return;
+
+    for (let r = 0; r < replayRows; r++) {
+        for (let c = 0; c < replayCols; c++) {
+            const cell = document.createElement('div');
+            cell.classList.add('modal-cell');
+            if (grid[r][c] === 1) cell.classList.add('red');
+            else if (grid[r][c] === 2) cell.classList.add('yellow');
+            board.appendChild(cell);
+        }
+    }
+    info.textContent = `COUP ${idx + 1} / ${situations.length}`;
+}
+
+function nextCoup() {
+    if (currentCoup < situations.length - 1) {
+        currentCoup++;
+        drawReplay(currentCoup);
+    } else {
+        stopAuto();
+    }
+}
+
+function prevCoup() {
+    if (currentCoup > 0) {
+        currentCoup--;
+        drawReplay(currentCoup);
+    }
+}
+
+function toggleAutoPlay() {
+    if (autoInterval) {
+        stopAuto();
+    } else {
+        document.getElementById('autoBtn').textContent = '⏸ PAUSE';
+        autoInterval = setInterval(() => {
+            if (currentCoup < situations.length - 1) {
+                nextCoup();
+            } else {
+                stopAuto();
+            }
+        }, 700);
+    }
+}
+
+function stopAuto() {
+    if (autoInterval) clearInterval(autoInterval);
+    autoInterval = null;
+    document.getElementById('autoBtn').textContent = '▶ AUTO';
+}
+
+function closeModal() {
+    stopAuto();
+    document.getElementById('replayModal').classList.remove('active');
+    situations = [];
+    currentCoup = 0;
+}
+
+function reprendrePartie(partieId) {
+    fetch(`/reprendre/${partieId}`, { method: 'POST' })
+    .then(r => r.json())
+    .then(() => { window.location = '/'; });
+}
+</script>
+</body>
+</html>

@@ -76,6 +76,8 @@
 
                     <option value="minimax">MINIMAX</option>
 
+                    <option value="bdd">IA BASE DE DONNÉES</option>
+
                 </select>
 
             </div>
@@ -96,7 +98,7 @@
             </div>
 
 
-            <div class="control-group">
+            <div class="control-group" id="depth-group">
 
                 <label class="ctrl-label">PROFONDEUR</label>
 
@@ -123,6 +125,8 @@
             <button onclick="pauseGame()" class="btn btn-secondary">⏸ PAUSE</button>
 
             <button onclick="resumeGame()" class="btn btn-secondary">▶ RESUME</button>
+
+            <a href="/historique" class="btn btn-secondary">📋 HISTORIQUE</a>
 
         </div>
 
@@ -162,6 +166,17 @@
 
     const INITIAL_GRID = {{ grid | tojson }};
 
+    const RESUMED = {{ resumed | tojson }};
+
+    const RESUMED_MODE = {{ mode | tojson }};
+
+</script>
+
+<script>
+document.getElementById('ai_type').addEventListener('change', function() {
+    const depthGroup = document.getElementById('depth-group');
+    depthGroup.style.display = this.value === 'bdd' ? 'none' : 'flex';
+});
 </script>
 
 <script src="/static/script.js"></script>

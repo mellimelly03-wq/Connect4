@@ -1644,3 +1644,848 @@ AttributeError: 'NoneType' object has no attribute 'get'
     res = self.tk.call(self._w, "insert", parent, index, *opts)
 _tkinter.TclError: invalid command name ".!treeview"
 
+2026-03-08 16:46:00,185 - ====== WebDriver manager ======
+2026-03-08 16:46:00,253 - Traceback (most recent call last):
+  File "c:\Users\Melissa\OneDrive\Connect4\bga.py", line 247, in connect
+    service = Service(GeckoDriverManager().install())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\firefox.py", line 39, in install
+    driver_path = self._get_driver_binary_path(self.driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\manager.py", line 35, in _get_driver_binary_path
+    binary_path = self._cache_manager.find_driver(driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\driver_cache.py", line 103, in find_driver
+    browser_version = self._os_system_manager.get_browser_version_from_os(browser_type)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\os_manager.py", line 78, in get_browser_version_from_os
+    OSType.WIN: windows_browser_apps_to_cmd(
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        r'(Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        r'(Get-ItemProperty -Path Registry::"HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome").version',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 28, in windows_browser_apps_to_cmd
+    powershell = determine_powershell()
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 55, in determine_powershell
+    with subprocess.Popen(
+         ~~~~~~~~~~~~~~~~^
+            cmd,
+            ^^^^
+    ...<3 lines>...
+            shell=True,
+            ^^^^^^^^^^^
+    ) as stream:
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1552, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé
+
+2026-03-08 16:46:07,746 - ====== WebDriver manager ======
+2026-03-08 16:46:07,749 - Traceback (most recent call last):
+  File "c:\Users\Melissa\OneDrive\Connect4\bga.py", line 247, in connect
+    service = Service(GeckoDriverManager().install())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\firefox.py", line 39, in install
+    driver_path = self._get_driver_binary_path(self.driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\manager.py", line 35, in _get_driver_binary_path
+    binary_path = self._cache_manager.find_driver(driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\driver_cache.py", line 103, in find_driver
+    browser_version = self._os_system_manager.get_browser_version_from_os(browser_type)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\os_manager.py", line 78, in get_browser_version_from_os
+    OSType.WIN: windows_browser_apps_to_cmd(
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        r'(Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        r'(Get-ItemProperty -Path Registry::"HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome").version',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 28, in windows_browser_apps_to_cmd
+    powershell = determine_powershell()
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 55, in determine_powershell
+    with subprocess.Popen(
+         ~~~~~~~~~~~~~~~~^
+            cmd,
+            ^^^^
+    ...<3 lines>...
+            shell=True,
+            ^^^^^^^^^^^
+    ) as stream:
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1552, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé
+
+2026-03-08 16:56:15,849 - ====== WebDriver manager ======
+2026-03-08 16:56:15,865 - Traceback (most recent call last):
+  File "c:\Users\Melissa\OneDrive\Connect4\bga.py", line 247, in connect
+    service = Service(GeckoDriverManager().install())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\firefox.py", line 39, in install
+    driver_path = self._get_driver_binary_path(self.driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\manager.py", line 35, in _get_driver_binary_path
+    binary_path = self._cache_manager.find_driver(driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\driver_cache.py", line 103, in find_driver
+    browser_version = self._os_system_manager.get_browser_version_from_os(browser_type)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\os_manager.py", line 78, in get_browser_version_from_os
+    OSType.WIN: windows_browser_apps_to_cmd(
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        r'(Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        r'(Get-ItemProperty -Path Registry::"HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome").version',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 28, in windows_browser_apps_to_cmd
+    powershell = determine_powershell()
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 55, in determine_powershell
+    with subprocess.Popen(
+         ~~~~~~~~~~~~~~~~^
+            cmd,
+            ^^^^
+    ...<3 lines>...
+            shell=True,
+            ^^^^^^^^^^^
+    ) as stream:
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1552, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé
+
+2026-03-08 17:01:14,721 - ====== WebDriver manager ======
+2026-03-08 17:01:14,729 - Traceback (most recent call last):
+  File "C:\Users\Melissa\OneDrive\Connect4\bga.py", line 247, in connect
+    service = Service(GeckoDriverManager().install())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\firefox.py", line 39, in install
+    driver_path = self._get_driver_binary_path(self.driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\manager.py", line 35, in _get_driver_binary_path
+    binary_path = self._cache_manager.find_driver(driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\driver_cache.py", line 103, in find_driver
+    browser_version = self._os_system_manager.get_browser_version_from_os(browser_type)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\os_manager.py", line 78, in get_browser_version_from_os
+    OSType.WIN: windows_browser_apps_to_cmd(
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        r'(Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        r'(Get-ItemProperty -Path Registry::"HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome").version',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 28, in windows_browser_apps_to_cmd
+    powershell = determine_powershell()
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 55, in determine_powershell
+    with subprocess.Popen(
+         ~~~~~~~~~~~~~~~~^
+            cmd,
+            ^^^^
+    ...<3 lines>...
+            shell=True,
+            ^^^^^^^^^^^
+    ) as stream:
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1552, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé
+
+2026-03-08 17:02:43,127 - ====== WebDriver manager ======
+2026-03-08 17:02:43,135 - Traceback (most recent call last):
+  File "C:\Users\Melissa\OneDrive\Connect4\bga.py", line 247, in connect
+    service = Service(GeckoDriverManager().install())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\firefox.py", line 39, in install
+    driver_path = self._get_driver_binary_path(self.driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\manager.py", line 35, in _get_driver_binary_path
+    binary_path = self._cache_manager.find_driver(driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\driver_cache.py", line 103, in find_driver
+    browser_version = self._os_system_manager.get_browser_version_from_os(browser_type)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\os_manager.py", line 78, in get_browser_version_from_os
+    OSType.WIN: windows_browser_apps_to_cmd(
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        r'(Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        r'(Get-ItemProperty -Path Registry::"HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome").version',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 28, in windows_browser_apps_to_cmd
+    powershell = determine_powershell()
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 55, in determine_powershell
+    with subprocess.Popen(
+         ~~~~~~~~~~~~~~~~^
+            cmd,
+            ^^^^
+    ...<3 lines>...
+            shell=True,
+            ^^^^^^^^^^^
+    ) as stream:
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1552, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé
+
+2026-03-08 17:05:13,966 - Traceback (most recent call last):
+  File "C:\Users\Melissa\OneDrive\Connect4\bga.py", line 246, in connect
+    service = Service(GeckoDriverManager().install())
+                      ^^^^^^^^^^^^^^^^^^
+NameError: name 'GeckoDriverManager' is not defined
+
+2026-03-08 17:09:28,256 - ====== WebDriver manager ======
+2026-03-08 17:09:28,275 - Traceback (most recent call last):
+  File "C:\Users\Melissa\OneDrive\Connect4\bga.py", line 247, in connect
+    service = Service(GeckoDriverManager().install())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\firefox.py", line 39, in install
+    driver_path = self._get_driver_binary_path(self.driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\manager.py", line 35, in _get_driver_binary_path
+    binary_path = self._cache_manager.find_driver(driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\driver_cache.py", line 103, in find_driver
+    browser_version = self._os_system_manager.get_browser_version_from_os(browser_type)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\os_manager.py", line 78, in get_browser_version_from_os
+    OSType.WIN: windows_browser_apps_to_cmd(
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        r'(Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        r'(Get-ItemProperty -Path Registry::"HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome").version',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 28, in windows_browser_apps_to_cmd
+    powershell = determine_powershell()
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 55, in determine_powershell
+    with subprocess.Popen(
+         ~~~~~~~~~~~~~~~~^
+            cmd,
+            ^^^^
+    ...<3 lines>...
+            shell=True,
+            ^^^^^^^^^^^
+    ) as stream:
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1552, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé
+
+2026-03-08 17:11:38,243 - ====== WebDriver manager ======
+2026-03-08 17:11:38,260 - Traceback (most recent call last):
+  File "c:\Users\Melissa\OneDrive\Connect4\bga.py", line 247, in connect
+    service = Service(GeckoDriverManager().install())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\firefox.py", line 39, in install
+    driver_path = self._get_driver_binary_path(self.driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\manager.py", line 35, in _get_driver_binary_path
+    binary_path = self._cache_manager.find_driver(driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\driver_cache.py", line 103, in find_driver
+    browser_version = self._os_system_manager.get_browser_version_from_os(browser_type)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\os_manager.py", line 78, in get_browser_version_from_os
+    OSType.WIN: windows_browser_apps_to_cmd(
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        r'(Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        r'(Get-ItemProperty -Path Registry::"HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome").version',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 28, in windows_browser_apps_to_cmd
+    powershell = determine_powershell()
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 55, in determine_powershell
+    with subprocess.Popen(
+         ~~~~~~~~~~~~~~~~^
+            cmd,
+            ^^^^
+    ...<3 lines>...
+            shell=True,
+            ^^^^^^^^^^^
+    ) as stream:
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1552, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé
+
+2026-03-08 17:11:54,332 - ====== WebDriver manager ======
+2026-03-08 17:11:54,338 - Traceback (most recent call last):
+  File "C:\Users\Melissa\OneDrive\Connect4\bga.py", line 247, in connect
+    service = Service(GeckoDriverManager().install())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\firefox.py", line 39, in install
+    driver_path = self._get_driver_binary_path(self.driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\manager.py", line 35, in _get_driver_binary_path
+    binary_path = self._cache_manager.find_driver(driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\driver_cache.py", line 103, in find_driver
+    browser_version = self._os_system_manager.get_browser_version_from_os(browser_type)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\os_manager.py", line 78, in get_browser_version_from_os
+    OSType.WIN: windows_browser_apps_to_cmd(
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        r'(Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        r'(Get-ItemProperty -Path Registry::"HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome").version',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 28, in windows_browser_apps_to_cmd
+    powershell = determine_powershell()
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 55, in determine_powershell
+    with subprocess.Popen(
+         ~~~~~~~~~~~~~~~~^
+            cmd,
+            ^^^^
+    ...<3 lines>...
+            shell=True,
+            ^^^^^^^^^^^
+    ) as stream:
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1552, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé
+
+2026-03-08 17:12:06,497 - ====== WebDriver manager ======
+2026-03-08 17:12:06,503 - Traceback (most recent call last):
+  File "C:\Users\Melissa\OneDrive\Connect4\bga.py", line 247, in connect
+    service = Service(GeckoDriverManager().install())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\firefox.py", line 39, in install
+    driver_path = self._get_driver_binary_path(self.driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\manager.py", line 35, in _get_driver_binary_path
+    binary_path = self._cache_manager.find_driver(driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\driver_cache.py", line 103, in find_driver
+    browser_version = self._os_system_manager.get_browser_version_from_os(browser_type)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\os_manager.py", line 78, in get_browser_version_from_os
+    OSType.WIN: windows_browser_apps_to_cmd(
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        r'(Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        r'(Get-ItemProperty -Path Registry::"HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome").version',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 28, in windows_browser_apps_to_cmd
+    powershell = determine_powershell()
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 55, in determine_powershell
+    with subprocess.Popen(
+         ~~~~~~~~~~~~~~~~^
+            cmd,
+            ^^^^
+    ...<3 lines>...
+            shell=True,
+            ^^^^^^^^^^^
+    ) as stream:
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1552, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé
+
+2026-03-08 17:12:25,464 - ====== WebDriver manager ======
+2026-03-08 17:12:25,470 - Traceback (most recent call last):
+  File "C:\Users\Melissa\OneDrive\Connect4\bga.py", line 247, in connect
+    service = Service(GeckoDriverManager().install())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\firefox.py", line 39, in install
+    driver_path = self._get_driver_binary_path(self.driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\manager.py", line 35, in _get_driver_binary_path
+    binary_path = self._cache_manager.find_driver(driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\driver_cache.py", line 103, in find_driver
+    browser_version = self._os_system_manager.get_browser_version_from_os(browser_type)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\os_manager.py", line 78, in get_browser_version_from_os
+    OSType.WIN: windows_browser_apps_to_cmd(
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        r'(Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        r'(Get-ItemProperty -Path Registry::"HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome").version',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 28, in windows_browser_apps_to_cmd
+    powershell = determine_powershell()
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 55, in determine_powershell
+    with subprocess.Popen(
+         ~~~~~~~~~~~~~~~~^
+            cmd,
+            ^^^^
+    ...<3 lines>...
+            shell=True,
+            ^^^^^^^^^^^
+    ) as stream:
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1552, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé
+
+2026-03-08 17:14:42,923 - ====== WebDriver manager ======
+2026-03-08 17:14:42,941 - Traceback (most recent call last):
+  File "c:\Users\Melissa\OneDrive\Connect4\bga.py", line 247, in connect
+    service = Service(GeckoDriverManager().install())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\firefox.py", line 39, in install
+    driver_path = self._get_driver_binary_path(self.driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\manager.py", line 35, in _get_driver_binary_path
+    binary_path = self._cache_manager.find_driver(driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\driver_cache.py", line 103, in find_driver
+    browser_version = self._os_system_manager.get_browser_version_from_os(browser_type)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\os_manager.py", line 78, in get_browser_version_from_os
+    OSType.WIN: windows_browser_apps_to_cmd(
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        r'(Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        r'(Get-ItemProperty -Path Registry::"HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome").version',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 28, in windows_browser_apps_to_cmd
+    powershell = determine_powershell()
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 55, in determine_powershell
+    with subprocess.Popen(
+         ~~~~~~~~~~~~~~~~^
+            cmd,
+            ^^^^
+    ...<3 lines>...
+            shell=True,
+            ^^^^^^^^^^^
+    ) as stream:
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1552, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé
+
+2026-03-08 17:15:27,415 - ====== WebDriver manager ======
+2026-03-08 17:15:27,421 - Traceback (most recent call last):
+  File "C:\Users\Melissa\OneDrive\Connect4\bga.py", line 247, in connect
+    service = Service(GeckoDriverManager().install())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\firefox.py", line 39, in install
+    driver_path = self._get_driver_binary_path(self.driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\manager.py", line 35, in _get_driver_binary_path
+    binary_path = self._cache_manager.find_driver(driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\driver_cache.py", line 103, in find_driver
+    browser_version = self._os_system_manager.get_browser_version_from_os(browser_type)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\os_manager.py", line 78, in get_browser_version_from_os
+    OSType.WIN: windows_browser_apps_to_cmd(
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        r'(Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        r'(Get-ItemProperty -Path Registry::"HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome").version',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 28, in windows_browser_apps_to_cmd
+    powershell = determine_powershell()
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 55, in determine_powershell
+    with subprocess.Popen(
+         ~~~~~~~~~~~~~~~~^
+            cmd,
+            ^^^^
+    ...<3 lines>...
+            shell=True,
+            ^^^^^^^^^^^
+    ) as stream:
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1552, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé
+
+2026-03-08 17:19:46,045 - Traceback (most recent call last):
+  File "c:\Users\Melissa\OneDrive\Connect4\bga.py", line 247, in connect
+    self.driver = Firefox(service=service, options=options)
+                  ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\selenium\webdriver\firefox\webdriver.py", line 69, in __init__
+    super().__init__(command_executor=executor, options=self.options)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\selenium\webdriver\common\webdriver.py", line 25, in __init__
+    super().__init__(*args, **kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 257, in __init__
+    self.start_session(capabilities)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 352, in start_session
+    response = self.execute(Command.NEW_SESSION, caps)["value"]
+               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.SessionNotCreatedException: Message: Expected browser binary location, but unable to find binary in default location, no 'moz:firefoxOptions.binary' capability provided, and no binary flag set on the command line; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+
+
+2026-03-08 17:20:08,092 - Traceback (most recent call last):
+  File "C:\Users\Melissa\OneDrive\Connect4\bga.py", line 247, in connect
+    self.driver = Firefox(service=service, options=options)
+                  ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\selenium\webdriver\firefox\webdriver.py", line 69, in __init__
+    super().__init__(command_executor=executor, options=self.options)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\selenium\webdriver\common\webdriver.py", line 25, in __init__
+    super().__init__(*args, **kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 257, in __init__
+    self.start_session(capabilities)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 352, in start_session
+    response = self.execute(Command.NEW_SESSION, caps)["value"]
+               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 432, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.SessionNotCreatedException: Message: Expected browser binary location, but unable to find binary in default location, no 'moz:firefoxOptions.binary' capability provided, and no binary flag set on the command line; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+
+
+2026-03-08 17:26:18,265 - Connexion BGA réussie
+2026-03-08 17:26:51,059 - Table 697430384 : bouton Revoir introuvable
+2026-03-08 17:26:56,116 - Table 697124818 : bouton Revoir introuvable
+2026-03-08 17:27:00,962 - Table 697122830 : bouton Revoir introuvable
+2026-03-08 17:27:05,815 - Table 697112071 : bouton Revoir introuvable
+2026-03-08 17:27:10,688 - Table 697080398 : bouton Revoir introuvable
+2026-03-08 17:27:15,566 - Table 697084456 : bouton Revoir introuvable
+2026-03-08 17:27:50,213 - Table 697087214 : bouton Revoir introuvable
+2026-03-08 17:27:55,111 - Table 697073597 : bouton Revoir introuvable
+2026-03-08 17:27:59,984 - Table 697075852 : bouton Revoir introuvable
+2026-03-08 17:28:04,851 - Table 697077381 : bouton Revoir introuvable
+2026-03-08 17:28:20,093 - Table 817882133 : bouton Revoir introuvable
+2026-03-08 17:28:35,385 - Table 817883177 : bouton Revoir introuvable
+2026-03-08 17:28:35,463 - Scraping terminé : \u2705 0 sauvegardées | \u26a0\ufe0f 0 doublons | \u23ed\ufe0f 12 ignorées
+2026-03-08 17:29:22,610 - Table 805150527 : 16 coups extraits
+2026-03-08 17:29:22,685 - Partie bga_805150527 sauvegardée \u2192 id 6183, 16 coups
+2026-03-08 17:29:32,710 - Table 805150116 : 17 coups extraits
+2026-03-08 17:29:32,742 - Partie bga_805150116 sauvegardée \u2192 id 6184, 17 coups
+2026-03-08 17:29:42,714 - Table 805154015 : 20 coups extraits
+2026-03-08 17:29:42,737 - Partie bga_805154015 sauvegardée \u2192 id 6185, 20 coups
+2026-03-08 17:29:52,793 - Table 804783775 : 30 coups extraits
+2026-03-08 17:29:52,833 - Partie bga_804783775 sauvegardée \u2192 id 6186, 30 coups
+2026-03-08 17:30:02,860 - Table 804780433 : 37 coups extraits
+2026-03-08 17:30:02,890 - Partie bga_804780433 sauvegardée \u2192 id 6187, 37 coups
+2026-03-08 17:30:12,953 - Table 804785730 : 34 coups extraits
+2026-03-08 17:30:12,986 - Partie bga_804785730 sauvegardée \u2192 id 6188, 34 coups
+2026-03-08 17:30:22,993 - Table 804771559 : 20 coups extraits
+2026-03-08 17:30:23,013 - Partie bga_804771559 sauvegardée \u2192 id 6189, 20 coups
+2026-03-08 17:30:33,010 - Table 804778917 : 29 coups extraits
+2026-03-08 17:30:33,029 - Partie bga_804778917 sauvegardée \u2192 id 6190, 29 coups
+2026-03-08 17:30:43,056 - Table 804776235 : 18 coups extraits
+2026-03-08 17:30:43,075 - Partie bga_804776235 sauvegardée \u2192 id 6191, 18 coups
+2026-03-08 17:30:53,071 - Table 804773344 : 23 coups extraits
+2026-03-08 17:30:53,105 - Partie bga_804773344 sauvegardée \u2192 id 6192, 23 coups
+2026-03-08 17:31:08,276 - Table 817882133 : bouton Revoir introuvable
+2026-03-08 17:31:23,487 - Table 817883177 : bouton Revoir introuvable
+2026-03-08 17:31:38,679 - Table 817893582 : bouton Revoir introuvable
+2026-03-08 17:31:38,716 - Scraping terminé : \u2705 10 sauvegardées | \u26a0\ufe0f 0 doublons | \u23ed\ufe0f 3 ignorées
+2026-03-08 17:32:17,191 - Table 805150527 : 16 coups extraits
+2026-03-08 17:32:27,229 - Table 805150116 : 17 coups extraits
+2026-03-08 17:32:37,190 - Table 805154015 : 20 coups extraits
+2026-03-08 17:32:47,166 - Table 804783775 : 30 coups extraits
+2026-03-08 17:32:57,247 - Table 804780433 : 37 coups extraits
+2026-03-08 17:33:07,369 - Table 804785730 : 34 coups extraits
+2026-03-08 17:33:17,353 - Table 804771559 : 20 coups extraits
+2026-03-08 17:33:27,368 - Table 804778917 : 29 coups extraits
+2026-03-08 17:33:37,470 - Table 804776235 : 18 coups extraits
+2026-03-08 17:33:47,467 - Table 804773344 : 23 coups extraits
+2026-03-08 17:33:57,465 - Table 804775572 : 22 coups extraits
+2026-03-08 17:33:57,488 - Partie bga_804775572 sauvegardée \u2192 id 6193, 22 coups
+2026-03-08 17:34:07,481 - Table 804778602 : 15 coups extraits
+2026-03-08 17:34:07,501 - Partie bga_804778602 sauvegardée \u2192 id 6194, 15 coups
+2026-03-08 17:34:17,461 - Table 804771500 : 13 coups extraits
+2026-03-08 17:34:17,481 - Partie bga_804771500 sauvegardée \u2192 id 6195, 13 coups
+2026-03-08 17:34:27,456 - Table 804761598 : 14 coups extraits
+2026-03-08 17:34:27,480 - Partie bga_804761598 sauvegardée \u2192 id 6196, 14 coups
+2026-03-08 17:34:37,450 - Table 804762687 : 19 coups extraits
+2026-03-08 17:34:37,490 - Partie bga_804762687 sauvegardée \u2192 id 6197, 19 coups
+2026-03-08 17:34:47,449 - Table 804763886 : 16 coups extraits
+2026-03-08 17:34:47,481 - Partie bga_804763886 sauvegardée \u2192 id 6198, 16 coups
+2026-03-08 17:34:57,526 - Table 804765253 : 50 coups extraits
+2026-03-08 17:34:57,551 - Partie bga_804765253 sauvegardée \u2192 id 6199, 50 coups
+2026-03-08 17:35:07,531 - Table 804758669 : 22 coups extraits
+2026-03-08 17:35:07,554 - Partie bga_804758669 sauvegardée \u2192 id 6200, 22 coups
+2026-03-08 17:35:17,532 - Table 804754818 : 18 coups extraits
+2026-03-08 17:35:17,552 - Partie bga_804754818 sauvegardée \u2192 id 6201, 18 coups
+2026-03-08 17:35:27,544 - Table 804755907 : 18 coups extraits
+2026-03-08 17:35:27,563 - Partie bga_804755907 sauvegardée \u2192 id 6202, 18 coups
+2026-03-08 17:35:37,586 - Table 804750234 : 21 coups extraits
+2026-03-08 17:35:37,624 - Partie bga_804750234 sauvegardée \u2192 id 6203, 21 coups
+2026-03-08 17:35:47,692 - Table 804750863 : 17 coups extraits
+2026-03-08 17:35:47,732 - Partie bga_804750863 sauvegardée \u2192 id 6204, 17 coups
+2026-03-08 17:36:03,023 - Table 817883177 : bouton Revoir introuvable
+2026-03-08 17:36:18,160 - Table 817893582 : bouton Revoir introuvable
+2026-03-08 17:36:33,402 - Table 817895244 : bouton Revoir introuvable
+2026-03-08 17:36:33,450 - Scraping terminé : \u2705 12 sauvegardées | \u26a0\ufe0f 10 doublons | \u23ed\ufe0f 3 ignorées
+2026-03-08 17:42:06,043 - ====== WebDriver manager ======
+2026-03-08 17:42:06,060 - Traceback (most recent call last):
+  File "c:\Users\Melissa\OneDrive\Connect4\bga.py", line 274, in connect
+    service = Service(GeckoDriverManager().install())
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\firefox.py", line 39, in install
+    driver_path = self._get_driver_binary_path(self.driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\manager.py", line 35, in _get_driver_binary_path
+    binary_path = self._cache_manager.find_driver(driver)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\driver_cache.py", line 103, in find_driver
+    browser_version = self._os_system_manager.get_browser_version_from_os(browser_type)
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\os_manager.py", line 78, in get_browser_version_from_os
+    OSType.WIN: windows_browser_apps_to_cmd(
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        r'(Get-Item -Path "$env:PROGRAMFILES\Google\Chrome\Application\chrome.exe").VersionInfo.FileVersion',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        r'(Get-ItemProperty -Path Registry::"HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome").version',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 28, in windows_browser_apps_to_cmd
+    powershell = determine_powershell()
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\site-packages\webdriver_manager\core\utils.py", line 55, in determine_powershell
+    with subprocess.Popen(
+         ~~~~~~~~~~~~~~~~^
+            cmd,
+            ^^^^
+    ...<3 lines>...
+            shell=True,
+            ^^^^^^^^^^^
+    ) as stream:
+    ^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Melissa\AppData\Local\Programs\Python\Python314\Lib\subprocess.py", line 1552, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé
+

@@ -3,6 +3,7 @@ import sys
 import os
 import json
 
+
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 SITE_DIR = os.path.abspath(os.path.dirname(__file__))
 sys.path = [p for p in sys.path if os.path.abspath(p) != SITE_DIR and p != '']
@@ -10,7 +11,9 @@ sys.path.insert(0, BASE_DIR)
 
 from board import Board
 from game import Game
-from game_repository import save_game_from_board
+from game_repository import save_game_from_board, get_parties, get_situations, load_game
+from ai_bdd import AIBaseDeDonnees
+
 
 app = Flask(__name__)
 
@@ -23,10 +26,12 @@ COLS = cfg["cols"]
 board = Board(ROWS, COLS)
 game = None
 
-
 @app.route("/")
 def index():
-    return render_template("game.html", rows=ROWS, cols=COLS, grid=board.grid)
+    grid = board.grid
+    resumed = game is not None and not game.game_over
+    mode = game.mode if game else None
+    return render_template("game.html", rows=ROWS, cols=COLS, grid=grid, resumed=resumed, mode=mode)
 
 
 @app.route("/start", methods=["POST"])
@@ -42,6 +47,8 @@ def start():
     game.ai_type = ai_type
     if ai_type == "minimax":
         game.ai.depth = depth
+    elif ai_type == "bdd":
+        game.ai_bdd = AIBaseDeDonnees(couleur="JAUNE" if starting == 1 else "ROUGE")
     return jsonify({"grid": board.grid})
 
 
@@ -132,10 +139,33 @@ def get_ai_move():
     if game.ai_type == "random":
         col = game.random_move()
         return col, []
+    elif game.ai_type == "bdd":
+        col = game.ai_bdd.choisir_coup(game.board)
+        return col, []
     else:
         col = game.ai.choose_move(game.board)
         scores = game.ai.scores
         return col, scores
+
+
+
+@app.route("/historique")
+def historique():
+    parties = get_parties()
+    return render_template("historique.html", parties=parties)
+
+@app.route("/replay/<int:partie_id>")
+def replay(partie_id):
+    situations = get_situations(partie_id)
+    plateaux = [json.loads(s['plateau']) for s in situations]
+    return jsonify(plateaux)
+
+@app.route("/reprendre/<int:partie_id>", methods=["POST"])
+def reprendre(partie_id):
+    global game, board
+    game = load_game(partie_id)
+    board = game.board
+    return jsonify({"ok": True})
 
 
 if __name__ == "__main__":

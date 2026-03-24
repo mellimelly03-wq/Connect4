@@ -17,9 +17,9 @@ from database import get_connection
 
 # ==============================
 
-NB_PARTIES_ALEATOIRES = 200   # confiance = 1
+NB_PARTIES_ALEATOIRES = 1000   # confiance = 1
 
-NB_PARTIES_MINIMAX    = 50    # confiance = 2  (plus long à générer)
+NB_PARTIES_MINIMAX    = 500    # confiance = 2  (plus long à générer)
 
 MAX_TENTATIVES        = 5000
 

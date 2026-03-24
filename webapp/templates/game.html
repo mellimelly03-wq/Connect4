@@ -1,187 +1,362 @@
 <!DOCTYPE html>
-
 <html lang="fr">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Connect4 — Cyberpunk</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="/static/style.css">
+    <style>
+        /* ---- PAINT CONTROLS ---- */
+        #paintControls {
+            display: none;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 12px;
+            padding: 12px;
+            border: 1px solid rgba(255,230,0,0.3);
+            border-radius: 4px;
+            background: rgba(255,230,0,0.03);
+        }
 
+        .paint-color-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+        }
+        .paint-color-btn:hover { transform: scale(1.2); }
+        .active-paint-btn {
+            border-color: white !important;
+            box-shadow: 0 0 14px white;
+            transform: scale(1.15);
+        }
+        #paintColor1 { background: radial-gradient(circle at 35% 35%, #ff4d6d, #ff1744); box-shadow: 0 0 8px rgba(255,23,68,0.5); }
+        #paintColor2 { background: radial-gradient(circle at 35% 35%, #fff176, #ffe600); box-shadow: 0 0 8px rgba(255,230,0,0.5); }
+        #paintColor0 { background: rgba(0,245,255,0.07); border: 2px solid var(--border); color: var(--text-dim); font-size: 1rem; }
+
+        .paint-cursor { cursor: crosshair !important; }
+
+        .btn-active-paint {
+            background: rgba(255,230,0,0.2) !important;
+            border-color: var(--neon-yellow) !important;
+            color: var(--neon-yellow) !important;
+        }
+
+        /* Indicateur prochain joueur painting */
+        #paintNextPlayer {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            padding: 4px 10px;
+            border-radius: 3px;
+            border: 1px solid currentColor;
+            transition: color 0.2s;
+        }
+
+        /* ---- SWITCH CONTROL ---- */
+        #switchControls {
+            display: none;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid rgba(0,245,255,0.2);
+            border-radius: 4px;
+        }
+
+        /* ---- AI PROGRESS BAR ---- */
+        #aiProgress {
+            display: none;
+            width: 100%;
+            height: 3px;
+            background: rgba(0,245,255,0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+        #aiProgressBar {
+            height: 100%;
+            width: 0%;
+            background: var(--neon-blue);
+            box-shadow: 0 0 8px var(--neon-blue);
+            transition: width 0.1s linear;
+        }
+        #aiProgress.active { display: block; }
+    </style>
 </head>
-
 <body>
-
-
 <div class="bg-grid"></div>
-
 <div class="scanlines"></div>
-
 
 <div class="container">
 
-
     <header>
-
         <div class="title-glow">
-
             <h1>CONNECT<span class="accent">4</span></h1>
-
             <div class="subtitle">NEURAL GAME SYSTEM</div>
-
         </div>
-
     </header>
 
-
+    <!-- ═══ PANEL CONTRÔLES ═══ -->
     <div class="panel controls-panel">
-
         <div class="controls-grid">
 
-
             <div class="control-group">
-
                 <label class="ctrl-label">MODE</label>
-
                 <select id="mode" class="cyber-select">
-
                     <option value="">— SELECT —</option>
-
                     <option value="2players">2 JOUEURS</option>
-
                     <option value="human_vs_ai">HUMAIN vs IA</option>
-
                     <option value="ai_vs_ai">IA vs IA</option>
-
                 </select>
-
             </div>
 
-
             <div class="control-group">
-
                 <label class="ctrl-label">IA TYPE</label>
-
                 <select id="ai_type" class="cyber-select">
-
                     <option value="random">RANDOM</option>
-
                     <option value="minimax">MINIMAX</option>
-
                     <option value="bdd">IA BASE DE DONNÉES</option>
-
                 </select>
-
             </div>
-
 
             <div class="control-group">
-
                 <label class="ctrl-label">PREMIER</label>
-
                 <select id="starting" class="cyber-select">
-
                     <option value="1">⬤ ROUGE</option>
-
                     <option value="2">⬤ JAUNE</option>
-
                 </select>
-
             </div>
-
 
             <div class="control-group" id="depth-group">
-
                 <label class="ctrl-label">PROFONDEUR</label>
-
-                <input type="number" id="depth" value="3" min="1" max="6" class="cyber-input">
-
+                <input type="number" id="depth" value="4" min="1" max="8" class="cyber-input">
             </div>
 
-
         </div>
 
-
+        <!-- Boutons principaux -->
         <div class="buttons-row">
-
             <button onclick="startGame()" class="btn btn-primary">▶ START</button>
-
             <button onclick="undo()" class="btn btn-secondary">↩ UNDO</button>
-
             <button onclick="restart()" class="btn btn-secondary">↺ RESTART</button>
-
             <button onclick="aiSuggestion()" class="btn btn-accent">⚡ IA HINT</button>
-
+            <button onclick="analyzeGame()" class="btn btn-accent">🔮 ANALYSE</button>
             <button onclick="saveGame()" class="btn btn-secondary">💾 SAVE</button>
-
             <button onclick="pauseGame()" class="btn btn-secondary">⏸ PAUSE</button>
-
             <button onclick="resumeGame()" class="btn btn-secondary">▶ RESUME</button>
-
             <a href="/historique" class="btn btn-secondary">📋 HISTORIQUE</a>
+        </div>
 
+        <!-- Boutons avancés -->
+        <div class="buttons-row" style="margin-top:8px;">
+            <button onclick="togglePaintMode()" class="btn btn-secondary" id="paintBtn">🖌 PAINT</button>
+            <button onclick="toggleSwitchControls()" class="btn btn-secondary">🔄 SWITCH CONTRÔLE</button>
+        </div>
+
+        <!-- ═══ Contrôles painting ═══ -->
+        <div id="paintControls">
+
+            <!-- Couleur peinture -->
+            <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; color:var(--neon-yellow); letter-spacing:0.2em;">COULEUR :</span>
+            <button class="paint-color-btn active-paint-btn" id="paintColor1" onclick="setPaintColor(1)" title="Rouge"></button>
+            <button class="paint-color-btn" id="paintColor2" onclick="setPaintColor(2)" title="Jaune"></button>
+            <button class="paint-color-btn" id="paintColor0" onclick="setPaintColor(0)" title="Effacer">✕</button>
+
+            <!-- Indicateur à qui jouer -->
+            <span id="paintNextPlayer" style="color: var(--player-red);">⬤ ROUGE</span>
+
+            <!-- Séparateur -->
+            <div style="width:100%; border-top: 1px solid rgba(255,230,0,0.15); margin: 4px 0;"></div>
+
+            <!-- Options pour jouer depuis le plateau -->
+            <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; color:var(--text-dim); letter-spacing:0.2em;">JOUER DEPUIS :</span>
+
+            <select id="paintMode" class="cyber-select" style="width:auto;">
+                <option value="2players">2 JOUEURS</option>
+                <option value="human_vs_ai">HUMAIN vs IA</option>
+                <option value="ai_vs_ai">IA vs IA</option>
+            </select>
+
+            <select id="paintAiType" class="cyber-select" style="width:auto;">
+                <option value="minimax">MINIMAX</option>
+                <option value="random">RANDOM</option>
+                <option value="bdd">IA BDD</option>
+            </select>
+
+            <!-- Couleur de l'humain -->
+            <select id="paintHumanColor" class="cyber-select" style="width:auto;">
+                <option value="rouge">🔴 HUMAIN = ROUGE</option>
+                <option value="jaune">🟡 HUMAIN = JAUNE</option>
+            </select>
+
+            <button onclick="startFromPaint()" class="btn btn-primary" style="font-size:0.6rem;">▶ JOUER</button>
+        </div>
+
+        <!-- ═══ Contrôles switch ═══ -->
+        <div id="switchControls">
+            <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; color:var(--neon-blue); letter-spacing:0.2em;">NOUVEAU MODE :</span>
+
+            <select id="switchMode" class="cyber-select" style="width:auto;">
+                <option value="2players">2 JOUEURS</option>
+                <option value="human_vs_ai">HUMAIN vs IA</option>
+                <option value="ai_vs_ai">IA vs IA</option>
+            </select>
+
+            <!-- Couleur de l'humain après switch -->
+            <select id="switchHumanColor" class="cyber-select" style="width:auto;">
+                <option value="rouge">🔴 HUMAIN = ROUGE</option>
+                <option value="jaune">🟡 HUMAIN = JAUNE</option>
+            </select>
+
+            <button onclick="switchControl()" class="btn btn-primary" style="font-size:0.6rem;">✓ APPLIQUER</button>
         </div>
 
     </div>
 
-
+    <!-- ═══ STATUS BAR ═══ -->
     <div class="status-bar">
-
         <div class="status-dot"></div>
-
-        <p id="info">INITIALISATION DU SYSTÈME...</p>
-
-    </div>
-
-
-    <div class="game-area">
-
-        <div class="board-wrapper">
-
-            <div id="board"></div>
-
-            <div id="scoresRow"></div>
-
+        <div style="flex:1;">
+            <p id="info">INITIALISATION DU SYSTÈME...</p>
+            <div id="aiProgress"><div id="aiProgressBar"></div></div>
         </div>
-
     </div>
 
+    <!-- ═══ PLATEAU ═══ -->
+    <div class="game-area">
+        <div class="board-wrapper">
+            <div id="board"></div>
+            <div id="scoresRow"></div>
+        </div>
+    </div>
 
 </div>
 
-
 <script>
-
     const ROWS = {{ rows }};
-
     const COLS = {{ cols }};
-
     const INITIAL_GRID = {{ grid | tojson }};
-
     const RESUMED = {{ resumed | tojson }};
-
     const RESUMED_MODE = {{ mode | tojson }};
-
+    const HUMAN_COLOR = {{ human_color }};
 </script>
 
 <script>
+// Cacher profondeur si IA BDD
 document.getElementById('ai_type').addEventListener('change', function() {
     const depthGroup = document.getElementById('depth-group');
     depthGroup.style.display = this.value === 'bdd' ? 'none' : 'flex';
 });
+
+// Toggle switch contrôles
+function toggleSwitchControls() {
+    const sc = document.getElementById('switchControls');
+    sc.style.display = sc.style.display === 'flex' ? 'none' : 'flex';
+}
+
+// Barre de progression IA
+let progressInterval = null;
+
+function startAIProgress() {
+    const bar = document.getElementById('aiProgressBar');
+    const progress = document.getElementById('aiProgress');
+    progress.classList.add('active');
+    bar.style.width = '0%';
+    let w = 0;
+    progressInterval = setInterval(() => {
+        w = Math.min(w + 2, 90);
+        bar.style.width = w + '%';
+    }, 80);
+}
+
+function stopAIProgress() {
+    const bar = document.getElementById('aiProgressBar');
+    const progress = document.getElementById('aiProgress');
+    if (progressInterval) clearInterval(progressInterval);
+    bar.style.width = '100%';
+    setTimeout(() => {
+        progress.classList.remove('active');
+        bar.style.width = '0%';
+    }, 300);
+}
 </script>
 
 <script src="/static/script.js"></script>
 
+<script>
+// Patch triggerAIMove pour la barre de progression
+window.triggerAIMove = function() {
+    startAIProgress();
+    fetch("/ai_move", { method: "POST" })
+    .then(res => res.json())
+    .then(data => {
+        stopAIProgress();
+        isAITurn = false;
+        if (data.error) return;
+
+        drawBoard(data.grid, data.scores || [], data.winning_cells || []);
+
+        if (data.winner) {
+            const who = data.winner === 1 ? "ROUGE" : "JAUNE";
+            const col = data.winner === 1 ? "var(--player-red)" : "var(--player-yellow)";
+            setInfo(`⬤ VICTOIRE — JOUEUR ${who} !`, col);
+            setTimeout(() => alert(`Victoire joueur ${who} !`), 100);
+        } else if (data.draw) {
+            setInfo("MATCH NUL — ÉGALITÉ PARFAITE", "var(--neon-blue)");
+            setTimeout(() => alert("Match nul !"), 100);
+        } else {
+            const whoNow = humanColor === 1 ? "ROUGE 🔴" : "JAUNE 🟡";
+            setInfo(`À TON TOUR — ${whoNow}`, humanColor === 1 ? "var(--player-red)" : "var(--player-yellow)");
+        }
+    });
+};
+
+// Patch aiMove pour IA vs IA avec barre
+window.aiMove = function() {
+    if (!gameStarted) return;
+    isAITurn = true;
+    setInfo("IA EN CALCUL...", "var(--neon-blue)");
+    startAIProgress();
+
+    fetch("/ai_move", { method: "POST" })
+    .then(res => res.json())
+    .then(data => {
+        stopAIProgress();
+        isAITurn = false;
+        if (data.error) { stopAIVsAI(); return; }
+
+        drawBoard(data.grid, data.scores || [], data.winning_cells || []);
+
+        if (data.winner) {
+            stopAIVsAI();
+            const who = data.winner === 1 ? "ROUGE" : "JAUNE";
+            const col = data.winner === 1 ? "var(--player-red)" : "var(--player-yellow)";
+            setInfo(`⬤ VICTOIRE — JOUEUR ${who} !`, col);
+            setTimeout(() => alert(`Victoire joueur ${who} !`), 100);
+        } else if (data.draw) {
+            stopAIVsAI();
+            setInfo("MATCH NUL — ÉGALITÉ PARFAITE", "var(--neon-blue)");
+        } else {
+            setInfo("SYSTÈME ACTIF — EN COURS...", "var(--neon-green)");
+        }
+    });
+};
+</script>
 
 </body>
-
 </html>

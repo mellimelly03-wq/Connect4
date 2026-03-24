@@ -1,148 +1,156 @@
-import json
 import hashlib
 from database import get_connection
-
-# ==============================
-# IA BASE DE DONNÉES
-# ==============================
-# Stratégie :
-#   1. Récupère la séquence des coups joués jusqu'ici
-#   2. Cherche en base les parties qui ont la MÊME séquence de début
-#   3. Regarde quel coup a été joué ensuite dans ces parties
-#   4. Choisit le coup avec le meilleur score (victoires - défaites × confiance)
-#
-# Indice de confiance :
-#   1 = parties aléatoires
-#   2 = parties minimax
-#   3 = parties humains local
-#   4 = parties BGA (très fiables)
-# ==============================
+from board import RED, YELLOW
 
 class AIBaseDeDonnees:
 
     def __init__(self, couleur="JAUNE"):
         self.couleur = couleur
+        self.couleur_int = YELLOW if couleur == "JAUNE" else RED
 
     # ==============================
     # MÉTHODE PRINCIPALE
     # ==============================
     def choisir_coup(self, board):
-        # Récupérer la séquence de coups joués jusqu'ici
         coups_joues = [col for (_, col, _) in board.history]
-        nb_coups    = len(coups_joues)
+        nb_coups = len(coups_joues)
 
+        print("[AI_BDD] coups:", coups_joues)
+
+        # 1. Victoire immédiate
+        for col in self._cols_valides(board):
+            board.drop_piece(col, self.couleur_int)
+            if board.check_winner(self.couleur_int):
+                board.undo()
+                print(f"[AI_BDD] Victoire immédiate → {col}")
+                return col
+            board.undo()
+
+        # 2. Bloquer adversaire
+        opp = RED if self.couleur_int == YELLOW else YELLOW
+        for col in self._cols_valides(board):
+            board.drop_piece(col, opp)
+            if board.check_winner(opp):
+                board.undo()
+                print(f"[AI_BDD] Blocage → {col}")
+                return col
+            board.undo()
+
+        # 3. BDD
         scores = self._calculer_scores(coups_joues, nb_coups, board)
 
-        if not scores:
-            print(f"[AI_BDD] Aucune situation trouvée après {nb_coups} coups → fallback")
-            return self._fallback(board)
+        if scores and max(scores.values(), default=0) > 0:
+            meilleur_col = max(scores, key=scores.get)
+            print(f"[AI_BDD] BDD → {scores} → {meilleur_col}")
+            return meilleur_col
 
-        meilleur_col   = max(scores, key=scores.get)
-        meilleur_score = scores[meilleur_col]
-
-        print(f"[AI_BDD] Scores : {scores} → choix colonne {meilleur_col} (score={meilleur_score})")
-
-        if meilleur_score <= 0:
-            return self._fallback(board)
-
-        return meilleur_col
+        # 4. fallback SAFE
+        print("[AI_BDD] fallback minimax")
+        return self._fallback_minimax(board)
 
     # ==============================
-    # CALCUL DES SCORES
+    # BDD (SAFE)
     # ==============================
     def _calculer_scores(self, coups_joues, nb_coups, board):
-        """
-        Cherche les parties en base dont les N premiers coups
-        correspondent exactement à la séquence actuelle.
-        Puis regarde quel coup a été joué en N+1.
-        """
         try:
             conn = get_connection()
-            cur  = conn.cursor(dictionary=True)
+            cur = conn.cursor(dictionary=True)
 
-            if nb_coups == 0:
-                # Début de partie → regarder le 1er coup de toutes les parties
-                cur.execute("""
-                    SELECT c.colonne, p.statut, p.confiance
-                    FROM coup c
-                    JOIN partie p ON p.id = c.partie_id
-                    WHERE c.numero = 1
-                """)
-            else:
-                # Trouver les parties dont les N premiers coups correspondent
-                # On construit le hash de la séquence actuelle
-                hash_seq = self._hash_sequence(coups_joues)
+            hash_seq = self._hash_sequence(coups_joues)
 
-                cur.execute("""
-                    SELECT c_next.colonne, p.statut, p.confiance
-                    FROM partie p
-                    JOIN coup c_next ON c_next.partie_id = p.id
-                                    AND c_next.numero = %s
-                    WHERE p.id IN (
-                        SELECT partie_id
-                        FROM coup
-                        WHERE numero <= %s
-                        GROUP BY partie_id
-                        HAVING MD5(GROUP_CONCAT(colonne ORDER BY numero SEPARATOR '')) = %s
-                    )
-                """, (nb_coups + 1, nb_coups, hash_seq))
+            cur.execute("""
+                SELECT c_next.colonne, p.statut, p.confiance,
+                       COUNT(*) as nb_fois
+                FROM partie p
+                JOIN coup c_next ON c_next.partie_id = p.id
+                                 AND c_next.numero = %s
+                WHERE p.statut != 'EN_COURS'
+                AND p.id IN (
+                    SELECT partie_id
+                    FROM coup
+                    WHERE numero <= %s
+                    GROUP BY partie_id
+                    HAVING MD5(GROUP_CONCAT(colonne ORDER BY numero SEPARATOR '')) = %s
+                )
+                GROUP BY c_next.colonne, p.statut, p.confiance
+            """, (nb_coups + 1, nb_coups, hash_seq))
 
             lignes = cur.fetchall()
             conn.close()
 
-            if not lignes:
-                return {}
-
-            scores = {}
-            for ligne in lignes:
-                col       = ligne["colonne"]
-                statut    = ligne["statut"]
-                confiance = ligne["confiance"] or 1
-
-                if board.is_column_full(col):
-                    continue
-
-                gain  = self._calculer_gain(statut)
-                poids = gain * confiance
-
-                scores[col] = scores.get(col, 0) + poids
-
-            return scores
+            return self._agreger(lignes, board)
 
         except Exception as e:
-            print(f"[AI_BDD] Erreur SQL : {e}")
-            return {}
+            print(f"[AI_BDD] BDD OFF → {e}")
+            return {}   # ⚠️ super important → jamais None
 
     # ==============================
-    # HASH DE LA SÉQUENCE
+    # AGRÉGATION
+    # ==============================
+    def _agreger(self, lignes, board):
+        scores = {}
+
+        for ligne in lignes:
+            col = ligne["colonne"]
+
+            if board.is_column_full(col):
+                continue
+
+            statut = ligne["statut"]
+            confiance = ligne.get("confiance") or 1
+            nb_fois = ligne.get("nb_fois") or 1
+
+            gain = self._calculer_gain(statut)
+            poids = gain * confiance * nb_fois
+
+            scores[col] = scores.get(col, 0) + poids
+
+        return scores
+
+    # ==============================
+    # OUTILS
     # ==============================
     def _hash_sequence(self, coups):
-        """
-        Hash MD5 de la séquence de coups
-        ex: [3, 4, 3] → md5("343")
-        Même format que GROUP_CONCAT en SQL.
-        """
         s = ''.join(map(str, coups))
         return hashlib.md5(s.encode()).hexdigest()
 
-    # ==============================
-    # GAIN SELON RÉSULTAT
-    # ==============================
     def _calculer_gain(self, statut):
         if statut == f"TERMINE_{self.couleur}":
-            return 1    # victoire
+            return 1
+        elif statut == "TERMINE_NUL":
+            return 0.1
         elif statut in ("TERMINE_ROUGE", "TERMINE_JAUNE"):
-            return -1   # défaite
-        else:
-            return 0    # nul ou en cours
+            return -1
+        return 0
 
     # ==============================
-    # FALLBACK — joue proche du centre
+    # FALLBACK CORRIGÉ
     # ==============================
-    def _fallback(self, board):
-        centre  = board.cols // 2
-        valides = [c for c in range(board.cols) if not board.is_column_full(c)]
+    def _fallback_minimax(self, board):
+        try:
+            from minmax import MiniMaxAI
+            ai = MiniMaxAI(depth=4)
+
+            # ✅ FIX ICI
+            col = ai.choose_move(board, self.couleur_int)
+
+            if col is not None:
+                return col
+
+        except Exception as e:
+            print(f"[AI_BDD] minimax error → {e}")
+
+        return self._fallback_centre(board)
+
+    def _fallback_centre(self, board):
+        centre = board.cols // 2
+        valides = self._cols_valides(board)
+
         if not valides:
             return None
+
         valides.sort(key=lambda c: abs(c - centre))
         return valides[0]
+
+    def _cols_valides(self, board):
+        return [c for c in range(board.cols) if not board.is_column_full(c)]

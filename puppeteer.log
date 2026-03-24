@@ -1,0 +1,1003 @@
+2026-03-24 11:24:39,351 - Puppeteer lancé — IA=bdd profondeur=6
+2026-03-24 11:24:40,132 - Couleur détectée : JAUNE \U0001f7e1
+2026-03-24 11:24:41,144 - Partie terminée détectée
+2026-03-24 11:25:14,050 - Puppeteer lancé — IA=bdd profondeur=6
+2026-03-24 11:25:15,883 - Couleur détectée : JAUNE \U0001f7e1
+2026-03-24 11:25:19,372 - IA choisit colonne 2
+2026-03-24 11:25:19,984 - Coup joué : colonne 2 (BGA col 3, case square_3_8)
+2026-03-24 11:26:12,459 - Puppeteer lancé — IA=bdd profondeur=6
+2026-03-24 11:26:13,087 - Couleur détectée : JAUNE \U0001f7e1
+2026-03-24 11:26:14,338 - IA choisit colonne 2
+2026-03-24 11:26:14,932 - Coup joué : colonne 2 (BGA col 3, case square_3_9)
+2026-03-24 11:26:48,082 - Puppeteer lancé — IA=bdd profondeur=6
+2026-03-24 11:26:48,999 - Couleur détectée : JAUNE \U0001f7e1
+2026-03-24 11:26:50,115 - IA choisit colonne 2
+2026-03-24 11:26:50,700 - Coup joué : colonne 2 (BGA col 3, case square_3_9)
+2026-03-24 11:27:23,898 - Puppeteer lancé — IA=minimax profondeur=6
+2026-03-24 11:27:25,613 - Couleur détectée : JAUNE \U0001f7e1
+2026-03-24 11:27:40,378 - IA choisit colonne 4
+2026-03-24 11:27:40,990 - Coup joué : colonne 4 (BGA col 5, case square_5_9)
+2026-03-24 11:28:04,036 - Puppeteer lancé — IA=minimax profondeur=4
+2026-03-24 11:28:05,957 - Couleur détectée : JAUNE \U0001f7e1
+2026-03-24 11:28:07,762 - IA choisit colonne 4
+2026-03-24 11:28:08,345 - Coup joué : colonne 4 (BGA col 5, case square_5_9)
+2026-03-24 11:34:18,807 - Puppeteer lancé — IA=minimax profondeur=4
+2026-03-24 11:34:21,298 - Couleur détectée : JAUNE \U0001f7e1
+2026-03-24 11:34:23,662 - IA choisit colonne 4
+2026-03-24 11:34:24,685 - jouer_coup erreur : Message: Tried to run command without establishing a connection; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+
+2026-03-24 11:34:41,177 - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=51303): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée")': /session/99ce2935-e0b0-444c-a90b-d8385df2f986/element
+2026-03-24 11:34:45,210 - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=51303): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée")': /session/99ce2935-e0b0-444c-a90b-d8385df2f986/element
+2026-03-24 11:34:49,293 - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=51303): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée")': /session/99ce2935-e0b0-444c-a90b-d8385df2f986/element
+2026-03-24 11:34:57,409 - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=51303): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée")': /session/99ce2935-e0b0-444c-a90b-d8385df2f986/elements
+2026-03-24 11:35:01,472 - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=51303): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée")': /session/99ce2935-e0b0-444c-a90b-d8385df2f986/elements
+2026-03-24 11:35:05,535 - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=51303): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée")': /session/99ce2935-e0b0-444c-a90b-d8385df2f986/elements
+2026-03-24 11:35:14,701 - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=51303): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée")': /session/99ce2935-e0b0-444c-a90b-d8385df2f986/element
+2026-03-24 11:35:18,769 - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=51303): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée")': /session/99ce2935-e0b0-444c-a90b-d8385df2f986/element
+2026-03-24 11:35:22,824 - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=51303): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée")': /session/99ce2935-e0b0-444c-a90b-d8385df2f986/element
+2026-03-24 11:35:30,953 - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=51303): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée")': /session/99ce2935-e0b0-444c-a90b-d8385df2f986/elements
+2026-03-24 11:35:35,011 - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=51303): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée")': /session/99ce2935-e0b0-444c-a90b-d8385df2f986/elements
+2026-03-24 11:35:39,077 - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=51303): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée")': /session/99ce2935-e0b0-444c-a90b-d8385df2f986/elements
+2026-03-24 11:35:48,200 - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='localhost', port=51303): Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée")': /session/99ce2935-e0b0-444c-a90b-d8385df2f986/element
+2026-03-24 11:39:59,123 - Puppeteer lancé — IA=minimax profondeur=6
+2026-03-24 11:39:59,425 - Couleur détectée : JAUNE \U0001f7e1
+2026-03-24 11:40:10,833 - IA choisit colonne 4
+2026-03-24 11:40:11,434 - Coup joué : colonne 4 (BGA col 5, case square_5_6)
+2026-03-24 11:40:37,816 - Puppeteer lancé — IA=minimax profondeur=6
+2026-03-24 11:40:38,408 - Couleur détectée : JAUNE \U0001f7e1
+2026-03-24 11:40:49,316 - IA choisit colonne 4
+2026-03-24 11:40:49,913 - Coup joué : colonne 4 (BGA col 5, case square_5_6)
+2026-03-24 11:41:07,159 - Puppeteer lancé — IA=minimax profondeur=6
+2026-03-24 11:41:08,034 - Couleur détectée : JAUNE \U0001f7e1
+2026-03-24 11:41:18,515 - IA choisit colonne 4
+2026-03-24 11:41:19,117 - Coup joué : colonne 4 (BGA col 5, case square_5_6)
+2026-03-24 11:41:26,864 - Puppeteer lancé — IA=minimax profondeur=6
+2026-03-24 11:41:28,132 - Couleur détectée : JAUNE \U0001f7e1
+2026-03-24 11:41:38,462 - IA choisit colonne 4
+2026-03-24 11:41:39,049 - Coup joué : colonne 4 (BGA col 5, case square_5_6)
+2026-03-24 11:41:56,831 - Puppeteer lancé — IA=minimax profondeur=6
+2026-03-24 11:41:58,340 - Couleur détectée : JAUNE \U0001f7e1
+2026-03-24 11:42:08,824 - IA choisit colonne 4
+2026-03-24 11:42:09,411 - Coup joué : colonne 4 (BGA col 5, case square_5_6)
+2026-03-24 11:42:24,873 - Partie terminée détectée
+2026-03-24 11:42:25,335 - Partie terminée détectée
+2026-03-24 11:42:25,791 - Partie terminée détectée
+2026-03-24 11:42:26,263 - Partie terminée détectée
+2026-03-24 11:42:26,683 - Partie terminée détectée
+2026-03-24 12:01:53,643 - Puppeteer lancé — IA=minimax profondeur=6
+2026-03-24 12:01:53,830 - Couleur détectée : JAUNE \U0001f7e1
+2026-03-24 12:02:05,300 - IA choisit colonne 4
+2026-03-24 12:02:05,893 - Coup joué : colonne 4 (BGA col 5, case square_5_9)
+2026-03-24 12:02:17,487 - IA choisit colonne 4
+2026-03-24 12:02:18,070 - Coup joué : colonne 4 (BGA col 5, case square_5_9)
+2026-03-24 12:02:29,653 - IA choisit colonne 4
+2026-03-24 12:02:30,227 - Coup joué : colonne 4 (BGA col 5, case square_5_9)
+2026-03-24 12:02:41,954 - IA choisit colonne 4
+2026-03-24 12:02:42,543 - Coup joué : colonne 4 (BGA col 5, case square_5_9)
+2026-03-24 12:02:54,381 - IA choisit colonne 4
+2026-03-24 12:02:54,957 - Coup joué : colonne 4 (BGA col 5, case square_5_9)
+2026-03-24 12:03:06,549 - IA choisit colonne 4
+2026-03-24 12:03:07,131 - Coup joué : colonne 4 (BGA col 5, case square_5_9)
+2026-03-24 12:03:18,673 - IA choisit colonne 4
+2026-03-24 12:03:19,260 - Coup joué : colonne 4 (BGA col 5, case square_5_9)
+2026-03-24 12:03:31,041 - IA choisit colonne 4
+2026-03-24 12:03:31,649 - jouer_coup erreur : Message: Element <div id="square_5_1" class="square possibleMove"> could not be scrolled into view; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:8:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:202:5
+ElementNotInteractableError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:371:5
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:165:11
+interaction.clickElement@chrome://remote/content/marionette/interaction.sys.mjs:134:11
+clickElement@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:331:29
+receiveMessage@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:210:31
+
+2026-03-24 12:03:43,027 - IA choisit colonne 4
+2026-03-24 12:03:43,618 - jouer_coup erreur : Message: Element <div id="square_5_1" class="square possibleMove"> could not be scrolled into view; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:8:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:202:5
+ElementNotInteractableError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:371:5
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:165:11
+interaction.clickElement@chrome://remote/content/marionette/interaction.sys.mjs:134:11
+clickElement@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:331:29
+receiveMessage@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:210:31
+
+2026-03-24 12:03:54,470 - Puppeteer arrêté par l'utilisateur
+2026-03-24 12:03:54,867 - IA choisit colonne 4
+2026-03-24 12:03:55,450 - jouer_coup erreur : Message: Element <div id="square_5_1" class="square possibleMove"> could not be scrolled into view; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:8:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:202:5
+ElementNotInteractableError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:371:5
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:165:11
+interaction.clickElement@chrome://remote/content/marionette/interaction.sys.mjs:134:11
+clickElement@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:331:29
+receiveMessage@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:210:31
+
+2026-03-24 12:13:39,525 - Puppeteer arrêté par l'utilisateur
+2026-03-24 12:15:19,116 - detecter_ma_couleur méthode 1 : ff0000
+2026-03-24 12:15:19,166 - detecter_ma_couleur méthode 1 : ff0000
+2026-03-24 12:15:19,167 - DIAG couleur : ROUGE
+2026-03-24 12:15:19,178 - DIAG plateau : 0 rouges, 0 jaunes
+2026-03-24 12:15:19,178 - DIAG | . . . . . . . . .
+2026-03-24 12:15:19,179 - DIAG | . . . . . . . . .
+2026-03-24 12:15:19,179 - DIAG | . . . . . . . . .
+2026-03-24 12:15:19,179 - DIAG | . . . . . . . . .
+2026-03-24 12:15:19,179 - DIAG | . . . . . . . . .
+2026-03-24 12:15:19,179 - DIAG | . . . . . . . . .
+2026-03-24 12:15:19,180 - DIAG | . . . . . . . . .
+2026-03-24 12:15:19,180 - DIAG | . . . . . . . . .
+2026-03-24 12:15:19,180 - DIAG | . . . . . . . . .
+2026-03-24 12:15:29,780 - IA \u2192 colonne 4
+2026-03-24 12:15:30,376 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:15:43,543 - IA \u2192 colonne 4
+2026-03-24 12:15:44,126 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:15:59,216 - IA \u2192 colonne 3
+2026-03-24 12:15:59,801 - Coup joué : colonne 3 (case square_4_9)
+2026-03-24 12:16:14,241 - IA \u2192 colonne 4
+2026-03-24 12:16:14,830 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:16:23,153 - IA \u2192 colonne 4
+2026-03-24 12:16:23,739 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:16:38,005 - IA \u2192 colonne 3
+2026-03-24 12:16:38,590 - Coup joué : colonne 3 (case square_4_9)
+2026-03-24 12:16:59,121 - IA \u2192 colonne 6
+2026-03-24 12:16:59,703 - Coup joué : colonne 6 (case square_7_9)
+2026-03-24 12:17:18,653 - IA \u2192 colonne 6
+2026-03-24 12:17:19,228 - Coup joué : colonne 6 (case square_7_9)
+2026-03-24 12:17:43,845 - IA \u2192 colonne 6
+2026-03-24 12:17:44,441 - Coup joué : colonne 6 (case square_7_9)
+2026-03-24 12:17:45,728 - IA \u2192 colonne 6
+2026-03-24 12:17:46,315 - Coup joué : colonne 6 (case square_7_9)
+2026-03-24 12:17:47,787 - IA \u2192 colonne 5
+2026-03-24 12:17:48,377 - Coup joué : colonne 5 (case square_6_9)
+2026-03-24 12:17:49,754 - IA \u2192 colonne 5
+2026-03-24 12:17:50,383 - jouer_coup erreur : Message: Element <div id="square_6_1" class="square possibleMove"> could not be scrolled into view; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:8:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:202:5
+ElementNotInteractableError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:371:5
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:165:11
+interaction.clickElement@chrome://remote/content/marionette/interaction.sys.mjs:134:11
+clickElement@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:331:29
+receiveMessage@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:210:31
+
+2026-03-24 12:17:51,994 - IA \u2192 colonne 5
+2026-03-24 12:17:52,681 - jouer_coup erreur : Message: Element <div id="square_6_1" class="square possibleMove"> could not be scrolled into view; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:8:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:202:5
+ElementNotInteractableError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:371:5
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:165:11
+interaction.clickElement@chrome://remote/content/marionette/interaction.sys.mjs:134:11
+clickElement@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:331:29
+receiveMessage@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:210:31
+
+2026-03-24 12:17:54,161 - IA \u2192 colonne 5
+2026-03-24 12:17:54,787 - jouer_coup erreur : Message: Element <div id="square_6_1" class="square possibleMove"> could not be scrolled into view; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:8:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:202:5
+ElementNotInteractableError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:371:5
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:165:11
+interaction.clickElement@chrome://remote/content/marionette/interaction.sys.mjs:134:11
+clickElement@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:331:29
+receiveMessage@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:210:31
+
+2026-03-24 12:17:56,282 - IA \u2192 colonne 5
+2026-03-24 12:17:56,907 - jouer_coup erreur : Message: Element <div id="square_6_1" class="square possibleMove"> could not be scrolled into view; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:8:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:202:5
+ElementNotInteractableError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:371:5
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:165:11
+interaction.clickElement@chrome://remote/content/marionette/interaction.sys.mjs:134:11
+clickElement@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:331:29
+receiveMessage@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:210:31
+
+2026-03-24 12:26:50,725 - detecter_ma_couleur méthode 1 : ffff00
+2026-03-24 12:26:50,780 - detecter_ma_couleur méthode 1 : ffff00
+2026-03-24 12:26:50,781 - Couleur : JAUNE \U0001f7e1
+2026-03-24 12:26:58,257 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:26:58,268 - Lecture méthode 2 (JS complet) : 1 pions
+2026-03-24 12:26:58,281 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:26:58,282 - Nouveau plateau détecté : 1 rouges, 0 jaunes
+2026-03-24 12:26:58,282 - | . . . . . . . . .
+2026-03-24 12:26:58,282 - | . . . . . . . . .
+2026-03-24 12:26:58,283 - | . . . . . . . . .
+2026-03-24 12:26:58,283 - | . . . . . . . . .
+2026-03-24 12:26:58,283 - | . . . . . . . . .
+2026-03-24 12:26:58,283 - | . . . . . . . . .
+2026-03-24 12:26:58,284 - | . . . . . . . . .
+2026-03-24 12:26:58,284 - | . . . . . . . . .
+2026-03-24 12:26:58,284 - | . . . . R . . . .
+2026-03-24 12:27:12,392 - detecter_ma_couleur méthode 1 : ffff00
+2026-03-24 12:27:12,792 - === DIAGNOSTIC ===
+MA COULEUR : JAUNE
+
+Méthode 1 (classes directes) : 0 rouges, 0 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+
+Méthode 2 (JS enfants) : 1 rouges, 0 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . R . . . .
+
+Méthode 3 (background-color) : 0 rouges, 0 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+
+\u2500\u2500 DUMP BRUT cases non-vides (classes BGA réelles) \u2500\u2500
+square_5_9 | cls=square possibleMove lastMove  enfant: DIV cls=disc disccolor_ff0000 id=disc_59
+2026-03-24 12:27:13,419 - IA \u2192 colonne 3
+2026-03-24 12:27:14,012 - Coup joué : colonne 3 (case square_4_9)
+2026-03-24 12:27:15,265 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:27:15,274 - Lecture méthode 2 (JS complet) : 2 pions
+2026-03-24 12:27:15,286 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:27:15,286 - Nouveau plateau détecté : 1 rouges, 1 jaunes
+2026-03-24 12:27:15,287 - | . . . . . . . . .
+2026-03-24 12:27:15,287 - | . . . . . . . . .
+2026-03-24 12:27:15,287 - | . . . . . . . . .
+2026-03-24 12:27:15,287 - | . . . . . . . . .
+2026-03-24 12:27:15,287 - | . . . . . . . . .
+2026-03-24 12:27:15,287 - | . . . . . . . . .
+2026-03-24 12:27:15,287 - | . . . . . . . . .
+2026-03-24 12:27:15,287 - | . . . . . . . . .
+2026-03-24 12:27:15,287 - | . . . J R . . . .
+2026-03-24 12:27:20,517 - detecter_ma_couleur méthode 1 : ffff00
+2026-03-24 12:27:20,975 - === DIAGNOSTIC ===
+MA COULEUR : JAUNE
+
+Méthode 1 (classes directes) : 0 rouges, 0 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+
+Méthode 2 (JS enfants) : 1 rouges, 1 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . J R . . . .
+
+Méthode 3 (background-color) : 0 rouges, 0 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+
+\u2500\u2500 DUMP BRUT cases non-vides (classes BGA réelles) \u2500\u2500
+square_4_9 | cls=square possibleMove lastMove  enfant: DIV cls=disc disccolor_ffff00 id=disc_49
+2026-03-24 12:27:27,417 - IA \u2192 colonne 4
+2026-03-24 12:27:28,006 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:27:29,306 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:27:29,314 - Lecture méthode 2 (JS complet) : 4 pions
+2026-03-24 12:27:29,335 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:27:29,335 - Nouveau plateau détecté : 2 rouges, 2 jaunes
+2026-03-24 12:27:29,335 - | . . . . . . . . .
+2026-03-24 12:27:29,335 - | . . . . . . . . .
+2026-03-24 12:27:29,336 - | . . . . . . . . .
+2026-03-24 12:27:29,336 - | . . . . . . . . .
+2026-03-24 12:27:29,336 - | . . . . . . . . .
+2026-03-24 12:27:29,336 - | . . . . . . . . .
+2026-03-24 12:27:29,336 - | . . . . . . . . .
+2026-03-24 12:27:29,336 - | . . . . J . . . .
+2026-03-24 12:27:29,336 - | . . . J R . R . .
+2026-03-24 12:27:50,872 - IA \u2192 colonne 7
+2026-03-24 12:27:51,459 - Coup joué : colonne 7 (case square_8_9)
+2026-03-24 12:27:52,693 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:27:52,701 - Lecture méthode 2 (JS complet) : 6 pions
+2026-03-24 12:27:52,710 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:27:52,710 - Nouveau plateau détecté : 3 rouges, 3 jaunes
+2026-03-24 12:27:52,710 - | . . . . . . . . .
+2026-03-24 12:27:52,710 - | . . . . . . . . .
+2026-03-24 12:27:52,710 - | . . . . . . . . .
+2026-03-24 12:27:52,710 - | . . . . . . . . .
+2026-03-24 12:27:52,710 - | . . . . . . . . .
+2026-03-24 12:27:52,710 - | . . . . . . . . .
+2026-03-24 12:27:52,710 - | . . . . . . . . .
+2026-03-24 12:27:52,710 - | . . . R J . . . .
+2026-03-24 12:27:52,710 - | . . . J R . R J .
+2026-03-24 12:28:03,751 - IA \u2192 colonne 4
+2026-03-24 12:28:04,349 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:28:05,587 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:28:05,595 - Lecture méthode 2 (JS complet) : 8 pions
+2026-03-24 12:28:05,603 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:28:05,603 - Nouveau plateau détecté : 4 rouges, 4 jaunes
+2026-03-24 12:28:05,603 - | . . . . . . . . .
+2026-03-24 12:28:05,603 - | . . . . . . . . .
+2026-03-24 12:28:05,603 - | . . . . . . . . .
+2026-03-24 12:28:05,604 - | . . . . . . . . .
+2026-03-24 12:28:05,604 - | . . . . . . . . .
+2026-03-24 12:28:05,604 - | . . . . . . . . .
+2026-03-24 12:28:05,604 - | . . . R J . . . .
+2026-03-24 12:28:05,604 - | . . . R J . . . .
+2026-03-24 12:28:05,604 - | . . . J R . R J .
+2026-03-24 12:28:12,373 - IA \u2192 colonne 4
+2026-03-24 12:28:12,965 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:28:14,210 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:28:14,219 - Lecture méthode 2 (JS complet) : 10 pions
+2026-03-24 12:28:14,228 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:28:14,228 - Nouveau plateau détecté : 5 rouges, 5 jaunes
+2026-03-24 12:28:14,228 - | . . . . . . . . .
+2026-03-24 12:28:14,228 - | . . . . . . . . .
+2026-03-24 12:28:14,228 - | . . . . . . . . .
+2026-03-24 12:28:14,228 - | . . . . . . . . .
+2026-03-24 12:28:14,228 - | . . . . J . . . .
+2026-03-24 12:28:14,228 - | . . . . R . . . .
+2026-03-24 12:28:14,228 - | . . . R J . . . .
+2026-03-24 12:28:14,228 - | . . . R J . . . .
+2026-03-24 12:28:14,229 - | . . . J R . R J .
+2026-03-24 12:28:32,965 - IA \u2192 colonne 7
+2026-03-24 12:28:33,542 - Coup joué : colonne 7 (case square_8_9)
+2026-03-24 12:28:34,803 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:28:34,810 - Lecture méthode 2 (JS complet) : 12 pions
+2026-03-24 12:28:34,818 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:28:34,818 - Nouveau plateau détecté : 6 rouges, 6 jaunes
+2026-03-24 12:28:34,818 - | . . . . . . . . .
+2026-03-24 12:28:34,819 - | . . . . . . . . .
+2026-03-24 12:28:34,819 - | . . . . . . . . .
+2026-03-24 12:28:34,819 - | . . . . . . . . .
+2026-03-24 12:28:34,819 - | . . . . J . . . .
+2026-03-24 12:28:34,819 - | . . . . R . . . .
+2026-03-24 12:28:34,819 - | . . . R J . . . .
+2026-03-24 12:28:34,819 - | . . . R J . . J .
+2026-03-24 12:28:34,819 - | . R . J R . R J .
+2026-03-24 12:28:54,363 - IA \u2192 colonne 3
+2026-03-24 12:28:54,943 - Coup joué : colonne 3 (case square_4_9)
+2026-03-24 12:28:56,207 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:28:56,215 - Lecture méthode 2 (JS complet) : 14 pions
+2026-03-24 12:28:56,224 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:28:56,224 - Nouveau plateau détecté : 7 rouges, 7 jaunes
+2026-03-24 12:28:56,224 - | . . . . . . . . .
+2026-03-24 12:28:56,225 - | . . . . . . . . .
+2026-03-24 12:28:56,225 - | . . . . . . . . .
+2026-03-24 12:28:56,225 - | . . . . . . . . .
+2026-03-24 12:28:56,225 - | . . . . J . . . .
+2026-03-24 12:28:56,225 - | . . . J R . . . .
+2026-03-24 12:28:56,225 - | . . . R J . . R .
+2026-03-24 12:28:56,225 - | . . . R J . . J .
+2026-03-24 12:28:56,225 - | . R . J R . R J .
+2026-03-24 12:29:20,400 - IA \u2192 colonne 3
+2026-03-24 12:29:20,987 - Coup joué : colonne 3 (case square_4_9)
+2026-03-24 12:29:22,254 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:29:22,261 - Lecture méthode 2 (JS complet) : 16 pions
+2026-03-24 12:29:22,269 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:29:22,269 - Nouveau plateau détecté : 8 rouges, 8 jaunes
+2026-03-24 12:29:22,269 - | . . . . . . . . .
+2026-03-24 12:29:22,269 - | . . . . . . . . .
+2026-03-24 12:29:22,269 - | . . . . . . . . .
+2026-03-24 12:29:22,269 - | . . . . . . . . .
+2026-03-24 12:29:22,269 - | . . . J J . . . .
+2026-03-24 12:29:22,269 - | . . . J R . . . .
+2026-03-24 12:29:22,269 - | . . . R J . . R .
+2026-03-24 12:29:22,270 - | . . . R J . R J .
+2026-03-24 12:29:22,270 - | . R . J R . R J .
+2026-03-24 12:29:39,130 - IA \u2192 colonne 3
+2026-03-24 12:29:39,724 - Coup joué : colonne 3 (case square_4_9)
+2026-03-24 12:29:40,996 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:29:41,004 - Lecture méthode 2 (JS complet) : 18 pions
+2026-03-24 12:29:41,013 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:29:41,013 - Nouveau plateau détecté : 9 rouges, 9 jaunes
+2026-03-24 12:29:41,013 - | . . . . . . . . .
+2026-03-24 12:29:41,013 - | . . . . . . . . .
+2026-03-24 12:29:41,013 - | . . . J . . . . .
+2026-03-24 12:29:41,013 - | . . . R . . . . .
+2026-03-24 12:29:41,014 - | . . . J J . . . .
+2026-03-24 12:29:41,014 - | . . . J R . . . .
+2026-03-24 12:29:41,014 - | . . . R J . . R .
+2026-03-24 12:29:41,014 - | . . . R J . R J .
+2026-03-24 12:29:41,014 - | . R . J R . R J .
+2026-03-24 12:30:00,699 - IA \u2192 colonne 4
+2026-03-24 12:30:01,286 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:30:02,560 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:30:02,568 - Lecture méthode 2 (JS complet) : 20 pions
+2026-03-24 12:30:02,575 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:30:02,576 - Nouveau plateau détecté : 10 rouges, 10 jaunes
+2026-03-24 12:30:02,576 - | . . . . . . . . .
+2026-03-24 12:30:02,576 - | . . . . . . . . .
+2026-03-24 12:30:02,576 - | . . . J . . . . .
+2026-03-24 12:30:02,576 - | . . . R J . . . .
+2026-03-24 12:30:02,576 - | . . . J J . . . .
+2026-03-24 12:30:02,576 - | . . . J R . . . .
+2026-03-24 12:30:02,576 - | . . . R J . . R .
+2026-03-24 12:30:02,576 - | . R . R J . R J .
+2026-03-24 12:30:02,576 - | . R . J R . R J .
+2026-03-24 12:30:18,914 - IA \u2192 colonne 4
+2026-03-24 12:30:19,496 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:30:20,792 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:30:20,799 - Lecture méthode 2 (JS complet) : 22 pions
+2026-03-24 12:30:20,810 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:30:20,810 - Nouveau plateau détecté : 11 rouges, 11 jaunes
+2026-03-24 12:30:20,810 - | . . . . . . . . .
+2026-03-24 12:30:20,810 - | . . . . . . . . .
+2026-03-24 12:30:20,810 - | . . . J J . . . .
+2026-03-24 12:30:20,810 - | . . . R J . . . .
+2026-03-24 12:30:20,810 - | . . . J J . . . .
+2026-03-24 12:30:20,810 - | . . . J R . . . .
+2026-03-24 12:30:20,810 - | . . . R J . R R .
+2026-03-24 12:30:20,810 - | . R . R J . R J .
+2026-03-24 12:30:20,810 - | . R . J R . R J .
+2026-03-24 12:30:20,811 - IA \u2192 colonne 4
+2026-03-24 12:30:21,393 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:30:22,803 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:30:22,832 - Lecture méthode 2 (JS complet) : 23 pions
+2026-03-24 12:30:22,848 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:30:22,848 - Nouveau plateau détecté : 12 rouges, 11 jaunes
+2026-03-24 12:30:22,848 - | . . . . . . . . .
+2026-03-24 12:30:22,849 - | . . . . . . . . .
+2026-03-24 12:30:22,849 - | . . . J J . . . .
+2026-03-24 12:30:22,849 - | . . . R J . . . .
+2026-03-24 12:30:22,849 - | . . . J J . . . .
+2026-03-24 12:30:22,849 - | . . . J R . R . .
+2026-03-24 12:30:22,849 - | . . . R J . R R .
+2026-03-24 12:30:22,849 - | . R . R J . R J .
+2026-03-24 12:30:22,849 - | . R . J R . R J .
+2026-03-24 12:30:22,850 - IA \u2192 colonne 4
+2026-03-24 12:30:23,431 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:30:24,808 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:30:24,815 - Lecture méthode 2 (JS complet) : 23 pions
+2026-03-24 12:30:24,830 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:30:24,830 - Nouveau plateau détecté : 12 rouges, 11 jaunes
+2026-03-24 12:30:24,830 - | . . . . . . . . .
+2026-03-24 12:30:24,830 - | . . . . . . . . .
+2026-03-24 12:30:24,830 - | . . . J J . . . .
+2026-03-24 12:30:24,830 - | . . . R J . . . .
+2026-03-24 12:30:24,830 - | . . . J J . . . .
+2026-03-24 12:30:24,830 - | . . . J R . R . .
+2026-03-24 12:30:24,830 - | . . . R J . R R .
+2026-03-24 12:30:24,830 - | . R . R J . R J .
+2026-03-24 12:30:24,831 - | . R . J R . R J .
+2026-03-24 12:30:24,831 - IA \u2192 colonne 4
+2026-03-24 12:30:25,408 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:30:26,980 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:30:26,994 - Lecture méthode 2 (JS complet) : 23 pions
+2026-03-24 12:30:27,011 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:30:27,011 - Nouveau plateau détecté : 12 rouges, 11 jaunes
+2026-03-24 12:30:27,011 - | . . . . . . . . .
+2026-03-24 12:30:27,011 - | . . . . . . . . .
+2026-03-24 12:30:27,011 - | . . . J J . . . .
+2026-03-24 12:30:27,011 - | . . . R J . . . .
+2026-03-24 12:30:27,011 - | . . . J J . . . .
+2026-03-24 12:30:27,011 - | . . . J R . R . .
+2026-03-24 12:30:27,011 - | . . . R J . R R .
+2026-03-24 12:30:27,012 - | . R . R J . R J .
+2026-03-24 12:30:27,012 - | . R . J R . R J .
+2026-03-24 12:30:27,013 - IA \u2192 colonne 4
+2026-03-24 12:30:27,653 - jouer_coup erreur : Message: Element <div id="square_5_1" class="square possibleMove"> could not be scrolled into view; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:8:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:202:5
+ElementNotInteractableError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:371:5
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:165:11
+interaction.clickElement@chrome://remote/content/marionette/interaction.sys.mjs:134:11
+clickElement@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:331:29
+receiveMessage@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:210:31
+
+2026-03-24 12:30:29,137 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:30:29,144 - Lecture méthode 2 (JS complet) : 23 pions
+2026-03-24 12:30:29,155 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:30:29,156 - IA \u2192 colonne 4
+2026-03-24 12:30:29,780 - jouer_coup erreur : Message: Element <div id="square_5_1" class="square possibleMove"> could not be scrolled into view; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:8:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:202:5
+ElementNotInteractableError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:371:5
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:165:11
+interaction.clickElement@chrome://remote/content/marionette/interaction.sys.mjs:134:11
+clickElement@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:331:29
+receiveMessage@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:210:31
+
+2026-03-24 12:30:31,298 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:30:31,307 - Lecture méthode 2 (JS complet) : 23 pions
+2026-03-24 12:30:31,322 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:30:31,323 - IA \u2192 colonne 4
+2026-03-24 12:30:31,965 - jouer_coup erreur : Message: Element <div id="square_5_1" class="square possibleMove"> could not be scrolled into view; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:8:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:202:5
+ElementNotInteractableError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:371:5
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:165:11
+interaction.clickElement@chrome://remote/content/marionette/interaction.sys.mjs:134:11
+clickElement@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:331:29
+receiveMessage@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:210:31
+
+2026-03-24 12:31:39,902 - detecter_ma_couleur méthode 1 : ffff00
+2026-03-24 12:31:39,935 - === DIAGNOSTIC ===
+MA COULEUR : JAUNE
+
+Méthode 1 (classes directes) : 0 rouges, 0 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+
+Méthode 2 (JS enfants) : 12 rouges, 11 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . J J . . . .
+  . . . R J . . . .
+  . . . J J . . . .
+  . . . J R . R . .
+  . . . R J . R R .
+  . R . R J . R J .
+  . R . J R . R J .
+
+Méthode 3 (background-color) : 0 rouges, 0 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+
+\u2500\u2500 DUMP BRUT cases non-vides (classes BGA réelles) \u2500\u2500
+square_7_6 | cls=square possibleMove lastMove  enfant: DIV cls=disc disccolor_ff0000 id=disc_76
+square_7_7 | cls=square possibleMove winMove  enfant: DIV cls=disc disccolor_ff0000 id=disc_77
+square_7_8 | cls=square possibleMove winMove  enfant: DIV cls=disc disccolor_ff0000 id=disc_78
+square_7_9 | cls=square possibleMove winMove  enfant: DIV cls=disc disccolor_ff0000 id=disc_79
+2026-03-24 12:31:51,438 - detecter_ma_couleur méthode 1 : ffff00
+2026-03-24 12:31:51,474 - === DIAGNOSTIC ===
+MA COULEUR : JAUNE
+
+Méthode 1 (classes directes) : 0 rouges, 0 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+
+Méthode 2 (JS enfants) : 12 rouges, 11 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . J J . . . .
+  . . . R J . . . .
+  . . . J J . . . .
+  . . . J R . R . .
+  . . . R J . R R .
+  . R . R J . R J .
+  . R . J R . R J .
+
+Méthode 3 (background-color) : 0 rouges, 0 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+
+\u2500\u2500 DUMP BRUT cases non-vides (classes BGA réelles) \u2500\u2500
+square_7_6 | cls=square possibleMove lastMove  enfant: DIV cls=disc disccolor_ff0000 id=disc_76
+square_7_7 | cls=square possibleMove winMove  enfant: DIV cls=disc disccolor_ff0000 id=disc_77
+square_7_8 | cls=square possibleMove winMove  enfant: DIV cls=disc disccolor_ff0000 id=disc_78
+square_7_9 | cls=square possibleMove winMove  enfant: DIV cls=disc disccolor_ff0000 id=disc_79
+2026-03-24 12:48:24,582 - detecter_ma_couleur méthode 1 : ffff00
+2026-03-24 12:48:24,672 - detecter_ma_couleur méthode 1 : ffff00
+2026-03-24 12:48:24,675 - Couleur : JAUNE \U0001f7e1
+2026-03-24 12:48:25,006 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:48:25,019 - Lecture méthode 2 (JS complet) : 1 pions
+2026-03-24 12:48:25,071 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:48:25,072 - Nouveau plateau détecté : 1 rouges, 0 jaunes
+2026-03-24 12:48:25,073 - | . . . . . . . . .
+2026-03-24 12:48:25,073 - | . . . . . . . . .
+2026-03-24 12:48:25,073 - | . . . . . . . . .
+2026-03-24 12:48:25,073 - | . . . . . . . . .
+2026-03-24 12:48:25,074 - | . . . . . . . . .
+2026-03-24 12:48:25,074 - | . . . . . . . . .
+2026-03-24 12:48:25,074 - | . . . . . . . . .
+2026-03-24 12:48:25,074 - | . . . . . . . . .
+2026-03-24 12:48:25,075 - | . . . . R . . . .
+2026-03-24 12:48:40,122 - IA \u2192 colonne 3
+2026-03-24 12:48:40,722 - Coup joué : colonne 3 (case square_4_9)
+2026-03-24 12:48:41,985 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:48:41,994 - Lecture méthode 2 (JS complet) : 2 pions
+2026-03-24 12:48:42,003 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:48:42,003 - Nouveau plateau détecté : 1 rouges, 1 jaunes
+2026-03-24 12:48:42,004 - | . . . . . . . . .
+2026-03-24 12:48:42,004 - | . . . . . . . . .
+2026-03-24 12:48:42,004 - | . . . . . . . . .
+2026-03-24 12:48:42,005 - | . . . . . . . . .
+2026-03-24 12:48:42,005 - | . . . . . . . . .
+2026-03-24 12:48:42,005 - | . . . . . . . . .
+2026-03-24 12:48:42,005 - | . . . . . . . . .
+2026-03-24 12:48:42,005 - | . . . . . . . . .
+2026-03-24 12:48:42,006 - | . . . J R . . . .
+2026-03-24 12:48:54,175 - IA \u2192 colonne 4
+2026-03-24 12:48:54,763 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:48:56,023 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:48:56,030 - Lecture méthode 2 (JS complet) : 4 pions
+2026-03-24 12:48:56,039 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:48:56,040 - Nouveau plateau détecté : 2 rouges, 2 jaunes
+2026-03-24 12:48:56,040 - | . . . . . . . . .
+2026-03-24 12:48:56,040 - | . . . . . . . . .
+2026-03-24 12:48:56,040 - | . . . . . . . . .
+2026-03-24 12:48:56,040 - | . . . . . . . . .
+2026-03-24 12:48:56,040 - | . . . . . . . . .
+2026-03-24 12:48:56,040 - | . . . . . . . . .
+2026-03-24 12:48:56,040 - | . . . . . . . . .
+2026-03-24 12:48:56,040 - | . . . . J . . . .
+2026-03-24 12:48:56,040 - | . . . J R R . . .
+2026-03-24 12:49:08,612 - detecter_ma_couleur méthode 1 : ffff00
+2026-03-24 12:49:09,104 - === DIAGNOSTIC ===
+MA COULEUR : JAUNE
+
+Méthode 1 (classes directes) : 0 rouges, 0 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+
+Méthode 2 (JS enfants) : 3 rouges, 2 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . J . . . .
+  . . . J R R R . .
+
+Méthode 3 (background-color) : 0 rouges, 0 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+
+\u2500\u2500 DUMP BRUT cases non-vides (classes BGA réelles) \u2500\u2500
+square_7_9 | cls=square possibleMove lastMove  enfant: DIV cls=disc disccolor_ff0000 id=disc_79
+2026-03-24 12:49:20,003 - IA \u2192 colonne 4
+2026-03-24 12:49:20,591 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:49:21,824 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:21,831 - Lecture méthode 2 (JS complet) : 6 pions
+2026-03-24 12:49:21,838 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:21,838 - Nouveau plateau détecté : 3 rouges, 3 jaunes
+2026-03-24 12:49:21,838 - | . . . . . . . . .
+2026-03-24 12:49:21,838 - | . . . . . . . . .
+2026-03-24 12:49:21,838 - | . . . . . . . . .
+2026-03-24 12:49:21,838 - | . . . . . . . . .
+2026-03-24 12:49:21,838 - | . . . . . . . . .
+2026-03-24 12:49:21,838 - | . . . . . . . . .
+2026-03-24 12:49:21,838 - | . . . . J . . . .
+2026-03-24 12:49:21,838 - | . . . . J . . . .
+2026-03-24 12:49:21,838 - | . . . J R R R . .
+2026-03-24 12:49:21,842 - IA \u2192 colonne 7
+2026-03-24 12:49:22,437 - Coup joué : colonne 7 (case square_8_9)
+2026-03-24 12:49:23,687 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:23,694 - Lecture méthode 2 (JS complet) : 6 pions
+2026-03-24 12:49:23,703 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:23,703 - Nouveau plateau détecté : 3 rouges, 3 jaunes
+2026-03-24 12:49:23,703 - | . . . . . . . . .
+2026-03-24 12:49:23,703 - | . . . . . . . . .
+2026-03-24 12:49:23,703 - | . . . . . . . . .
+2026-03-24 12:49:23,704 - | . . . . . . . . .
+2026-03-24 12:49:23,704 - | . . . . . . . . .
+2026-03-24 12:49:23,704 - | . . . . . . . . .
+2026-03-24 12:49:23,704 - | . . . . J . . . .
+2026-03-24 12:49:23,704 - | . . . . J . . . .
+2026-03-24 12:49:23,704 - | . . . J R R R . .
+2026-03-24 12:49:23,708 - IA \u2192 colonne 7
+2026-03-24 12:49:24,288 - Coup joué : colonne 7 (case square_8_9)
+2026-03-24 12:49:25,534 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:25,541 - Lecture méthode 2 (JS complet) : 6 pions
+2026-03-24 12:49:25,549 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:25,549 - Nouveau plateau détecté : 3 rouges, 3 jaunes
+2026-03-24 12:49:25,549 - | . . . . . . . . .
+2026-03-24 12:49:25,549 - | . . . . . . . . .
+2026-03-24 12:49:25,550 - | . . . . . . . . .
+2026-03-24 12:49:25,550 - | . . . . . . . . .
+2026-03-24 12:49:25,550 - | . . . . . . . . .
+2026-03-24 12:49:25,550 - | . . . . . . . . .
+2026-03-24 12:49:25,550 - | . . . . J . . . .
+2026-03-24 12:49:25,550 - | . . . . J . . . .
+2026-03-24 12:49:25,550 - | . . . J R R R . .
+2026-03-24 12:49:25,555 - IA \u2192 colonne 7
+2026-03-24 12:49:26,145 - Coup joué : colonne 7 (case square_8_9)
+2026-03-24 12:49:27,397 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:27,403 - Lecture méthode 2 (JS complet) : 6 pions
+2026-03-24 12:49:27,412 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:27,412 - Nouveau plateau détecté : 3 rouges, 3 jaunes
+2026-03-24 12:49:27,412 - | . . . . . . . . .
+2026-03-24 12:49:27,412 - | . . . . . . . . .
+2026-03-24 12:49:27,412 - | . . . . . . . . .
+2026-03-24 12:49:27,412 - | . . . . . . . . .
+2026-03-24 12:49:27,413 - | . . . . . . . . .
+2026-03-24 12:49:27,413 - | . . . . . . . . .
+2026-03-24 12:49:27,413 - | . . . . J . . . .
+2026-03-24 12:49:27,413 - | . . . . J . . . .
+2026-03-24 12:49:27,413 - | . . . J R R R . .
+2026-03-24 12:49:27,418 - IA \u2192 colonne 7
+2026-03-24 12:49:27,997 - Coup joué : colonne 7 (case square_8_9)
+2026-03-24 12:49:29,400 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:29,424 - Lecture méthode 2 (JS complet) : 7 pions
+2026-03-24 12:49:29,440 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:29,440 - Nouveau plateau détecté : 4 rouges, 3 jaunes
+2026-03-24 12:49:29,440 - | . . . . . . . . .
+2026-03-24 12:49:29,440 - | . . . . . . . . .
+2026-03-24 12:49:29,441 - | . . . . . . . . .
+2026-03-24 12:49:29,441 - | . . . . . . . . .
+2026-03-24 12:49:29,441 - | . . . . . . . . .
+2026-03-24 12:49:29,441 - | . . . . . . . . .
+2026-03-24 12:49:29,441 - | . . . . J . . . .
+2026-03-24 12:49:29,441 - | . . . . J . . . .
+2026-03-24 12:49:29,441 - | . . . J R R R R .
+2026-03-24 12:49:29,445 - IA \u2192 colonne 4
+2026-03-24 12:49:30,037 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:49:31,379 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:31,387 - Lecture méthode 2 (JS complet) : 7 pions
+2026-03-24 12:49:31,402 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:31,402 - Nouveau plateau détecté : 4 rouges, 3 jaunes
+2026-03-24 12:49:31,402 - | . . . . . . . . .
+2026-03-24 12:49:31,402 - | . . . . . . . . .
+2026-03-24 12:49:31,402 - | . . . . . . . . .
+2026-03-24 12:49:31,402 - | . . . . . . . . .
+2026-03-24 12:49:31,402 - | . . . . . . . . .
+2026-03-24 12:49:31,402 - | . . . . . . . . .
+2026-03-24 12:49:31,402 - | . . . . J . . . .
+2026-03-24 12:49:31,403 - | . . . . J . . . .
+2026-03-24 12:49:31,403 - | . . . J R R R R .
+2026-03-24 12:49:31,407 - IA \u2192 colonne 4
+2026-03-24 12:49:32,009 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:49:33,546 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:33,552 - Lecture méthode 2 (JS complet) : 7 pions
+2026-03-24 12:49:33,565 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:33,566 - Nouveau plateau détecté : 4 rouges, 3 jaunes
+2026-03-24 12:49:33,566 - | . . . . . . . . .
+2026-03-24 12:49:33,566 - | . . . . . . . . .
+2026-03-24 12:49:33,566 - | . . . . . . . . .
+2026-03-24 12:49:33,566 - | . . . . . . . . .
+2026-03-24 12:49:33,566 - | . . . . . . . . .
+2026-03-24 12:49:33,566 - | . . . . . . . . .
+2026-03-24 12:49:33,566 - | . . . . J . . . .
+2026-03-24 12:49:33,566 - | . . . . J . . . .
+2026-03-24 12:49:33,566 - | . . . J R R R R .
+2026-03-24 12:49:33,570 - IA \u2192 colonne 4
+2026-03-24 12:49:34,266 - jouer_coup erreur : Message: Element <div id="square_5_1" class="square possibleMove"> could not be scrolled into view; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:8:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:202:5
+ElementNotInteractableError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:371:5
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:165:11
+interaction.clickElement@chrome://remote/content/marionette/interaction.sys.mjs:134:11
+clickElement@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:331:29
+receiveMessage@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:210:31
+
+2026-03-24 12:49:35,148 - detecter_ma_couleur méthode 1 : ffff00
+2026-03-24 12:49:35,193 - === DIAGNOSTIC ===
+MA COULEUR : JAUNE
+
+Méthode 1 (classes directes) : 0 rouges, 0 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+
+Méthode 2 (JS enfants) : 4 rouges, 3 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . J . . . .
+  . . . . J . . . .
+  . . . J R R R R .
+
+Méthode 3 (background-color) : 0 rouges, 0 jaunes
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+  . . . . . . . . .
+
+\u2500\u2500 DUMP BRUT cases non-vides (classes BGA réelles) \u2500\u2500
+square_5_9 | cls=square possibleMove winMove  enfant: DIV cls=disc disccolor_ff0000 id=disc_59
+square_6_9 | cls=square possibleMove winMove  enfant: DIV cls=disc disccolor_ff0000 id=disc_69
+square_7_9 | cls=square possibleMove winMove  enfant: DIV cls=disc disccolor_ff0000 id=disc_79
+square_8_9 | cls=square possibleMove lastMove  enfant: DIV cls=disc disccolor_ff0000 id=disc_89
+2026-03-24 12:49:35,714 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:35,722 - Lecture méthode 2 (JS complet) : 7 pions
+2026-03-24 12:49:35,743 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:35,748 - IA \u2192 colonne 4
+2026-03-24 12:49:36,374 - jouer_coup erreur : Message: Element <div id="square_5_1" class="square possibleMove"> could not be scrolled into view; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:8:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:202:5
+ElementNotInteractableError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:371:5
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:165:11
+interaction.clickElement@chrome://remote/content/marionette/interaction.sys.mjs:134:11
+clickElement@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:331:29
+receiveMessage@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:210:31
+
+2026-03-24 12:49:37,888 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:37,896 - Lecture méthode 2 (JS complet) : 7 pions
+2026-03-24 12:49:37,911 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:37,916 - IA \u2192 colonne 4
+2026-03-24 12:49:38,564 - jouer_coup erreur : Message: Element <div id="square_5_1" class="square possibleMove"> could not be scrolled into view; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:8:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:202:5
+ElementNotInteractableError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:371:5
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:165:11
+interaction.clickElement@chrome://remote/content/marionette/interaction.sys.mjs:134:11
+clickElement@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:331:29
+receiveMessage@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:210:31
+
+2026-03-24 12:49:40,096 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:40,102 - Lecture méthode 2 (JS complet) : 7 pions
+2026-03-24 12:49:40,112 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:40,118 - IA \u2192 colonne 4
+2026-03-24 12:49:40,767 - jouer_coup erreur : Message: Element <div id="square_5_1" class="square possibleMove"> could not be scrolled into view; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+RemoteError@chrome://remote/content/shared/RemoteError.sys.mjs:8:8
+WebDriverError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:202:5
+ElementNotInteractableError@chrome://remote/content/shared/webdriver/Errors.sys.mjs:371:5
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:165:11
+interaction.clickElement@chrome://remote/content/marionette/interaction.sys.mjs:134:11
+clickElement@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:331:29
+receiveMessage@chrome://remote/content/marionette/actors/MarionetteCommandsChild.sys.mjs:210:31
+
+2026-03-24 12:49:42,240 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:42,246 - Lecture méthode 2 (JS complet) : 7 pions
+2026-03-24 12:49:42,255 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:42,260 - IA \u2192 colonne 4
+2026-03-24 12:49:42,845 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:49:44,173 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:44,180 - Lecture méthode 2 (JS complet) : 7 pions
+2026-03-24 12:49:44,190 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:44,190 - Nouveau plateau détecté : 4 rouges, 3 jaunes
+2026-03-24 12:49:44,190 - | . . . . . . . . .
+2026-03-24 12:49:44,190 - | . . . . . . . . .
+2026-03-24 12:49:44,190 - | . . . . . . . . .
+2026-03-24 12:49:44,190 - | . . . . . . . . .
+2026-03-24 12:49:44,190 - | . . . . . . . . .
+2026-03-24 12:49:44,190 - | . . . . . . . . .
+2026-03-24 12:49:44,190 - | . . . . J . . . .
+2026-03-24 12:49:44,190 - | . . . . J . . . .
+2026-03-24 12:49:44,190 - | . . . J R R R R .
+2026-03-24 12:49:44,193 - IA \u2192 colonne 4
+2026-03-24 12:49:44,782 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:49:46,129 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:46,136 - Lecture méthode 2 (JS complet) : 7 pions
+2026-03-24 12:49:46,143 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:46,144 - Nouveau plateau détecté : 4 rouges, 3 jaunes
+2026-03-24 12:49:46,144 - | . . . . . . . . .
+2026-03-24 12:49:46,144 - | . . . . . . . . .
+2026-03-24 12:49:46,144 - | . . . . . . . . .
+2026-03-24 12:49:46,144 - | . . . . . . . . .
+2026-03-24 12:49:46,144 - | . . . . . . . . .
+2026-03-24 12:49:46,144 - | . . . . . . . . .
+2026-03-24 12:49:46,144 - | . . . . J . . . .
+2026-03-24 12:49:46,144 - | . . . . J . . . .
+2026-03-24 12:49:46,144 - | . . . J R R R R .
+2026-03-24 12:49:46,147 - IA \u2192 colonne 4
+2026-03-24 12:49:46,735 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:49:48,067 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:48,076 - Lecture méthode 2 (JS complet) : 7 pions
+2026-03-24 12:49:48,087 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:48,087 - Nouveau plateau détecté : 4 rouges, 3 jaunes
+2026-03-24 12:49:48,087 - | . . . . . . . . .
+2026-03-24 12:49:48,087 - | . . . . . . . . .
+2026-03-24 12:49:48,087 - | . . . . . . . . .
+2026-03-24 12:49:48,087 - | . . . . . . . . .
+2026-03-24 12:49:48,088 - | . . . . . . . . .
+2026-03-24 12:49:48,088 - | . . . . . . . . .
+2026-03-24 12:49:48,088 - | . . . . J . . . .
+2026-03-24 12:49:48,088 - | . . . . J . . . .
+2026-03-24 12:49:48,088 - | . . . J R R R R .
+2026-03-24 12:49:48,092 - IA \u2192 colonne 4
+2026-03-24 12:49:48,677 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:49:50,006 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:50,012 - Lecture méthode 2 (JS complet) : 7 pions
+2026-03-24 12:49:50,020 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:50,020 - Nouveau plateau détecté : 4 rouges, 3 jaunes
+2026-03-24 12:49:50,020 - | . . . . . . . . .
+2026-03-24 12:49:50,020 - | . . . . . . . . .
+2026-03-24 12:49:50,020 - | . . . . . . . . .
+2026-03-24 12:49:50,020 - | . . . . . . . . .
+2026-03-24 12:49:50,020 - | . . . . . . . . .
+2026-03-24 12:49:50,020 - | . . . . . . . . .
+2026-03-24 12:49:50,021 - | . . . . J . . . .
+2026-03-24 12:49:50,021 - | . . . . J . . . .
+2026-03-24 12:49:50,021 - | . . . J R R R R .
+2026-03-24 12:49:50,025 - IA \u2192 colonne 4
+2026-03-24 12:49:50,615 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:49:51,982 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:51,992 - Lecture méthode 2 (JS complet) : 7 pions
+2026-03-24 12:49:52,001 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:52,001 - Nouveau plateau détecté : 4 rouges, 3 jaunes
+2026-03-24 12:49:52,001 - | . . . . . . . . .
+2026-03-24 12:49:52,001 - | . . . . . . . . .
+2026-03-24 12:49:52,001 - | . . . . . . . . .
+2026-03-24 12:49:52,002 - | . . . . . . . . .
+2026-03-24 12:49:52,002 - | . . . . . . . . .
+2026-03-24 12:49:52,002 - | . . . . . . . . .
+2026-03-24 12:49:52,002 - | . . . . J . . . .
+2026-03-24 12:49:52,002 - | . . . . J . . . .
+2026-03-24 12:49:52,002 - | . . . J R R R R .
+2026-03-24 12:49:52,006 - IA \u2192 colonne 4
+2026-03-24 12:49:52,599 - Coup joué : colonne 4 (case square_5_9)
+2026-03-24 12:49:53,947 - Lecture méthode 1 (classes directes) : 0 pions
+2026-03-24 12:49:53,955 - Lecture méthode 2 (JS complet) : 7 pions
+2026-03-24 12:49:53,962 - Lecture méthode 3 (background-color) : 0 pions
+2026-03-24 12:49:53,963 - Nouveau plateau détecté : 4 rouges, 3 jaunes
+2026-03-24 12:49:53,963 - | . . . . . . . . .
+2026-03-24 12:49:53,963 - | . . . . . . . . .
+2026-03-24 12:49:53,963 - | . . . . . . . . .
+2026-03-24 12:49:53,963 - | . . . . . . . . .
+2026-03-24 12:49:53,963 - | . . . . . . . . .
+2026-03-24 12:49:53,963 - | . . . . . . . . .
+2026-03-24 12:49:53,963 - | . . . . J . . . .
+2026-03-24 12:49:53,963 - | . . . . J . . . .
+2026-03-24 12:49:53,963 - | . . . J R R R R .
+2026-03-24 12:49:53,967 - IA \u2192 colonne 4
+2026-03-24 12:49:54,558 - Coup joué : colonne 4 (case square_5_9)

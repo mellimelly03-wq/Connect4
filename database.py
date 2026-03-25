@@ -1,13 +1,10 @@
 import mysql.connector
 import os
 
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except ImportError:
-    pass  # Sur Railway, dotenv n'est pas installé, les variables sont déjà là
 
 def get_connection():
+    # En local (WAMP), on garde les valeurs par défaut
+    # Sur Railway, les variables d'environnement sont injectées automatiquement
     return mysql.connector.connect(
         host=os.environ.get('MYSQLHOST', 'localhost'),
         user=os.environ.get('MYSQLUSER', 'root'),

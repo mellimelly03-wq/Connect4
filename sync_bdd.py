@@ -18,7 +18,7 @@ print("Connexion à la BDD distante (Railway)…")
 remote = mysql.connector.connect(
     host="yamanote.proxy.rlwy.net",
     user="root",
-    password="tzAmyMicMRHrbNQGrhUnTOjqpYYGYnaf",
+    password="DxxCDswbxSGHZMTQCSvCyhuRDejjihjJ",
     database="railway",
     port=48344
 )

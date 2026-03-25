@@ -1,8 +1,11 @@
 import mysql.connector
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # Sur Railway, dotenv n'est pas installé, les variables sont déjà là
 
 def get_connection():
     return mysql.connector.connect(

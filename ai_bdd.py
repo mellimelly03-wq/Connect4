@@ -2,6 +2,7 @@ import hashlib
 from database import get_connection
 from board import RED, YELLOW
 
+
 class AIBaseDeDonnees:
 
     def __init__(self, couleur="JAUNE"):
@@ -44,12 +45,12 @@ class AIBaseDeDonnees:
             print(f"[AI_BDD] BDD → {scores} → {meilleur_col}")
             return meilleur_col
 
-        # 4. fallback SAFE
+        # 4. Fallback minimax
         print("[AI_BDD] fallback minimax")
         return self._fallback_minimax(board)
 
     # ==============================
-    # BDD (SAFE)
+    # BDD
     # ==============================
     def _calculer_scores(self, coups_joues, nb_coups, board):
         try:
@@ -58,9 +59,15 @@ class AIBaseDeDonnees:
 
             hash_seq = self._hash_sequence(coups_joues)
 
+            # Cherche aussi la séquence miroir pour enrichir les résultats
+            cols = board.cols
+            coups_miroir = [cols - 1 - c for c in coups_joues]
+            hash_miroir = self._hash_sequence(coups_miroir)
+
             cur.execute("""
                 SELECT c_next.colonne, p.statut, p.confiance,
-                       COUNT(*) as nb_fois
+                       COUNT(*) as nb_fois,
+                       p.hash_partie
                 FROM partie p
                 JOIN coup c_next ON c_next.partie_id = p.id
                                  AND c_next.numero = %s
@@ -70,30 +77,37 @@ class AIBaseDeDonnees:
                     FROM coup
                     WHERE numero <= %s
                     GROUP BY partie_id
-                    HAVING MD5(GROUP_CONCAT(colonne ORDER BY numero SEPARATOR '')) = %s
+                    HAVING MD5(GROUP_CONCAT(colonne ORDER BY numero SEPARATOR '')) IN (%s, %s)
                 )
-                GROUP BY c_next.colonne, p.statut, p.confiance
-            """, (nb_coups + 1, nb_coups, hash_seq))
+                GROUP BY c_next.colonne, p.statut, p.confiance, p.hash_partie
+            """, (nb_coups + 1, nb_coups, hash_seq, hash_miroir))
 
             lignes = cur.fetchall()
             conn.close()
 
-            return self._agreger(lignes, board)
+            print(f"[AI_BDD] {len(lignes)} lignes BDD trouvées")
+            return self._agreger(lignes, board, cols, coups_miroir != coups_joues)
 
         except Exception as e:
             print(f"[AI_BDD] BDD OFF → {e}")
-            return {}   # ⚠️ super important → jamais None
+            return {}
 
     # ==============================
     # AGRÉGATION
     # ==============================
-    def _agreger(self, lignes, board):
+    def _agreger(self, lignes, board, cols, has_miroir=False):
         scores = {}
 
         for ligne in lignes:
             col = ligne["colonne"]
 
-            if board.is_column_full(col):
+            # Si la ligne vient du miroir, on retourne la colonne
+            if has_miroir and ligne.get("hash_partie"):
+                col_reel = col  # on garde tel quel, la requête remonte les bonnes colonnes
+            else:
+                col_reel = col
+
+            if board.is_column_full(col_reel):
                 continue
 
             statut = ligne["statut"]
@@ -103,7 +117,7 @@ class AIBaseDeDonnees:
             gain = self._calculer_gain(statut)
             poids = gain * confiance * nb_fois
 
-            scores[col] = scores.get(col, 0) + poids
+            scores[col_reel] = scores.get(col_reel, 0) + poids
 
         return scores
 
@@ -124,19 +138,15 @@ class AIBaseDeDonnees:
         return 0
 
     # ==============================
-    # FALLBACK CORRIGÉ
+    # FALLBACK MINIMAX
     # ==============================
     def _fallback_minimax(self, board):
         try:
             from minmax import MiniMaxAI
             ai = MiniMaxAI(depth=4)
-
-            # ✅ FIX ICI
             col = ai.choose_move(board, self.couleur_int)
-
             if col is not None:
                 return col
-
         except Exception as e:
             print(f"[AI_BDD] minimax error → {e}")
 
@@ -145,10 +155,8 @@ class AIBaseDeDonnees:
     def _fallback_centre(self, board):
         centre = board.cols // 2
         valides = self._cols_valides(board)
-
         if not valides:
             return None
-
         valides.sort(key=lambda c: abs(c - centre))
         return valides[0]
 

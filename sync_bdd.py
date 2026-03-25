@@ -1,9 +1,8 @@
 import mysql.connector
 
-# ====== CONNEXION ======
 print("🔄 Synchronisation en cours...")
 
-# Connexion locale
+# ====== CONNEXION ======
 print("Connexion à la BDD locale…")
 local = mysql.connector.connect(
     host="localhost",
@@ -15,92 +14,55 @@ local = mysql.connector.connect(
 cur_local = local.cursor(dictionary=True)
 print("✅ Connexion locale OK")
 
-# Connexion distante (Railway)
 print("Connexion à la BDD distante (Railway)…")
 remote = mysql.connector.connect(
     host="yamanote.proxy.rlwy.net",
     user="root",
-    password="DxxCDswbxSGHZMTQCSvCyhuRDejjihjJ",
+    password="tzAmyMicMRHrbNQGrhUnTOjqpYYGYnaf",
     database="railway",
     port=48344
 )
-cur_remote = remote.cursor()
+cur_remote = remote.cursor(dictionary=True)
 print("✅ Connexion distante OK\n")
 
-# ====== TABLE PARTIE ======
-print("🔹 Synchronisation de la table 'partie'…")
-cur_local.execute("SELECT * FROM partie")
-parties = cur_local.fetchall()
-print(f"{len(parties)} lignes trouvées dans 'partie'")
+# ====== FONCTION DE SYNCHRO ======
+def sync_table(table_name, columns, key_column):
+    print(f"🔹 Synchronisation de la table '{table_name}'…")
+    
+    # Récupérer toutes les lignes locales
+    cur_local.execute(f"SELECT * FROM {table_name}")
+    local_rows = cur_local.fetchall()
+    print(f"{len(local_rows)} lignes trouvées dans '{table_name}' (local)")
+    
+    # Récupérer tous les IDs distants
+    cur_remote.execute(f"SELECT {key_column} FROM {table_name}")
+    remote_ids = set(row[key_column] for row in cur_remote.fetchall())
+    
+    count = 0
+    for row in local_rows:
+        # On insert seulement si l'ID n'existe pas encore
+        if row[key_column] not in remote_ids:
+            placeholders = ", ".join(["%s"] * len(columns))
+            col_names = ", ".join(columns)
+            updates = ", ".join([f"{col}=VALUES({col})" for col in columns if col != key_column])
+            sql = f"""
+                INSERT INTO {table_name} ({col_names})
+                VALUES ({placeholders})
+                ON DUPLICATE KEY UPDATE {updates}
+            """
+            values = [row.get(col, 0 if 'nb_' in col else '') for col in columns]
+            cur_remote.execute(sql, values)
+            count += 1
+            if count % 100 == 0:
+                print(f"{count} nouvelles lignes synchronisées…")
+    
+    remote.commit()
+    print(f"✅ Table '{table_name}' synchronisée ({count} nouvelles lignes)\n")
 
-for i, row in enumerate(parties, 1):
-    cur_remote.execute("""
-        INSERT INTO partie (id, statut, confiance, nb_rows, nb_cols)
-        VALUES (%s, %s, %s, %s, %s)
-        ON DUPLICATE KEY UPDATE
-            statut=VALUES(statut),
-            confiance=VALUES(confiance),
-            nb_rows=VALUES(nb_rows),
-            nb_cols=VALUES(nb_cols)
-    """, (
-        row["id"],
-        row.get("statut", ""),         
-        row.get("confiance", 0),
-        row.get("nb_rows", 0),
-        row.get("nb_cols", 0)
-    ))
-    if i % 100 == 0:
-        print(f"{i} lignes synchronisées…")
 
-remote.commit()
-print("✅ Table 'partie' synchronisée\n")
-
-# ====== TABLE COUP ======
-print("🔹 Synchronisation de la table 'coup'…")
-cur_local.execute("SELECT * FROM coup")
-coups = cur_local.fetchall()
-print(f"{len(coups)} lignes trouvées dans 'coup'")
-
-for i, row in enumerate(coups, 1):
-    cur_remote.execute("""
-        INSERT INTO coup (id, partie_id, numero, colonne)
-        VALUES (%s, %s, %s, %s)
-        ON DUPLICATE KEY UPDATE
-            colonne=VALUES(colonne)
-    """, (
-        row["id"],
-        row["partie_id"],
-        row["numero"],      # <-- ici c'est bien 'numero'
-        row["colonne"]
-    ))
-    if i % 100 == 0:
-        print(f"{i} lignes synchronisées…")
-
-remote.commit()
-print("✅ Table 'coup' synchronisée\n")
-
-# ====== TABLE SITUATION ======
-print("🔹 Synchronisation de la table 'situation'…")
-cur_local.execute("SELECT * FROM situation")
-situations = cur_local.fetchall()
-print(f"{len(situations)} lignes trouvées dans 'situation'")
-
-for i, row in enumerate(situations, 1):
-    cur_remote.execute("""
-        INSERT INTO situation (id, partie_id, coup_numero, plateau)
-        VALUES (%s, %s, %s, %s)
-        ON DUPLICATE KEY UPDATE
-            plateau=VALUES(plateau)
-    """, (
-        row["id"],
-        row["partie_id"],
-        row["coup_numero"],  # <-- le nom correct
-        row["plateau"]
-    ))
-    if i % 100 == 0:
-        print(f"{i} lignes synchronisées…")
-
-remote.commit()
-print("✅ Table 'situation' synchronisée\n")
+# ====== TABLES ======
+sync_table("partie", ["id", "statut", "confiance", "nb_rows", "nb_cols"], "id")
+sync_table("coup", ["id", "partie_id", "numero", "colonne"], "id")
+sync_table("situation", ["id", "partie_id", "coup_numero", "plateau", "hash_situation"], "id")
 
 print("🎉 Synchronisation complète terminée !")

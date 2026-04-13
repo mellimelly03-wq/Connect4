@@ -40,8 +40,6 @@ class AIBaseDeDonnees:
         # 3. BDD
         scores = self._calculer_scores(coups_joues, nb_coups, board)
 
-        # FIX : on joue le meilleur coup connu même si le score est négatif
-        # Le fallback ne s'active que si la BDD ne trouve vraiment rien (dict vide)
         if scores:
             meilleur_col = max(scores, key=scores.get)
             meilleur_score = scores[meilleur_col]
@@ -56,13 +54,13 @@ class AIBaseDeDonnees:
     # BDD
     # ==============================
     def _calculer_scores(self, coups_joues, nb_coups, board):
+        conn = None
         try:
             conn = get_connection()
             cur = conn.cursor(dictionary=True)
 
             hash_seq = self._hash_sequence(coups_joues)
 
-            # Cherche aussi la séquence miroir pour enrichir les résultats
             cols = board.cols
             coups_miroir = [cols - 1 - c for c in coups_joues]
             hash_miroir = self._hash_sequence(coups_miroir)
@@ -86,7 +84,6 @@ class AIBaseDeDonnees:
             """, (nb_coups + 1, nb_coups, hash_seq, hash_miroir))
 
             lignes = cur.fetchall()
-            conn.close()
 
             print(f"[AI_BDD] {len(lignes)} lignes BDD trouvées")
             return self._agreger(lignes, board, cols, coups_miroir != coups_joues)
@@ -94,6 +91,12 @@ class AIBaseDeDonnees:
         except Exception as e:
             print(f"[AI_BDD] BDD OFF → {e}")
             return {}
+        finally:
+            if conn:
+                try:
+                    conn.close()
+                except Exception:
+                    pass
 
     # ==============================
     # AGRÉGATION
@@ -104,13 +107,7 @@ class AIBaseDeDonnees:
         for ligne in lignes:
             col = ligne["colonne"]
 
-            # Si la ligne vient du miroir, on retourne la colonne
-            if has_miroir and ligne.get("hash_partie"):
-                col_reel = col  # on garde tel quel, la requête remonte les bonnes colonnes
-            else:
-                col_reel = col
-
-            if board.is_column_full(col_reel):
+            if board.is_column_full(col):
                 continue
 
             statut = ligne["statut"]
@@ -120,7 +117,7 @@ class AIBaseDeDonnees:
             gain = self._calculer_gain(statut)
             poids = gain * confiance * nb_fois
 
-            scores[col_reel] = scores.get(col_reel, 0) + poids
+            scores[col] = scores.get(col, 0) + poids
 
         return scores
 

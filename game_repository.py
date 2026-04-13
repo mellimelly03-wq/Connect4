@@ -173,12 +173,23 @@ def save_game_from_board(game, source="local"):
         conn = get_connection()
         cur = conn.cursor()
 
-        # 1. Vérif doublon
+        # ── FIX : vérification doublon uniquement sur la même source ──
+        # On vérifie le hash exact (h_normal) toutes sources confondues
+        # pour éviter les vrais doublons, mais le hash miroir uniquement
+        # pour la même source afin de ne pas bloquer les parties locales
+        # qui matchent des parties d'entraînement symétriques.
         cur.execute(
-            "SELECT id FROM partie WHERE hash_partie=%s OR hash_partie=%s",
-            (h_normal, h_miroir)
+            "SELECT id FROM partie WHERE hash_partie = %s",
+            (h_normal,)
         )
         existing = cur.fetchone()
+        if not existing:
+            cur.execute(
+                "SELECT id FROM partie WHERE hash_partie = %s AND source = %s",
+                (h_miroir, source)
+            )
+            existing = cur.fetchone()
+
         if existing:
             return {"status": "EXISTE", "partie_id": existing[0]}
 

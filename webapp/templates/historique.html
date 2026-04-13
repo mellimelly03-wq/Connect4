@@ -3,184 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historique — Connect4</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>Historique — Connect 4</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Exo+2:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
     <style>
-        .historique-container {
-            max-width: 900px;
+        .hist-container {
+            max-width: 960px;
             margin: 0 auto;
-            padding: 30px 20px;
+            padding: 24px 16px 60px;
             position: relative;
             z-index: 2;
         }
-        .back-btn {
-            display: inline-block;
+
+        .hist-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        table {
+
+        .hist-title {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--violet);
+        }
+
+        /* Table */
+        .hist-table {
             width: 100%;
-            border-collapse: collapse;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.8rem;
+            border-collapse: separate;
+            border-spacing: 0 5px;
+            font-family: 'Nunito', sans-serif;
         }
-        th {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.2em;
-            color: var(--neon-blue);
-            padding: 10px;
-            border-bottom: 1px solid var(--border);
+
+        .hist-table th {
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            color: var(--violet);
+            text-transform: uppercase;
+            padding: 6px 12px;
             text-align: left;
+            border-bottom: 2px solid var(--border);
         }
-        td {
-            padding: 10px;
-            border-bottom: 1px solid rgba(0,245,255,0.05);
+
+        .hist-table tbody tr {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            transition: all 0.18s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hist-table tbody tr:hover {
+            background: var(--violet-pale);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .hist-table td {
+            padding: 10px 12px;
+            font-size: 0.88rem;
+            font-weight: 700;
             color: var(--text);
         }
-        tr:hover td { background: rgba(0,245,255,0.03); }
 
-        .statut-badge {
-            padding: 3px 8px;
-            border-radius: 3px;
-            font-size: 0.7rem;
+        .hist-table td:first-child { border-radius: 10px 0 0 10px; }
+        .hist-table td:last-child  { border-radius: 0 10px 10px 0; }
+
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            border: 1.5px solid;
         }
-        .TERMINE_ROUGE { color: var(--player-red); border: 1px solid var(--player-red); }
-        .TERMINE_JAUNE { color: var(--player-yellow); border: 1px solid var(--player-yellow); }
-        .TERMINE_NUL   { color: var(--neon-blue); border: 1px solid var(--neon-blue); }
-        .EN_COURS      { color: var(--neon-green); border: 1px solid var(--neon-green); }
 
-        /* Modal replay */
-        .modal {
+        .badge-rouge  { color: #b91c1c; border-color: #fca5a5; background: var(--red-soft); }
+        .badge-jaune  { color: #92400e; border-color: #fcd34d; background: var(--yellow-soft); }
+        .badge-nul    { color: var(--cyan); border-color: var(--cyan-pale); background: #f0fdff; }
+        .badge-cours  { color: #065f46; border-color: #a7f3d0; background: #d1fae5; }
+
+        /* Empty */
+        .hist-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-dim);
+        }
+        .hist-empty .icon { font-size: 3rem; margin-bottom: 10px; }
+
+        /* Modal */
+        .modal-overlay {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.85);
+            background: rgba(124,58,237,0.15);
+            backdrop-filter: blur(6px);
             z-index: 100;
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
         }
-        .modal.active { display: flex; }
+        .modal-overlay.active { display: flex; }
+
+        .modal-card {
+            background: var(--surface);
+            border: 2px solid var(--border-strong);
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            box-shadow: var(--shadow-lg);
+            max-width: 95vw;
+        }
+
+        .modal-info {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--violet);
+            letter-spacing: 0.1em;
+        }
+
         .modal-board {
             display: grid;
             gap: 5px;
-            padding: 16px;
-            background: rgba(0,10,25,0.95);
-            border: 1px solid var(--border);
-            border-radius: 6px;
+            padding: 14px;
+            background: linear-gradient(135deg, #4c1d95, #1e40af);
+            border-radius: 14px;
+            box-shadow: var(--shadow-md);
         }
+
         .modal-cell {
-            width: 52px;
-            height: 52px;
+            width: 46px; height: 46px;
             border-radius: 50%;
-            background: rgba(0,245,255,0.07);
-            border: 1px solid rgba(0,245,255,0.18);
+            background: radial-gradient(circle at 40% 35%, #e0d7ff, #b794f4 60%, #7c3aed);
+            border: none;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.2);
         }
-        .modal-cell.red {
-            background: radial-gradient(circle at 35% 35%, #ff4d6d, #ff1744);
-            box-shadow: 0 0 12px rgba(255,23,68,0.5);
+        .modal-cell.red    { background: radial-gradient(circle at 35% 30%, #fca5a5, #ef4444); box-shadow: inset 0 2px 6px rgba(0,0,0,0.2), 0 0 10px rgba(239,68,68,0.3); }
+        .modal-cell.yellow { background: radial-gradient(circle at 35% 30%, #fde68a, #f59e0b); box-shadow: inset 0 2px 6px rgba(0,0,0,0.2), 0 0 10px rgba(245,158,11,0.3); }
+
+        .modal-controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+
+        @media (max-width: 600px) {
+            .modal-cell { width: 34px; height: 34px; }
+            .hist-table th, .hist-table td { padding: 7px 8px; font-size: 0.8rem; }
         }
-        .modal-cell.yellow {
-            background: radial-gradient(circle at 35% 35%, #fff176, #ffe600);
-            box-shadow: 0 0 12px rgba(255,230,0,0.5);
-        }
-        .modal-info {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            color: var(--neon-blue);
-            letter-spacing: 0.2em;
-        }
-        .modal-controls { display: flex; gap: 10px; }
     </style>
 </head>
 <body>
-<div class="bg-grid"></div>
-<div class="scanlines"></div>
 
-<div class="historique-container">
-    <a href="/" class="btn btn-secondary back-btn">← RETOUR AU JEU</a>
+<div class="hist-container">
+
+    <div class="hist-header">
+        <div class="hist-title">📋 Historique des parties</div>
+        <a href="/" class="btn btn-secondary">← Retour au jeu</a>
+    </div>
 
     <div class="panel">
-        <h2 style="font-family:'Orbitron',sans-serif; color:var(--neon-blue); font-size:1rem; letter-spacing:0.2em; margin-bottom:20px;">
-            HISTORIQUE DES PARTIES
-        </h2>
-
         {% if parties %}
-        <table>
+        <table class="hist-table">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>MODE</th>
+                    <th>Mode</th>
                     <th>IA</th>
-                    <th>PREMIER</th>
-                    <th>STATUT</th>
-                    <th>ACTIONS</th>
+                    <th>Premier</th>
+                    <th>Résultat</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for p in parties %}
                 <tr>
-                    <td>{{ p.id }}</td>
+                    <td style="color:var(--text-dim); font-size:0.8rem;">{{ p.id }}</td>
                     <td>{{ p.mode }}</td>
-                    <td>{{ p.ai_type }}</td>
+                    <td style="color:var(--violet);">{{ p.ai_type }}</td>
                     <td>{{ p.starting_color }}</td>
                     <td>
-                        <span class="statut-badge {{ p.statut }}">{{ p.statut }}</span>
+                        {% if p.statut == 'TERMINE_ROUGE' %}
+                            <span class="badge badge-rouge">🔴 Rouge gagne</span>
+                        {% elif p.statut == 'TERMINE_JAUNE' %}
+                            <span class="badge badge-jaune">🟡 Jaune gagne</span>
+                        {% elif p.statut == 'TERMINE_NUL' %}
+                            <span class="badge badge-nul">🤝 Nul</span>
+                        {% else %}
+                            <span class="badge badge-cours">⚡ En cours</span>
+                        {% endif %}
                     </td>
                     <td>
-                        <button onclick="replayPartie({{ p.id }}, {{ p.nb_cols }}, {{ p.nb_rows }})"
-                                class="btn btn-primary" style="font-size:0.55rem; padding:6px 10px;">
-                            ▶ REPLAY
-                        </button>
-                        {% if p.statut == 'EN_COURS' %}
-                        <button onclick="reprendrePartie({{ p.id }})"
-                                class="btn btn-accent" style="font-size:0.55rem; padding:6px 10px;">
-                            ↩ REPRENDRE
-                        </button>
-                        {% endif %}
+                        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                            <button onclick="replayPartie({{ p.id }}, {{ p.nb_cols }}, {{ p.nb_rows }})"
+                                    class="btn btn-primary" style="font-size:0.7rem; padding:6px 12px;">
+                                ▶ Replay
+                            </button>
+                            {% if p.statut == 'EN_COURS' %}
+                            <button onclick="reprendrePartie({{ p.id }})"
+                                    class="btn btn-accent" style="font-size:0.7rem; padding:6px 12px;">
+                                ↩ Reprendre
+                            </button>
+                            {% endif %}
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
         {% else %}
-        <p style="color:var(--text-dim); text-align:center; padding:40px;">
-            AUCUNE PARTIE SAUVEGARDÉE
-        </p>
+        <div class="hist-empty">
+            <div class="icon">🎮</div>
+            <p style="font-weight:700;">Aucune partie sauvegardée pour l'instant.</p>
+            <p style="font-size:0.85rem; margin-top:6px;">Lance une partie et clique sur 💾 Sauver !</p>
+        </div>
         {% endif %}
     </div>
 </div>
 
-<!-- MODAL REPLAY -->
-<div class="modal" id="replayModal">
-    <div class="modal-info" id="replayInfo">COUP 0 / 0</div>
-    <div class="modal-board" id="replayBoard"></div>
-    <div class="modal-controls">
-        <button onclick="prevCoup()" class="btn btn-secondary">◀ PRÉC</button>
-        <button onclick="toggleAutoPlay()" class="btn btn-primary" id="autoBtn">▶ AUTO</button>
-        <button onclick="nextCoup()" class="btn btn-secondary">SUIV ▶</button>
-        <button onclick="closeModal()" class="btn btn-accent">✕ FERMER</button>
+<!-- Modal Replay -->
+<div class="modal-overlay" id="replayModal">
+    <div class="modal-card">
+        <div class="modal-info" id="replayInfo">Coup 0 / 0</div>
+        <div class="modal-board" id="replayBoard"></div>
+        <div class="modal-controls">
+            <button onclick="prevCoup()" class="btn btn-secondary">◀ Préc</button>
+            <button onclick="toggleAutoPlay()" class="btn btn-primary" id="autoBtn">▶ Auto</button>
+            <button onclick="nextCoup()" class="btn btn-secondary">Suiv ▶</button>
+            <button onclick="closeModal()" class="btn btn-accent">✕ Fermer</button>
+        </div>
     </div>
 </div>
 
 <script>
-let situations = [];
-let currentCoup = 0;
-let replayCols = 7;
-let replayRows = 6;
-let autoInterval = null;
+let situations = [], currentCoup = 0, replayCols = 7, replayRows = 6, autoInterval = null;
 
 function replayPartie(partieId, cols, rows) {
-    replayCols = cols;
-    replayRows = rows;
-    currentCoup = 0;
-    stopAuto();
-
-    fetch(`/replay/${partieId}`)
-    .then(r => r.json())
-    .then(data => {
+    replayCols = cols; replayRows = rows; currentCoup = 0; stopAuto();
+    fetch(`/replay/${partieId}`).then(r => r.json()).then(data => {
         situations = data;
         document.getElementById('replayModal').classList.add('active');
         drawReplay(0);
@@ -189,14 +258,10 @@ function replayPartie(partieId, cols, rows) {
 
 function drawReplay(idx) {
     const board = document.getElementById('replayBoard');
-    const info = document.getElementById('replayInfo');
-
-    board.style.gridTemplateColumns = `repeat(${replayCols}, 52px)`;
+    board.style.gridTemplateColumns = `repeat(${replayCols}, 46px)`;
     board.innerHTML = '';
-
     const grid = situations[idx];
     if (!grid) return;
-
     for (let r = 0; r < replayRows; r++) {
         for (let c = 0; c < replayCols; c++) {
             const cell = document.createElement('div');
@@ -206,57 +271,28 @@ function drawReplay(idx) {
             board.appendChild(cell);
         }
     }
-    info.textContent = `COUP ${idx + 1} / ${situations.length}`;
+    document.getElementById('replayInfo').textContent = `Coup ${idx + 1} / ${situations.length}`;
 }
 
-function nextCoup() {
-    if (currentCoup < situations.length - 1) {
-        currentCoup++;
-        drawReplay(currentCoup);
-    } else {
-        stopAuto();
-    }
-}
-
-function prevCoup() {
-    if (currentCoup > 0) {
-        currentCoup--;
-        drawReplay(currentCoup);
-    }
-}
-
+function nextCoup() { if (currentCoup < situations.length - 1) { currentCoup++; drawReplay(currentCoup); } else stopAuto(); }
+function prevCoup() { if (currentCoup > 0) { currentCoup--; drawReplay(currentCoup); } }
 function toggleAutoPlay() {
-    if (autoInterval) {
-        stopAuto();
-    } else {
-        document.getElementById('autoBtn').textContent = '⏸ PAUSE';
-        autoInterval = setInterval(() => {
-            if (currentCoup < situations.length - 1) {
-                nextCoup();
-            } else {
-                stopAuto();
-            }
-        }, 700);
-    }
+    if (autoInterval) { stopAuto(); return; }
+    document.getElementById('autoBtn').textContent = '⏸ Pause';
+    autoInterval = setInterval(() => { if (currentCoup < situations.length - 1) nextCoup(); else stopAuto(); }, 650);
 }
-
 function stopAuto() {
     if (autoInterval) clearInterval(autoInterval);
     autoInterval = null;
-    document.getElementById('autoBtn').textContent = '▶ AUTO';
+    document.getElementById('autoBtn').textContent = '▶ Auto';
 }
-
 function closeModal() {
     stopAuto();
     document.getElementById('replayModal').classList.remove('active');
-    situations = [];
-    currentCoup = 0;
+    situations = []; currentCoup = 0;
 }
-
 function reprendrePartie(partieId) {
-    fetch(`/reprendre/${partieId}`, { method: 'POST' })
-    .then(r => r.json())
-    .then(() => { window.location = '/'; });
+    fetch(`/reprendre/${partieId}`, { method: 'POST' }).then(() => window.location = '/');
 }
 </script>
 </body>

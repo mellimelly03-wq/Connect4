@@ -78,6 +78,26 @@ function setInfo(msg, color = null) {
     info.style.color = color || "var(--text)";
 }
 
+// Affiche "Dernier coup X : colonne N — À Y de jouer"
+function setLastMoveInfo(grid, prevGrid) {
+    let lastCol = null, lastColor = null;
+    if (prevGrid) {
+        for (let r = 0; r < ROWS; r++) {
+            for (let c = 0; c < COLS; c++) {
+                if (grid[r][c] !== prevGrid[r][c]) {
+                    lastCol = c + 1;
+                    lastColor = grid[r][c] === 1 ? "Rouge 🔴" : "Jaune 🟡";
+                }
+            }
+        }
+    }
+    const nextColor = humanColor === 1 ? "Rouge 🔴" : "Jaune 🟡";
+    if (lastCol !== null) {
+        const color = lastColor.includes("Rouge") ? "var(--red)" : "var(--yellow)";
+        setInfo(`Dernier coup ${lastColor} : col. ${lastCol} — 👆 À ${nextColor} de jouer`, color);
+    }
+}
+
 // ══════════════════════════════════════════
 // DÉMARRER UNE PARTIE
 // ══════════════════════════════════════════
@@ -104,8 +124,13 @@ function startGame() {
         gameStarted = true;
         lastScores = [];
         drawBoard(data.grid);
-        setInfo("SYSTÈME ACTIF — BONNE CHANCE", "var(--neon-green)");
+        const whoNow = humanColor === 1 ? "Rouge 🔴" : "Jaune 🟡";
+        setInfo(`✅ Partie démarrée — À toi ${whoNow} !`, humanColor === 1 ? "var(--red)" : "var(--yellow)");
         if (currentMode === "ai_vs_ai") launchAIVsAI();
+        if (currentMode === "human_vs_ai" && humanColor !== parseInt(starting)) {
+            isAITurn = true;
+            setTimeout(() => triggerAIMove(), 300);
+        }
     });
 }
 
@@ -117,6 +142,16 @@ function playMove(col) {
     if (currentMode === "ai_vs_ai") return;
     if (paintMode) return;
 
+    const prevGrid = boardDiv.querySelectorAll('.cell').length > 0
+        ? Array.from({length: ROWS}, (_, r) =>
+            Array.from({length: COLS}, (_, c) => {
+                const cell = boardDiv.children[r * COLS + c];
+                if (cell.classList.contains('red')) return 1;
+                if (cell.classList.contains('yellow')) return 2;
+                return 0;
+            }))
+        : null;
+
     fetch("/move", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -124,34 +159,33 @@ function playMove(col) {
     })
     .then(res => res.json())
     .then(data => {
-        if (data.error === "full") { setInfo("COLONNE PLEINE !", "var(--neon-pink)"); return; }
+        if (data.error === "full") { setInfo("⚠️ Colonne pleine !", "var(--red)"); return; }
         if (data.error) return;
 
         drawBoard(data.grid, data.scores, data.winning_cells || []);
 
         if (data.winner) {
-            const who = data.winner === 1 ? "ROUGE" : "JAUNE";
-            const col = data.winner === 1 ? "var(--player-red)" : "var(--player-yellow)";
-            setInfo(`⬤ VICTOIRE — JOUEUR ${who} !`, col);
+            const who = data.winner === 1 ? "Rouge 🔴" : "Jaune 🟡";
+            const color = data.winner === 1 ? "var(--red)" : "var(--yellow)";
+            setInfo(`🏆 Victoire — Joueur ${who} !`, color);
             setTimeout(() => alert(`Victoire joueur ${who} !`), 100);
             return;
         }
         if (data.draw) {
-            setInfo("MATCH NUL — ÉGALITÉ PARFAITE", "var(--neon-blue)");
+            setInfo("🤝 Match nul — Égalité parfaite !", "var(--cyan)");
             setTimeout(() => alert("Match nul !"), 100);
             return;
         }
 
+        setLastMoveInfo(data.grid, prevGrid);
+
         if (data.ai_pending) {
             isAITurn = true;
-            setInfo("IA EN CALCUL...", "var(--neon-blue)");
+            setInfo("🧠 IA en train de réfléchir...", "var(--violet)");
             setTimeout(() => triggerAIMove(), 150);
-        } else {
-            setInfo("EN ATTENTE DU PROCHAIN COUP...");
         }
     });
 }
-
 function triggerAIMove() {
     fetch("/ai_move", { method: "POST" })
     .then(res => res.json())
@@ -159,19 +193,28 @@ function triggerAIMove() {
         isAITurn = false;
         if (data.error) return;
 
+        const prevGrid = Array.from({length: ROWS}, (_, r) =>
+            Array.from({length: COLS}, (_, c) => {
+                const cell = boardDiv.children[r * COLS + c];
+                if (!cell) return 0;
+                if (cell.classList.contains('red')) return 1;
+                if (cell.classList.contains('yellow')) return 2;
+                return 0;
+            }));
+
         drawBoard(data.grid, data.scores || [], data.winning_cells || []);
 
         if (data.winner) {
-            const who = data.winner === 1 ? "ROUGE" : "JAUNE";
-            const col = data.winner === 1 ? "var(--player-red)" : "var(--player-yellow)";
-            setInfo(`⬤ VICTOIRE — JOUEUR ${who} !`, col);
+            const who = data.winner === 1 ? "Rouge 🔴" : "Jaune 🟡";
+            const color = data.winner === 1 ? "var(--red)" : "var(--yellow)";
+            setInfo(`🏆 Victoire — Joueur ${who} !`, color);
             setTimeout(() => alert(`Victoire joueur ${who} !`), 100);
         } else if (data.draw) {
-            setInfo("MATCH NUL — ÉGALITÉ PARFAITE", "var(--neon-blue)");
+            setInfo("🤝 Match nul !", "var(--cyan)");
             setTimeout(() => alert("Match nul !"), 100);
         } else {
-            const whoNow = humanColor === 1 ? "ROUGE" : "JAUNE";
-            setInfo(`À TON TOUR — ${whoNow} !`, humanColor === 1 ? "var(--player-red)" : "var(--player-yellow)");
+            // Afficher quel coup l'IA vient de jouer
+            setLastMoveInfo(data.grid, prevGrid);
         }
     });
 }
@@ -227,8 +270,8 @@ function aiSuggestion() {
     .then(res => res.json())
     .then(data => {
         if (data.col === null) return;
-        setInfo(`IA SUGGÈRE COLONNE : ${data.col}`, "var(--neon-yellow)");
-        highlightColumn(data.col);
+        setInfo(`IA SUGGÈRE COLONNE : ${data.col + 1}`, "var(--neon-yellow)"); // ← +1 ici
+        highlightColumn(data.col); // ← reste inchangé
     });
 }
 
@@ -457,6 +500,15 @@ drawBoard(INITIAL_GRID);
 if (RESUMED) {
     gameStarted = true;
     currentMode = RESUMED_MODE;
-    setInfo("PARTIE REPRISE — À TON TOUR !", "var(--neon-green)");
+    humanColor = HUMAN_COLOR;
+    const whoNow = humanColor === 1 ? "Rouge 🔴" : "Jaune 🟡";
+    setInfo(`↩ Partie reprise — À toi ${whoNow} !`, humanColor === 1 ? "var(--red)" : "var(--yellow)");
     if (currentMode === "ai_vs_ai") launchAIVsAI();
+    // Si c'est à l'IA de jouer
+    if (currentMode === "human_vs_ai") {
+        // On vérifie côté serveur si c'est à l'IA
+        fetch("/get_grid").then(r => r.json()).then(d => {
+            if (d.ai_turn) { isAITurn = true; setTimeout(() => triggerAIMove(), 500); }
+        });
+    }
 }

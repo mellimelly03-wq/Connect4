@@ -19,7 +19,7 @@ from database import get_connection
 
 NB_PARTIES_ALEATOIRES = 1000   # confiance = 1
 
-NB_PARTIES_MINIMAX    = 500    # confiance = 2  (plus long à générer)
+NB_PARTIES_MINIMAX    = 500   # confiance = 2  (plus long à générer)
 
 MAX_TENTATIVES        = 5000
 
@@ -117,49 +117,27 @@ def generer_partie_aleatoire():
 # ==============================
 
 def generer_partie_minimax():
-
     board = Board(ROWS, COLS)
-
     game  = Game(board, START, "human_vs_ai")
-
     game.ai_type = "minimax"
-
-    game.ai.depth = 3   # profondeur 3 = bon compromis vitesse/qualité
-
+    game.ai.depth = 3
 
     for _ in range(ROWS * COLS):
-
         valides = [c for c in range(COLS) if not board.is_column_full(c)]
-
         if not valides:
-
             break
-
 
         if game.current_player == YELLOW:
-
-            # Minimax joue
-
-            col = game.ai.choose_move(board)
-
+            col = game.ai.choose_move(board, YELLOW)  # ← ajoute YELLOW ici
         else:
-
-            # Aléatoire joue
-
             col = random.choice(valides)
 
-
         if col is None:
-
             break
-
 
         game.play_turn(col)
-
         if board.check_winner(RED) or board.check_winner(YELLOW):
-
             break
-
 
     return game
 

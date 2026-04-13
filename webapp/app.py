@@ -150,9 +150,31 @@ def index():
 
     human_color = getattr(game, 'human_color', RED) if game else RED
 
-    return render_template("game.html", rows=ROWS, cols=COLS, grid=grid,
+    ai_type = getattr(game, 'ai_type', 'minimax') if game else 'minimax'
 
-                           resumed=resumed, mode=mode, human_color=human_color)
+    depth = game.ai.depth if (game and hasattr(game, 'ai') and hasattr(game.ai, 'depth')) else 4
+
+    return render_template(
+
+        "game.html",
+
+        rows=ROWS,
+
+        cols=COLS,
+
+        grid=grid,
+
+        resumed=resumed,
+
+        mode=mode,
+
+        human_color=human_color,
+
+        ai_type=ai_type,
+
+        depth=depth
+
+    )
 
 
 
@@ -546,35 +568,7 @@ def start_from_paint():
 
 
 
-    # ── Reconstruire un historique cohérent depuis la grille peinte ──
-
-    # On reconstruit colonne par colonne de bas en haut
-
-    # en alternant les couleurs selon qui a commencé
-
-    history = []
-
-    for c in range(COLS):
-
-        for r in range(ROWS - 1, -1, -1):
-
-            if grid[r][c] != 0:
-
-                history.append((r, c, grid[r][c]))
-
-
-
-    # Trier par ligne décroissante (bas = premier joué) pour chaque colonne
-
-    # puis reconstituer l'ordre de jeu en alternant rouge/jaune
-
-    # On reconstruit simplement : rouge en position impaire, jaune en paire
-
-    # selon qui commence (starting)
-
     ordered_history = []
-
-    # Collecter toutes les pièces par colonne, de bas en haut
 
     pieces_par_col = {}
 
@@ -591,8 +585,6 @@ def start_from_paint():
         pieces_par_col[c] = pieces
 
 
-
-    # Reconstruire dans l'ordre simulé : on alterne en partant du bas
 
     max_height = max((len(v) for v in pieces_par_col.values()), default=0)
 
@@ -670,6 +662,8 @@ def switch_control():
 
     new_ai_type = data.get("ai_type", game.ai_type)
 
+    new_depth = int(data.get("depth", 4))
+
     human_color_str = data.get("human_color", "rouge")
 
     human_color = RED if human_color_str == "rouge" else YELLOW
@@ -684,15 +678,17 @@ def switch_control():
 
 
 
-    if new_ai_type == "bdd":
+    if new_ai_type == "minimax" and hasattr(game, 'ai'):
+
+        game.ai.depth = new_depth
+
+    elif new_ai_type == "bdd":
 
         ai_color = "JAUNE" if human_color == RED else "ROUGE"
 
         game.ai_bdd = AIBaseDeDonnees(couleur=ai_color)
 
 
-
-    # Est-ce que c'est maintenant à l'IA de jouer ?
 
     ai_pending = new_mode == "human_vs_ai" and game.current_player != human_color
 
@@ -718,7 +714,21 @@ def get_grid():
 
     state = get_game_state()
 
-    return jsonify({"grid": state['board'].grid})
+    game = state['game']
+
+    ai_turn = False
+
+    if game and game.mode == "human_vs_ai" and not game.game_over:
+
+        ai_turn = game.current_player != game.human_color
+
+    return jsonify({
+
+        "grid": state['board'].grid,
+
+        "ai_turn": ai_turn
+
+    })
 
 
 
@@ -759,32 +769,56 @@ def reprendre(partie_id):
 
 
 def get_ai_move_for(game):
+
     coups = [col for (_, col, _) in game.board.history]
+
     key = ''.join(map(str, coups))
+
     if key in OPENING_BOOK and game.ai_type == "minimax":
+
         col = OPENING_BOOK[key]
+
         if not game.board.is_column_full(col):
+
             return col, []
 
+
+
     if game.ai_type == "random":
+
         col = game.random_move()
+
         return col, []
+
     elif game.ai_type == "bdd":
+
         col = game.ai_bdd.choisir_coup(game.board)
+
         return col, []
+
     else:
-        # Nouveau minimax : passer la couleur de l'IA
+
         ai_color = game.current_player
+
         col = game.ai.choose_move(game.board, ai_color)
 
-        # Convertir scores (liste) en liste de tuples (col, score)
+
+
         scores = []
+
         if hasattr(game.ai, 'scores') and game.ai.scores:
+
             for c, s in enumerate(game.ai.scores):
+
                 if s is not None:
+
                     scores.append((c, s))
 
+
+
         return col, scores
+
+
 
 if __name__ == "__main__":
 

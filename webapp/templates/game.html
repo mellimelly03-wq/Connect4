@@ -3,238 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect4 — Cyberpunk</title>
+    <title>Connect 4</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Exo+2:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
-    <style>
-        /* ---- PAINT CONTROLS ---- */
-        #paintControls {
-            display: none;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-            justify-content: center;
-            margin-top: 12px;
-            padding: 12px;
-            border: 1px solid rgba(255,230,0,0.3);
-            border-radius: 4px;
-            background: rgba(255,230,0,0.03);
-        }
-
-        .paint-color-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: all 0.15s;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-        }
-        .paint-color-btn:hover { transform: scale(1.2); }
-        .active-paint-btn {
-            border-color: white !important;
-            box-shadow: 0 0 14px white;
-            transform: scale(1.15);
-        }
-        #paintColor1 { background: radial-gradient(circle at 35% 35%, #ff4d6d, #ff1744); box-shadow: 0 0 8px rgba(255,23,68,0.5); }
-        #paintColor2 { background: radial-gradient(circle at 35% 35%, #fff176, #ffe600); box-shadow: 0 0 8px rgba(255,230,0,0.5); }
-        #paintColor0 { background: rgba(0,245,255,0.07); border: 2px solid var(--border); color: var(--text-dim); font-size: 1rem; }
-
-        .paint-cursor { cursor: crosshair !important; }
-
-        .btn-active-paint {
-            background: rgba(255,230,0,0.2) !important;
-            border-color: var(--neon-yellow) !important;
-            color: var(--neon-yellow) !important;
-        }
-
-        /* Indicateur prochain joueur painting */
-        #paintNextPlayer {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            padding: 4px 10px;
-            border-radius: 3px;
-            border: 1px solid currentColor;
-            transition: color 0.2s;
-        }
-
-        /* ---- SWITCH CONTROL ---- */
-        #switchControls {
-            display: none;
-            gap: 8px;
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 10px;
-            padding: 10px;
-            border: 1px solid rgba(0,245,255,0.2);
-            border-radius: 4px;
-        }
-
-        /* ---- AI PROGRESS BAR ---- */
-        #aiProgress {
-            display: none;
-            width: 100%;
-            height: 3px;
-            background: rgba(0,245,255,0.1);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 4px;
-        }
-        #aiProgressBar {
-            height: 100%;
-            width: 0%;
-            background: var(--neon-blue);
-            box-shadow: 0 0 8px var(--neon-blue);
-            transition: width 0.1s linear;
-        }
-        #aiProgress.active { display: block; }
-    </style>
 </head>
 <body>
-<div class="bg-grid"></div>
-<div class="scanlines"></div>
 
 <div class="container">
 
+    <!-- ═══ HEADER ═══ -->
     <header>
         <div class="title-glow">
-            <h1>CONNECT<span class="accent">4</span></h1>
-            <div class="subtitle">NEURAL GAME SYSTEM</div>
+            <h1>CONNECT <span class="accent">4</span></h1>
+            <div class="subtitle"></div>
         </div>
     </header>
 
-    <!-- ═══ PANEL CONTRÔLES ═══ -->
-    <div class="panel controls-panel">
+    <!-- ═══ STATUS BAR sticky ═══ -->
+    <div class="status-bar">
+        <div class="status-dot" id="statusDot"></div>
+        <div style="flex:1;">
+            <p id="info">👋 Bienvenue ! Choisis un mode et clique sur Démarrer.</p>
+            <div id="aiProgress"><div id="aiProgressBar"></div></div>
+        </div>
+    </div>
+
+    <!-- ═══ PANEL PRINCIPAL ═══ -->
+    <div class="panel">
+
+        <!-- Sélecteurs -->
         <div class="controls-grid">
 
             <div class="control-group">
-                <label class="ctrl-label">MODE</label>
+                <label class="ctrl-label">🎮 Mode de jeu</label>
                 <select id="mode" class="cyber-select">
-                    <option value="">— SELECT —</option>
-                    <option value="2players">2 JOUEURS</option>
-                    <option value="human_vs_ai">HUMAIN vs IA</option>
-                    <option value="ai_vs_ai">IA vs IA</option>
+                    <option value="">— Choisir —</option>
+                    <option value="2players">👥 2 Joueurs</option>
+                    <option value="human_vs_ai">🤖 Humain vs IA</option>
+                    <option value="ai_vs_ai">⚡ IA vs IA</option>
                 </select>
             </div>
 
             <div class="control-group">
-                <label class="ctrl-label">IA TYPE</label>
+                <label class="ctrl-label">🧠 Type d'IA</label>
                 <select id="ai_type" class="cyber-select">
-                    <option value="random">RANDOM</option>
-                    <option value="minimax">MINIMAX</option>
-                    <option value="bdd">IA BASE DE DONNÉES</option>
+                    <option value="random">🎲 Aléatoire</option>
+                    <option value="minimax">🧠 Minimax</option>
+                    <option value="bdd">🗄️ Base de données</option>
                 </select>
             </div>
 
             <div class="control-group">
-                <label class="ctrl-label">PREMIER</label>
+                <label class="ctrl-label">🔴 Je joue</label>
                 <select id="starting" class="cyber-select">
-                    <option value="1">⬤ ROUGE</option>
-                    <option value="2">⬤ JAUNE</option>
+                    <option value="1">🔴 Rouge</option>
+                    <option value="2">🟡 Jaune</option>
                 </select>
             </div>
 
             <div class="control-group" id="depth-group">
-                <label class="ctrl-label">PROFONDEUR</label>
+                <label class="ctrl-label">🔢 Profondeur IA</label>
                 <input type="number" id="depth" value="4" min="1" max="8" class="cyber-input">
             </div>
 
         </div>
 
-        <!-- Boutons principaux -->
+        <!-- Bouton principal bien visible -->
+        <div style="display:flex; justify-content:center; margin-bottom:14px;">
+            <button onclick="startGame()" class="btn btn-primary" style="font-size:1rem; padding:12px 32px; border-radius:12px;">
+                ▶ Démarrer la partie
+            </button>
+        </div>
+
+        <!-- Boutons actions -->
         <div class="buttons-row">
-            <button onclick="startGame()" class="btn btn-primary">▶ START</button>
-            <button onclick="undo()" class="btn btn-secondary">↩ UNDO</button>
-            <button onclick="restart()" class="btn btn-secondary">↺ RESTART</button>
-            <button onclick="aiSuggestion()" class="btn btn-accent">⚡ IA HINT</button>
-            <button onclick="analyzeGame()" class="btn btn-accent">🔮 ANALYSE</button>
-            <button onclick="saveGame()" class="btn btn-secondary">💾 SAVE</button>
-            <button onclick="pauseGame()" class="btn btn-secondary">⏸ PAUSE</button>
-            <button onclick="resumeGame()" class="btn btn-secondary">▶ RESUME</button>
-            <a href="/historique" class="btn btn-secondary">📋 HISTORIQUE</a>
+            <button onclick="undo()" class="btn btn-secondary">↩ Annuler</button>
+            <button onclick="restart()" class="btn btn-secondary">↺ Rejouer</button>
+            <button onclick="aiSuggestion()" class="btn btn-accent">💡 Astuce IA</button>
+            <button onclick="analyzeGame()" class="btn btn-accent">🔮 Analyser</button>
+            <button onclick="saveGame()" class="btn btn-secondary">💾 Sauvegarder</button>
+            <button onclick="pauseGame()" class="btn btn-secondary">⏸ Pause</button>
+            <button onclick="resumeGame()" class="btn btn-secondary">▶ Reprendre</button>
+            <a href="/historique" class="btn btn-secondary">📋 Historique</a>
         </div>
 
         <!-- Boutons avancés -->
         <div class="buttons-row" style="margin-top:8px;">
-            <button onclick="togglePaintMode()" class="btn btn-secondary" id="paintBtn">🖌 PAINT</button>
-            <button onclick="toggleSwitchControls()" class="btn btn-secondary">🔄 SWITCH CONTRÔLE</button>
+            <button onclick="togglePaintMode()" class="btn btn-secondary" id="paintBtn">🖌 Mode Peinture</button>
+            <button onclick="toggleSwitchControls()" class="btn btn-secondary">🔄 switch</button>
         </div>
 
-        <!-- ═══ Contrôles painting ═══ -->
+        <!-- ═══ Contrôles peinture ═══ -->
         <div id="paintControls">
-
-            <!-- Couleur peinture -->
-            <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; color:var(--neon-yellow); letter-spacing:0.2em;">COULEUR :</span>
+            <span style="font-weight:800; font-size:0.75rem; color:#92400e; letter-spacing:0.1em;">COULEUR :</span>
             <button class="paint-color-btn active-paint-btn" id="paintColor1" onclick="setPaintColor(1)" title="Rouge"></button>
             <button class="paint-color-btn" id="paintColor2" onclick="setPaintColor(2)" title="Jaune"></button>
             <button class="paint-color-btn" id="paintColor0" onclick="setPaintColor(0)" title="Effacer">✕</button>
+            <span id="paintNextPlayer" style="color: var(--red);">⬤ Rouge joue</span>
 
-            <!-- Indicateur à qui jouer -->
-            <span id="paintNextPlayer" style="color: var(--player-red);">⬤ ROUGE</span>
+            <div style="width:100%; border-top:1.5px solid #fde68a; margin:6px 0;"></div>
 
-            <!-- Séparateur -->
-            <div style="width:100%; border-top: 1px solid rgba(255,230,0,0.15); margin: 4px 0;"></div>
-
-            <!-- Options pour jouer depuis le plateau -->
-            <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; color:var(--text-dim); letter-spacing:0.2em;">JOUER DEPUIS :</span>
-
+            <span style="font-weight:800; font-size:0.72rem; color:#92400e;">JOUER DEPUIS CE PLATEAU :</span>
             <select id="paintMode" class="cyber-select" style="width:auto;">
-                <option value="2players">2 JOUEURS</option>
-                <option value="human_vs_ai">HUMAIN vs IA</option>
-                <option value="ai_vs_ai">IA vs IA</option>
+                <option value="2players">👥 2 Joueurs</option>
+                <option value="human_vs_ai">🤖 Humain vs IA</option>
+                <option value="ai_vs_ai">⚡ IA vs IA</option>
             </select>
-
             <select id="paintAiType" class="cyber-select" style="width:auto;">
-                <option value="minimax">MINIMAX</option>
-                <option value="random">RANDOM</option>
-                <option value="bdd">IA BDD</option>
+                <option value="minimax">🧠 Minimax</option>
+                <option value="random">🎲 Aléatoire</option>
+                <option value="bdd">🗄️ IA BDD</option>
             </select>
-
-            <!-- Couleur de l'humain -->
             <select id="paintHumanColor" class="cyber-select" style="width:auto;">
-                <option value="rouge">🔴 HUMAIN = ROUGE</option>
-                <option value="jaune">🟡 HUMAIN = JAUNE</option>
+                <option value="rouge">🔴 Je suis Rouge</option>
+                <option value="jaune">🟡 Je suis Jaune</option>
             </select>
-
-            <button onclick="startFromPaint()" class="btn btn-primary" style="font-size:0.6rem;">▶ JOUER</button>
+            <button onclick="startFromPaint()" class="btn btn-primary">▶ Jouer depuis ici</button>
         </div>
 
-        <!-- ═══ Contrôles switch ═══ -->
+        <!-- ═══ Switch contrôle ═══ -->
         <div id="switchControls">
-            <span style="font-family:'Orbitron',sans-serif; font-size:0.6rem; color:var(--neon-blue); letter-spacing:0.2em;">NOUVEAU MODE :</span>
+            <span style="font-weight:800; font-size:0.75rem; color:var(--cyan);">CHANGER EN COURS DE PARTIE :</span>
 
-            <select id="switchMode" class="cyber-select" style="width:auto;">
-                <option value="2players">2 JOUEURS</option>
-                <option value="human_vs_ai">HUMAIN vs IA</option>
-                <option value="ai_vs_ai">IA vs IA</option>
+            <select id="switchMode" class="cyber-select" style="width:auto;" onchange="toggleSwitchAiOptions()">
+                <option value="2players">👥 2 Joueurs</option>
+                <option value="human_vs_ai">🤖 Humain vs IA</option>
+                <option value="ai_vs_ai">⚡ IA vs IA</option>
             </select>
 
-            <!-- Couleur de l'humain après switch -->
+            <select id="switchAiType" class="cyber-select" style="width:auto; display:none;" onchange="toggleSwitchDepth()">
+                <option value="random">🎲 Aléatoire</option>
+                <option value="minimax">🧠 Minimax</option>
+                <option value="bdd">🗄️ Base de données</option>
+            </select>
+
+            <select id="switchDepth" class="cyber-select" style="width:auto; display:none;">
+                <option value="3">Profondeur 3</option>
+                <option value="4" selected>Profondeur 4</option>
+                <option value="5">Profondeur 5</option>
+                <option value="6">Profondeur 6</option>
+                <option value="7">Profondeur 7</option>
+                <option value="8">Profondeur 8</option>
+            </select>
+
             <select id="switchHumanColor" class="cyber-select" style="width:auto;">
-                <option value="rouge">🔴 HUMAIN = ROUGE</option>
-                <option value="jaune">🟡 HUMAIN = JAUNE</option>
+                <option value="rouge">🔴 Je suis Rouge</option>
+                <option value="jaune">🟡 Je suis Jaune</option>
             </select>
 
-            <button onclick="switchControl()" class="btn btn-primary" style="font-size:0.6rem;">✓ APPLIQUER</button>
+            <button onclick="switchControl()" class="btn btn-primary">✓ Appliquer</button>
         </div>
 
-    </div>
-
-    <!-- ═══ STATUS BAR ═══ -->
-    <div class="status-bar">
-        <div class="status-dot"></div>
-        <div style="flex:1;">
-            <p id="info">INITIALISATION DU SYSTÈME...</p>
-            <div id="aiProgress"><div id="aiProgressBar"></div></div>
-        </div>
     </div>
 
     <!-- ═══ PLATEAU ═══ -->
@@ -248,114 +168,304 @@
 </div>
 
 <script>
-    const ROWS = {{ rows }};
-    const COLS = {{ cols }};
-    const INITIAL_GRID = {{ grid | tojson }};
-    const RESUMED = {{ resumed | tojson }};
-    const RESUMED_MODE = {{ mode | tojson }};
-    const HUMAN_COLOR = {{ human_color }};
+    const ROWS            = {{ rows }};
+    const COLS            = {{ cols }};
+    const INITIAL_GRID    = {{ grid | tojson }};
+    const RESUMED         = {{ resumed | tojson }};
+    const RESUMED_MODE    = {{ mode | tojson }};
+    const HUMAN_COLOR     = {{ human_color }};
+    const RESUMED_AI_TYPE = {{ ai_type | tojson }};
+    const RESUMED_DEPTH   = {{ depth }};
 </script>
 
 <script>
-// Cacher profondeur si IA BDD
+// ══════════════════════════════════════════
+// SYNC UI — met à jour les selects selon l'état réel du jeu
+// ══════════════════════════════════════════
+function syncUIState(mode, ai_type, humanColor, depth) {
+    if (mode) {
+        const modeSelect = document.getElementById('mode');
+        if (modeSelect) modeSelect.value = mode;
+    }
+    if (ai_type) {
+        const aiSelect = document.getElementById('ai_type');
+        if (aiSelect) {
+            aiSelect.value = ai_type;
+            document.getElementById('depth-group').style.display =
+                ai_type === 'bdd' ? 'none' : 'flex';
+        }
+    }
+    if (humanColor !== null && humanColor !== undefined) {
+        const startingSelect = document.getElementById('starting');
+        if (startingSelect) startingSelect.value = String(humanColor);
+    }
+    if (depth !== null && depth !== undefined) {
+        const depthInput = document.getElementById('depth');
+        if (depthInput) depthInput.value = depth;
+    }
+}
+
+// ══════════════════════════════════════════
+// SWITCH CONTROLS — affichage dynamique IA / profondeur
+// ══════════════════════════════════════════
+function toggleSwitchAiOptions() {
+    const mode     = document.getElementById('switchMode').value;
+    const aiType   = document.getElementById('switchAiType');
+    const depthSel = document.getElementById('switchDepth');
+    const isAI     = mode === 'human_vs_ai' || mode === 'ai_vs_ai';
+    aiType.style.display   = isAI ? 'inline-block' : 'none';
+    depthSel.style.display = (isAI && aiType.value !== 'bdd') ? 'inline-block' : 'none';
+}
+
+function toggleSwitchDepth() {
+    const aiType   = document.getElementById('switchAiType').value;
+    const depthSel = document.getElementById('switchDepth');
+    depthSel.style.display = aiType === 'bdd' ? 'none' : 'inline-block';
+}
+
+// Masquer profondeur principale si IA BDD
 document.getElementById('ai_type').addEventListener('change', function() {
-    const depthGroup = document.getElementById('depth-group');
-    depthGroup.style.display = this.value === 'bdd' ? 'none' : 'flex';
+    document.getElementById('depth-group').style.display =
+        this.value === 'bdd' ? 'none' : 'flex';
 });
 
-// Toggle switch contrôles
+// Toggle affichage panel switch
 function toggleSwitchControls() {
     const sc = document.getElementById('switchControls');
     sc.style.display = sc.style.display === 'flex' ? 'none' : 'flex';
 }
 
-// Barre de progression IA
+// ── Barre de progression IA ─────────────────────────
 let progressInterval = null;
 
 function startAIProgress() {
-    const bar = document.getElementById('aiProgressBar');
-    const progress = document.getElementById('aiProgress');
-    progress.classList.add('active');
+    const bar  = document.getElementById('aiProgressBar');
+    const prog = document.getElementById('aiProgress');
+    prog.classList.add('active');
     bar.style.width = '0%';
     let w = 0;
     progressInterval = setInterval(() => {
-        w = Math.min(w + 2, 90);
+        w = Math.min(w + 1.5, 88);
         bar.style.width = w + '%';
     }, 80);
 }
 
 function stopAIProgress() {
-    const bar = document.getElementById('aiProgressBar');
-    const progress = document.getElementById('aiProgress');
+    const bar  = document.getElementById('aiProgressBar');
+    const prog = document.getElementById('aiProgress');
     if (progressInterval) clearInterval(progressInterval);
     bar.style.width = '100%';
     setTimeout(() => {
-        progress.classList.remove('active');
+        prog.classList.remove('active');
         bar.style.width = '0%';
-    }, 300);
+    }, 350);
+}
+
+// Couleur du dot de statut
+function setStatusColor(color) {
+    const dot = document.getElementById('statusDot');
+    if (color === 'thinking') {
+        dot.style.background = '#f59e0b';
+        dot.style.boxShadow = '0 0 0 3px rgba(245,158,11,0.2)';
+    } else if (color === 'win') {
+        dot.style.background = '#10b981';
+        dot.style.boxShadow = '0 0 0 3px rgba(16,185,129,0.2)';
+    } else {
+        dot.style.background = '#7c3aed';
+        dot.style.boxShadow = '0 0 0 3px rgba(124,58,237,0.2)';
+    }
 }
 </script>
 
 <script src="/static/script.js"></script>
 
 <script>
-// Patch triggerAIMove pour la barre de progression
+// ══════════════════════════════════════════
+// PATCH startGame — sync UI après démarrage
+// ══════════════════════════════════════════
+window.startGame = function() {
+    const mode     = document.getElementById("mode").value;
+    const ai_type  = document.getElementById("ai_type").value;
+    const depth    = document.getElementById("depth").value;
+    const starting = document.getElementById("starting").value;
+
+    if (mode === "") { alert("Choisis un mode !"); return; }
+
+    currentMode = mode;
+    humanColor  = parseInt(starting);
+    stopAIVsAI();
+    exitPaintMode();
+
+    fetch("/start", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({mode, ai_type, depth, starting})
+    })
+    .then(res => res.json())
+    .then(data => {
+        gameStarted = true;
+        lastScores  = [];
+        drawBoard(data.grid);
+
+        syncUIState(mode, ai_type, parseInt(starting), parseInt(depth));
+
+        const whoNow = humanColor === 1 ? "Rouge 🔴" : "Jaune 🟡";
+        setInfo(`✅ Partie démarrée — À toi ${whoNow} !`, humanColor === 1 ? "var(--red)" : "var(--yellow)");
+        if (currentMode === "ai_vs_ai") launchAIVsAI();
+        if (currentMode === "human_vs_ai" && humanColor !== parseInt(starting)) {
+            isAITurn = true;
+            setTimeout(() => triggerAIMove(), 300);
+        }
+    });
+};
+
+// ══════════════════════════════════════════
+// PATCH startFromPaint — sync UI après peinture
+// ══════════════════════════════════════════
+window.startFromPaint = function() {
+    const mode        = document.getElementById("paintMode").value;
+    const ai_type     = document.getElementById("paintAiType").value;
+    const depth       = document.getElementById("depth").value;
+    const human_color = document.getElementById("paintHumanColor").value;
+
+    fetch("/start_from_paint", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({mode, ai_type, depth: parseInt(depth), human_color})
+    })
+    .then(res => res.json())
+    .then(data => {
+        exitPaintMode();
+        gameStarted = true;
+        currentMode = mode;
+        humanColor  = human_color === "rouge" ? 1 : 2;
+        lastScores  = [];
+        drawBoard(data.grid);
+
+        syncUIState(mode, ai_type, humanColor, parseInt(depth));
+
+        setInfo(`PARTIE DEPUIS PAINTING — TOUR : ${data.next_player}`, "var(--neon-green)");
+        if (currentMode === "ai_vs_ai") launchAIVsAI();
+        if (data.ai_pending) {
+            isAITurn = true;
+            setTimeout(() => triggerAIMove(), 300);
+        }
+    });
+};
+
+// ══════════════════════════════════════════
+// PATCH switchControl — avec IA + profondeur
+// ══════════════════════════════════════════
+window.switchControl = function() {
+    const newMode       = document.getElementById("switchMode").value;
+    const newAiType     = document.getElementById("switchAiType").value;
+    const newDepth      = parseInt(document.getElementById("switchDepth").value) || 4;
+    const newHumanColor = document.getElementById("switchHumanColor").value;
+
+    fetch("/switch_control", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({mode: newMode, ai_type: newAiType, depth: newDepth, human_color: newHumanColor})
+    })
+    .then(res => res.json())
+    .then(data => {
+        currentMode = newMode;
+        humanColor  = newHumanColor === "rouge" ? 1 : 2;
+        stopAIVsAI();
+
+        syncUIState(newMode, newAiType, humanColor, newDepth);
+
+        const colorLabel = newHumanColor === "rouge" ? "ROUGE 🔴" : "JAUNE 🟡";
+        setInfo(`MODE → ${newMode} | IA : ${newAiType} | HUMAIN = ${colorLabel}`, "var(--neon-yellow)");
+
+        if (currentMode === "ai_vs_ai") launchAIVsAI();
+        if (data.ai_pending) {
+            isAITurn = true;
+            setTimeout(() => triggerAIMove(), 300);
+        }
+    });
+};
+
+// ══════════════════════════════════════════
+// PATCH triggerAIMove avec barre de progression
+// ══════════════════════════════════════════
 window.triggerAIMove = function() {
     startAIProgress();
+    setStatusColor('thinking');
     fetch("/ai_move", { method: "POST" })
     .then(res => res.json())
     .then(data => {
         stopAIProgress();
         isAITurn = false;
         if (data.error) return;
-
         drawBoard(data.grid, data.scores || [], data.winning_cells || []);
-
         if (data.winner) {
-            const who = data.winner === 1 ? "ROUGE" : "JAUNE";
-            const col = data.winner === 1 ? "var(--player-red)" : "var(--player-yellow)";
-            setInfo(`⬤ VICTOIRE — JOUEUR ${who} !`, col);
+            setStatusColor('win');
+            const who = data.winner === 1 ? "Rouge 🔴" : "Jaune 🟡";
+            const col = data.winner === 1 ? "var(--red)" : "var(--yellow)";
+            setInfo(`🏆 Victoire — Joueur ${who} !`, col);
             setTimeout(() => alert(`Victoire joueur ${who} !`), 100);
         } else if (data.draw) {
-            setInfo("MATCH NUL — ÉGALITÉ PARFAITE", "var(--neon-blue)");
+            setInfo("🤝 Match nul — Égalité parfaite !", "var(--cyan)");
             setTimeout(() => alert("Match nul !"), 100);
         } else {
-            const whoNow = humanColor === 1 ? "ROUGE 🔴" : "JAUNE 🟡";
-            setInfo(`À TON TOUR — ${whoNow}`, humanColor === 1 ? "var(--player-red)" : "var(--player-yellow)");
+            setStatusColor('normal');
+            const whoNow = humanColor === 1 ? "Rouge 🔴" : "Jaune 🟡";
+            setInfo(`👆 À toi de jouer — ${whoNow}`, humanColor === 1 ? "var(--red)" : "var(--yellow)");
         }
     });
 };
 
-// Patch aiMove pour IA vs IA avec barre
+// ══════════════════════════════════════════
+// PATCH aiMove pour IA vs IA
+// ══════════════════════════════════════════
 window.aiMove = function() {
     if (!gameStarted) return;
     isAITurn = true;
-    setInfo("IA EN CALCUL...", "var(--neon-blue)");
+    setInfo("🧠 IA en train de réfléchir...", "var(--violet)");
+    setStatusColor('thinking');
     startAIProgress();
-
     fetch("/ai_move", { method: "POST" })
     .then(res => res.json())
     .then(data => {
         stopAIProgress();
         isAITurn = false;
         if (data.error) { stopAIVsAI(); return; }
-
         drawBoard(data.grid, data.scores || [], data.winning_cells || []);
-
         if (data.winner) {
             stopAIVsAI();
-            const who = data.winner === 1 ? "ROUGE" : "JAUNE";
-            const col = data.winner === 1 ? "var(--player-red)" : "var(--player-yellow)";
-            setInfo(`⬤ VICTOIRE — JOUEUR ${who} !`, col);
-            setTimeout(() => alert(`Victoire joueur ${who} !`), 100);
+            setStatusColor('win');
+            const who = data.winner === 1 ? "Rouge 🔴" : "Jaune 🟡";
+            const col = data.winner === 1 ? "var(--red)" : "var(--yellow)";
+            setInfo(`🏆 Victoire — ${who} !`, col);
+            setTimeout(() => alert(`Victoire ${who} !`), 100);
         } else if (data.draw) {
             stopAIVsAI();
-            setInfo("MATCH NUL — ÉGALITÉ PARFAITE", "var(--neon-blue)");
+            setInfo("🤝 Match nul !", "var(--cyan)");
         } else {
-            setInfo("SYSTÈME ACTIF — EN COURS...", "var(--neon-green)");
+            setStatusColor('normal');
+            setInfo("⚡ Combat IA en cours...", "var(--violet)");
         }
     });
 };
+
+// ══════════════════════════════════════════
+// SYNC AU CHARGEMENT si partie reprise
+// ══════════════════════════════════════════
+if (RESUMED && RESUMED_MODE) {
+    syncUIState(RESUMED_MODE, RESUMED_AI_TYPE, HUMAN_COLOR, RESUMED_DEPTH);
+    gameStarted = true;
+    currentMode = RESUMED_MODE;
+    humanColor  = HUMAN_COLOR;
+    const whoNow = humanColor === 1 ? "Rouge 🔴" : "Jaune 🟡";
+    setInfo(`↩ Partie reprise — À toi ${whoNow} !`, humanColor === 1 ? "var(--red)" : "var(--yellow)");
+    if (currentMode === "ai_vs_ai") launchAIVsAI();
+    if (currentMode === "human_vs_ai") {
+        fetch("/get_grid").then(r => r.json()).then(d => {
+            if (d.ai_turn) { isAITurn = true; setTimeout(() => triggerAIMove(), 500); }
+        });
+    }
+}
 </script>
 
 </body>

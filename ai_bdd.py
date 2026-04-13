@@ -40,12 +40,15 @@ class AIBaseDeDonnees:
         # 3. BDD
         scores = self._calculer_scores(coups_joues, nb_coups, board)
 
-        if scores and max(scores.values(), default=0) > 0:
+        # FIX : on joue le meilleur coup connu même si le score est négatif
+        # Le fallback ne s'active que si la BDD ne trouve vraiment rien (dict vide)
+        if scores:
             meilleur_col = max(scores, key=scores.get)
-            print(f"[AI_BDD] BDD → {scores} → {meilleur_col}")
+            meilleur_score = scores[meilleur_col]
+            print(f"[AI_BDD] BDD → {scores} → col {meilleur_col} (score={meilleur_score})")
             return meilleur_col
 
-        # 4. Fallback minimax
+        # 4. Fallback minimax (seulement si BDD vide)
         print("[AI_BDD] fallback minimax")
         return self._fallback_minimax(board)
 

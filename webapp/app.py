@@ -94,43 +94,72 @@ def get_game_state():
 
 
 
-def predict_outcome(board, ai, current_player, depth=8):
+def predict_outcome(board, current_player, depth=7):
+    import copy
+    b = copy.deepcopy(board)
+    opp = YELLOW if current_player == RED else RED
 
-    def search(b, player, moves_ahead):
+    def col_order():
+        center = b.cols // 2
+        return sorted(
+            [c for c in range(b.cols) if not b.is_column_full(c)],
+            key=lambda c: abs(c - center)
+        )
 
-        if b.check_winner(RED):
+    def minimax(player, depth_left, alpha, beta, moves_made):
+        cols = col_order()
+        if not cols or b.is_full():
+            return 0, moves_made
 
-            return ("ROUGE", moves_ahead)
+        nxt = opp if player == current_player else current_player
 
-        if b.check_winner(YELLOW):
-
-            return ("JAUNE", moves_ahead)
-
-        if b.is_full() or moves_ahead >= depth:
-
-            return None
-
-        opp = YELLOW if player == RED else RED
-
-        for col in range(b.cols):
-
-            if not b.is_column_full(col):
-
+        if player == current_player:  # MAX
+            best_score, best_moves = -float('inf'), moves_made
+            for col in cols:
                 b.drop_piece(col, player)
-
-                result = search(b, opp, moves_ahead + 1)
-
+                # On vérifie JUSTE APRÈS avoir posé la pièce
+                if b.check_winner(player):
+                    b.undo()
+                    return 10000 - moves_made, moves_made + 1
+                if depth_left == 0:
+                    b.undo()
+                    continue
+                score, nm = minimax(nxt, depth_left - 1, alpha, beta, moves_made + 1)
                 b.undo()
+                if score > best_score:
+                    best_score, best_moves = score, nm
+                alpha = max(alpha, best_score)
+                if beta <= alpha:
+                    break
+            return best_score, best_moves
 
-                if result:
+        else:  # MIN
+            best_score, best_moves = float('inf'), moves_made
+            for col in cols:
+                b.drop_piece(col, player)
+                if b.check_winner(player):
+                    b.undo()
+                    return -(10000 - moves_made), moves_made + 1
+                if depth_left == 0:
+                    b.undo()
+                    continue
+                score, nm = minimax(nxt, depth_left - 1, alpha, beta, moves_made + 1)
+                b.undo()
+                if score < best_score:
+                    best_score, best_moves = score, nm
+                beta = min(beta, best_score)
+                if beta <= alpha:
+                    break
+            return best_score, best_moves
 
-                    return result
+    score, nb_coups = minimax(current_player, depth, -float('inf'), float('inf'), 0)
 
+    if score > 0:
+        return ("ROUGE" if current_player == RED else "JAUNE"), nb_coups
+    elif score < 0:
+        return ("ROUGE" if opp == RED else "JAUNE"), nb_coups
+    else:
         return None
-
-    b_copy = copy.deepcopy(board)
-
-    return search(b_copy, current_player, 0)
 
 
 
@@ -435,43 +464,23 @@ def ai_suggest():
 
 
 @app.route("/predict", methods=["POST"])
-
 def predict():
-
     state = get_game_state()
-
     game = state['game']
-
     board = state['board']
 
-
-
     if not game or game.game_over:
-
         return jsonify({"prediction": None})
 
-
-
-    ai = MiniMaxAI(depth=6)
-
-    result = predict_outcome(board, ai, game.current_player, depth=8)
-
-
+    result = predict_outcome(board, game.current_player, depth=7)
 
     if result:
-
-        color_name = "ROUGE" if result[0] == "ROUGE" else "JAUNE"
-
+        color_name = "ROUGE 🔴" if result[0] == "ROUGE" else "JAUNE 🟡"
         return jsonify({
-
-            "prediction": f"{color_name} gagne dans {result[1]} coup{'s' if result[1] > 1 else ''}"
-
+            "prediction": f"{color_name} gagne dans {result[1]} coup{'s' if result[1] > 1 else ''} (jeu optimal)"
         })
-
     else:
-
-        return jsonify({"prediction": "Aucun gagnant détecté dans les 8 prochains coups"})
-
+        return jsonify({"prediction": "Aucun gagnant détecté — partie équilibrée"})
 
 
 @app.route("/paint", methods=["POST"])
